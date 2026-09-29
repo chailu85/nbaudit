@@ -18,11 +18,9 @@ export const modules = [
   { id: 'governance', label: '责任制与资源保障', short: '责任' },
   { id: 'people', label: '机构与人员', short: '人员' },
   { id: 'rules', label: '制度与档案', short: '制度' },
-  { id: 'risk', label: '风险评估、部位/区域与防护设计', short: '风险' },
-  { id: 'general', label: '一般单位常态防范', short: '一般' },
-  { id: 'key', label: '重点单位分类、分级与常态要求', short: '重点' },
-  { id: 'access', label: '访问控制、门卫值守与巡查', short: '出入' },
-  { id: 'defense', label: '设施配置与空间防护', short: '防范' },
+  { id: 'risk', label: '风险评估（第4章 / 附录A）', short: '风险' },
+  { id: 'general', label: '一般单位常态防范（第5章）', short: '一般' },
+  { id: 'key', label: '重点单位常态防范（第6章）', short: '重点' },
   { id: 'unusual', label: '非常态防范', short: '非常态' },
   { id: 'systems', label: '系统技术与全生命周期', short: '系统' },
   { id: 'emergency', label: '应急与处置', short: '应急' },
@@ -52,26 +50,11 @@ const baseCriteria: Criterion[] = [
   { id:'R-01', module:'rules', title:'内部治安保卫制度体系完整', prompt:'制度覆盖门卫值班巡查、场所安全、重要物品、消防交通、培训、案件报告、检查考核奖惩和危险物品等事项。', evidence:'制度目录、有效版本、审批记录', weight:3, critical:true, basis:[current('4.3.1—4.3.2、附录C'), old('第8条'), forward('第9条')] },
   { id:'R-02', module:'rules', title:'新兴场景和设施运维制度已补齐', prompt:'制度已覆盖防范设施管理维护、营业/医疗/试验场所、涉密载体、重要活动和管控区域等内容。', evidence:'专项制度、作业规程、场景清单', weight:2, basis:[forward('第9条')] },
   { id:'R-03', module:'rules', title:'治安保卫工作档案可追溯', prompt:'已建立工作档案；重点单位档案包含基本情况、责任制、制度、岗位/部位清单、风险评估、工程报告、培训、演练和案事件记录。', evidence:'档案目录、抽查记录、电子归档', weight:2, applies:p=>p.keyCandidate, basis:[current('4.3.3—4.3.4、附录B/C')] },
-  { id:'K-01', module:'risk', title:'重要部位、区域和周界已识别', prompt:'已识别限制区、非限制区、周界、重要部位、危险物品及人员密集场所，并形成清单与地图。', evidence:'区域/部位清单、平面图、风险分区资料', weight:3, critical:true, basis:[current('3、6.2'), old('第14条'), forward('第25条')] },
-  { id:'K-02', module:'risk', title:'重要部位实施重点保护', prompt:'重点单位已根据风险和国家标准对重要部位配置必要的技术防范设施并实施重点保护。', evidence:'防护配置表、验收资料、巡检记录', weight:3, critical:true, applies:p=>p.keyCandidate, basis:[current('6.2—6.3、附录F'), old('第14条'), forward('第25条')] },
-  { id:'K-03', module:'risk', title:'重点单位防范级别已判定', prompt:'重点单位已完成治安保卫等级和防范级别判定，并按一级/二级/三级要求组织防范。', evidence:'等级判定、公安/主管部门告知、差距评估', weight:3, applies:p=>p.keyCandidate, basis:[current('6.3、6.4—6.6')] },
-  { id:'K-04', module:'key', title:'重点单位非限制区防护已落实', prompt:'重点单位已按附录E对非限制区的周界、出入口、公共区域和重要通道落实分级防护、巡查和异常处置。', evidence:'非限制区防护图、门卫巡查记录、异常处置记录', weight:3, critical:true, applies:p=>p.keyCandidate, basis:[current('6.4—6.6、附录E')] },
-  { id:'K-05', module:'key', title:'重点单位重要部位防护配置已核验', prompt:'重点单位已依据附录F和防范级别核验重要部位的实体、报警、视频、出入口控制和应急设施配置。', evidence:'附录F配置矩阵、点位图、验收与检测资料', weight:3, critical:true, applies:p=>p.keyCandidate, basis:[current('6.4—6.6、附录F')] },
   { id:'S-04', module:'scope', title:'特殊风险场景专项适用性已确认', prompt:'已单独判断涉密、涉危、人员密集、重要数据存储或重要高科技/互联网业务是否触发更高等级的控制措施。', evidence:'专项风险识别、行业主管部门要求、场景判断记录', weight:2, applies:p=>p.secret || p.dangerous || p.crowded || p.dataStorage, basis:[current('4.1.4、6.1'), forward('第23—26条')] },
   { id:'A-01', module:'general', title:'一般单位人力防范到位', prompt:'一般单位已安排门卫、值班、巡查、检查和隐患处置等必要人力防范。', evidence:'值班表、巡查计划、记录和隐患闭环', weight:2, applies:p=>!p.keyCandidate, basis:[current('5.2')] },
-  { id:'A-02', module:'general', title:'一般单位实体防范和设施配置适配', prompt:'一般单位已按风险和附录D配置周界、门窗、锁具、重要部位屏障等实体防范设施。', evidence:'设施配置表、现场检查、维护记录', weight:2, applies:p=>!p.keyCandidate, basis:[current('5.3、附录D')] },
-  { id:'A-03', module:'general', title:'一般单位电子防范适配', prompt:'一般单位已按需要配置入侵报警、视频监控、出入口控制或其他电子防范手段，并保持可用。', evidence:'系统清单、测试记录、故障维修记录', weight:2, applies:p=>!p.keyCandidate, basis:[current('5.4、8.1—8.7')] },
-  { id:'A-04', module:'general', title:'防范设施运行维护有记录', prompt:'设施和系统有日常检查、故障报修、维护、备件和停用补偿措施。', evidence:'运维合同、工单、巡检表、故障复盘', weight:2, basis:[current('5.3—5.4、8.1')] },
-  { id:'X-01', module:'access', title:'门卫、值班、巡查和检查制度落实', prompt:'门卫值班、巡逻检查按制度执行，记录完整并能追溯到人员、时间、区域和问题。', evidence:'值班表、交接班、巡查记录、检查记录', weight:2, basis:[current('5.2、9、附录H'), old('第8、11条'), forward('第9、17—18条')] },
-  { id:'X-02', module:'access', title:'人员、物品、车辆出入控制有效', prompt:'已按需要检查有效证件，登记人员、物品和车辆，执行限制区授权和权限撤销。', evidence:'登记台账、门禁权限、访客记录、抽查记录', weight:3, critical:true, basis:[current('3、6.2'), old('第11条'), forward('第18条')] },
-  { id:'X-03', module:'access', title:'隐患排查和整改记录闭环', prompt:'巡查检查发现的问题有责任人、措施、期限、复查结果和关闭记录。', evidence:'隐患台账、整改通知、复查记录', weight:3, critical:true, basis:[current('9、附录H'), old('第7、11条'), forward('第31、34—36条')] },
-  { id:'D-01', module:'defense', title:'实体防范措施有效', prompt:'建筑物、屏障、门窗、锁具、围界等实体防范能够延迟或阻止风险事件，并按周期维护。', evidence:'现场照片索引、设施台账、维护和测试记录', weight:2, basis:[current('3、5.3、6.4—6.6')] },
-  { id:'D-02', module:'defense', title:'视频监控和报警系统可用', prompt:'视频监控、入侵和紧急报警系统覆盖需要保护的区域，功能、联动、存储和故障告警有效。', evidence:'点位图、测试报告、存储策略、故障记录', weight:3, critical:true, basis:[current('8.2—8.3、附录G')] },
-  { id:'D-03', module:'defense', title:'视频和登记信息安全使用', prompt:'视频图像、人员车辆登记和门禁数据有访问授权、留存、调取、复制和删除控制，不得删改、隐匿、滥用或泄露。', evidence:'权限矩阵、日志、调取审批、隐私告知', weight:3, critical:true, basis:[current('4.1.8、8.1'), forward('第20条')] },
   { id:'U-01', module:'unusual', title:'非常态防范启动、实施和解除机制', prompt:'重大会议、活动、节假日、预警或案事件发生时，能够按授权流程启动、升级和解除非常态防范。', evidence:'启动令、值班升级表、解除记录、复盘报告', weight:3, critical:true, basis:[current('4.1.7、7.1')] },
   { id:'U-02', module:'unusual', title:'非常态期间人力、实体、电子措施加强', prompt:'非常态状态下已增加巡逻值守、重点部位保护、出入口管控、设备值机或其他临时措施。', evidence:'专项方案、加岗表、设备加固/测试记录', weight:3, critical:true, basis:[current('7.2—7.4'), forward('第10条')] },
   { id:'T-01', module:'systems', title:'安全防范系统纳入总体规划并同步建设', prompt:'新建、改建、扩建项目已将安全防范工程纳入总体规划，并按要求同步建设、验收、运行。', evidence:'规划、设计、验收、移交资料', weight:3, critical:true, basis:[current('4.5.1、8.1')] },
-  { id:'T-02', module:'systems', title:'系统技术要求逐项满足', prompt:'入侵报警、视频监控、出入口控制、电子巡查、停车库（场）和安全防范管理平台按第8章要求建设、联动和维护。', evidence:'系统架构、技术参数、检测/验收报告、联动测试', weight:3, critical:true, basis:[current('8.1—8.7、附录G')] },
   { id:'T-03', module:'systems', title:'重点单位效能评估与网络安全保护', prompt:'重点单位已开展安全防范系统效能评估，明确网络安全保护等级并采取相应防护措施。', evidence:'效能评估报告、等保定级/测评、整改报告', weight:3, critical:true, applies:p=>p.keyCandidate, basis:[current('4.5.3—4.5.4')] },
   { id:'T-04', module:'systems', title:'系统运行维护符合要求', prompt:'竣工移交后已持续开展安全防范系统运行与维护，并符合 DB11/T 855 等要求。', evidence:'运维制度、SLA、巡检工单、年度维护报告', weight:2, basis:[current('4.5.2、8.1')] },
   { id:'E-01', module:'emergency', title:'应急组织和预案要素完整', prompt:'已明确突发案事件应急组织、人员分工、处置流程、装备使用、目标保护、避险和疏散方案。', evidence:'应急预案、组织架构、通讯录、资源清单', weight:3, critical:true, basis:[current('4.4.1—4.4.2'), old('第15条'), forward('第27条')] },
@@ -85,9 +68,8 @@ const baseCriteria: Criterion[] = [
   { id:'H-03', module:'appendix', title:'设备采用现行标准并留存检测资料', prompt:'安全防范设备采用附录G所列现行标准或适用的更高标准，并留存检测、验收、维护资料。', evidence:'设备型号标准、检测报告、验收资料、变更记录', weight:2, basis:[appendix('G')] },
 ];
 
-// 用标准逐条矩阵替换早期按主题归并的泛化项，避免以概括性问题覆盖分级、点位和阈值要求。
-const generalizedIds = new Set(['K-01', 'K-02', 'K-03', 'K-04', 'K-05', 'X-01', 'X-02', 'X-03', 'D-01', 'D-02', 'D-03', 'A-02', 'A-03', 'A-04', 'T-02']);
-export const criteria: Criterion[] = [...baseCriteria.filter(c => !generalizedIds.has(c.id)), ...detailedMatrixCriteria];
+// 基础条款与逐条标准矩阵共同构成最终审核库。
+export const criteria: Criterion[] = [...baseCriteria, ...detailedMatrixCriteria];
 
 export const basisLabel = (kind: BasisKind) => kind === 'forward' ? '前瞻参考' : kind === 'local' ? '地方要求' : '现行基线';
 

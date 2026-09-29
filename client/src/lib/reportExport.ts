@@ -1,3 +1,4 @@
+import { modules } from '@/data/criteria';
 import type { Criterion, Profile } from '@/data/criteria';
 import type { Answers, Answer } from '@/lib/scoring';
 import { remediationLabel, statusLabel } from '@/lib/scoring';
@@ -18,6 +19,8 @@ export type ReportExportInput = {
   answers: Answers;
 };
 
+export const wordDetailHeaders = ['条款', '模块', '口径', '审核项目', '结论', '负责人/期限', '整改措施'];
+
 const cleanFilePart = (value: string) => (value || '未命名单位').replace(/[\\/:*?"<>|\s]+/g, '-').slice(0, 45);
 const fileBase = (profile: Profile) => `内保合规审核报告-${cleanFilePart(profile.name)}-${profile.reviewDate || new Date().toISOString().slice(0, 10)}`;
 const answerOf = (answers: Answers, id: string): Answer => answers[id] ?? { status: 'unreviewed', evidence: '', owner: '', due: '', action: '', note: '', remediationStatus: 'pending' };
@@ -28,7 +31,7 @@ export const reportDetailRows = ({ current, forward, answers }: ReportExportInpu
     const a = answerOf(answers, c.id);
     return {
       条款编号: c.id,
-      模块: c.module,
+      模块: modules.find(module => module.id === c.module)?.label ?? c.module,
       审核项目: c.title,
       审核要求: c.prompt,
       口径: currentIds.has(c.id) ? '现行基线' : '前瞻参考',
@@ -82,7 +85,7 @@ export async function exportExcelReport(input: ReportExportInput) {
   summarySheet['!cols'] = [{ wch: 24 }, { wch: 72 }];
   const detailSheet = XLSX.utils.json_to_sheet(reportDetailRows(input));
   detailSheet['!cols'] = [
-    { wch: 12 }, { wch: 14 }, { wch: 28 }, { wch: 46 }, { wch: 12 }, { wch: 42 }, { wch: 8 }, { wch: 9 }, { wch: 12 },
+    { wch: 12 }, { wch: 28 }, { wch: 28 }, { wch: 46 }, { wch: 12 }, { wch: 42 }, { wch: 8 }, { wch: 9 }, { wch: 12 },
     { wch: 24 }, { wch: 16 }, { wch: 14 }, { wch: 14 }, { wch: 34 }, { wch: 24 },
   ];
   XLSX.utils.book_append_sheet(workbook, summarySheet, '报告摘要');
@@ -98,9 +101,9 @@ export async function exportWordReport(input: ReportExportInput) {
   const cell = (text: string, bold = false) => new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: String(text || '—'), bold, size: 18 })] })] });
   const header = (label: string) => new TableCell({ shading: { fill: '173A5B' }, children: [new Paragraph({ children: [new TextRun({ text: label, bold: true, color: 'FFFFFF', size: 18 })] })] });
   const detailTable = new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, rows: [
-    new TableRow({ children: ['条款', '口径', '审核项目', '结论', '负责人/期限', '整改措施'].map(header) }),
+    new TableRow({ children: wordDetailHeaders.map(header) }),
     ...rows.map(row => new TableRow({ children: [
-      cell(row.条款编号), cell(row.口径), cell(row.审核项目), cell(row.结论), cell(`${row.整改负责人 || '待指定'} / ${row.整改期限 || '待定'}`), cell(row.整改措施 || '未填写'),
+      cell(row.条款编号), cell(row.模块), cell(row.口径), cell(row.审核项目), cell(row.结论), cell(`${row.整改负责人 || '待指定'} / ${row.整改期限 || '待定'}`), cell(row.整改措施 || '未填写'),
     ] })),
   ] });
   const doc = new Document({ sections: [{ children: [

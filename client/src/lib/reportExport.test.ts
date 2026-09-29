@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { criteria, Profile } from '@/data/criteria';
 import { emptyAnswer, score } from './scoring';
-import { reportDetailRows } from './reportExport';
+import { reportDetailRows, wordDetailHeaders } from './reportExport';
 
 const profile: Profile = {
   name: '测试重点单位', region: '北京市', unitType: '企业', industry: '测试', multiSite: false,
@@ -19,6 +19,7 @@ describe('报告导出数据', () => {
     const row = reportDetailRows({ profile, current, forward, answers }).find(item => item.条款编号 === 'KF-23');
     expect(row).toMatchObject({
       条款编号: 'KF-23',
+      模块: '重点单位常态防范（第6章）',
       口径: '现行基线',
       结论: '不符合',
       证据编号或位置: '安防点位图-F23',
@@ -27,5 +28,6 @@ describe('报告导出数据', () => {
       整改状态: '整改中',
     });
     expect(row?.依据).toContain('表F.1 序号23');
+    expect(wordDetailHeaders).toContain('模块');
   });
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { criteria, Profile } from './criteria';
+import { criteria, modules, Profile } from './criteria';
 import { activeCriteria, emptyAnswer, score } from '@/lib/scoring';
 
 const base: Profile = {
@@ -8,8 +8,21 @@ const base: Profile = {
   crowded: false, dataStorage: false, reviewer: '', reviewDate: '2026-09-29',
 };
 const ids = (profile: Profile) => new Set(activeCriteria(criteria, profile).map(c => c.id));
+const byId = (id: string) => criteria.find(c => c.id === id);
 
-describe('DB11/T 2552—2026 四模块逐条矩阵', () => {
+describe('DB11/T 2552—2026 第5章与第6章审核矩阵', () => {
+  it('删除自定义出入/防范导航，按标准章节聚合项目', () => {
+    expect(modules.some(m => m.id === 'access' || m.id === 'defense')).toBe(false);
+    expect(modules.find(m => m.id === 'general')?.label).toContain('第5章');
+    expect(modules.find(m => m.id === 'key')?.label).toContain('第6章');
+    expect(byId('AC-01')?.module).toBe('general');
+    expect(byId('AC-02')?.module).toBe('general');
+    expect(byId('RM-05')?.module).toBe('general');
+    expect(byId('RM-06')?.module).toBe('general');
+    expect(byId('GD-01')?.module).toBe('general');
+    ['RM-07', 'RM-08', 'RM-09', 'AC-03', 'AC-11', 'KF-01', 'KF-23', 'KF-58'].forEach(id => expect(byId(id)?.module).toBe('key'));
+  });
+
   it('移除了早期泛化审核项，并完整建立附录D/F行项目', () => {
     const obsolete = ['K-01', 'K-02', 'K-03', 'K-04', 'K-05', 'X-01', 'X-02', 'X-03', 'D-01', 'D-02', 'D-03', 'A-02', 'A-03', 'A-04', 'T-02'];
     const all = new Set(criteria.map(c => c.id));
@@ -21,11 +34,14 @@ describe('DB11/T 2552—2026 四模块逐条矩阵', () => {
     expect(all.has('ST-07')).toBe(true);
   });
 
-  it('未确定重点单位防范级别时，仅显示确认和人工复核事项', () => {
+  it('非重点单位模式保留第6.1资格判定入口，而不是显示0项', () => {
+    const keyItems = activeCriteria(criteria, { ...base, keyCandidate: false }).filter(c => c.module === 'key');
+    expect(keyItems.map(c => c.id)).toEqual(['KU-00']);
+  });
+
+  it('未确定重点单位防范级别时，显示第6章资格、部位和一般要求，隐藏等级专属项目', () => {
     const active = ids(base);
-    expect(active.has('KU-01')).toBe(true);
-    expect(active.has('KU-02')).toBe(true);
-    expect(active.has('KU-03')).toBe(true);
+    ['KU-01', 'KU-02', 'KU-03', 'KU-04', 'KU-05', 'RM-07', 'AC-03'].forEach(id => expect(active.has(id)).toBe(true));
     expect(active.has('AC-06')).toBe(false);
     expect(active.has('KF-01')).toBe(false);
   });

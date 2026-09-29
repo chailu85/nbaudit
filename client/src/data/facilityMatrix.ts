@@ -7,7 +7,7 @@ const atLeast = (level: Exclude<KeyProtectionLevel, '未确定'>) => (p: Profile
 const generalUnit = (p: Profile) => !p.keyCandidate;
 
 const d = (id: string, title: string, requirement: string, strength: '应' | '宜') : Criterion => ({
-  id: `GD-${id}`, module: 'defense', title: `附录D-${id} ${title}（一般单位：${strength}）`,
+  id: `GD-${id}`, module: 'general', title: `附录D-${id} ${title}（一般单位：${strength}）`,
   prompt: `${requirement}。该点位或场景不存在时，可选择“不适用”并说明理由。`,
   evidence: '附录D对照表、点位图/平面图、现场照片、设备台账、验收或巡检记录',
   weight: strength === '应' ? 3 : 2, critical: strength === '应', applies: generalUnit,
@@ -15,7 +15,7 @@ const d = (id: string, title: string, requirement: string, strength: '应' | '�
 });
 
 const f = (id: string, title: string, requirement: string, level: Exclude<KeyProtectionLevel, '未确定'>, rating: string, critical = false): Criterion => ({
-  id: `KF-${id}`, module: 'defense', title: `附录F-${id} ${title}（${rating}）`,
+  id: `KF-${id}`, module: 'key', title: `附录F-${id} ${title}（${rating}）`,
   prompt: `${requirement}。该具体空间或设施不存在时，可选择“不适用”并说明理由；不得以其他点位的配置替代本项结论。`,
   evidence: '附录F逐行对照表、点位图/平面图、现场照片、设备台账、验收/联动或巡检记录',
   weight: critical ? 3 : 2, critical, applies: atLeast(level),
