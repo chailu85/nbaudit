@@ -2,11 +2,12 @@ import { Profile } from '@/data/criteria';
 import { Answer, Answers, emptyAnswer, RemediationStatus } from './scoring';
 
 const KEY = 'neibao-audit-v1';
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 export type AuditState = { version: number; profile: Profile; answers: Answers; savedAt: string };
 const isRecord = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 const statuses = new Set(['unreviewed', 'compliant', 'partial', 'noncompliant', 'na']);
 const remediationStatuses = new Set(['pending', 'in_progress', 'review', 'closed']);
+const keyProtectionLevels = new Set(['未确定', '三级', '二级', '一级']);
 const asString = (value: unknown, fallback = '') => typeof value === 'string' ? value : fallback;
 
 export function normalizeAuditState(raw: unknown, defaultProfile: Profile, defaultAnswers: Answers): AuditState | null {
@@ -15,7 +16,7 @@ export function normalizeAuditState(raw: unknown, defaultProfile: Profile, defau
   const profile: Profile = {
     ...defaultProfile,
     name: asString(p.name), region: asString(p.region), unitType: asString(p.unitType, defaultProfile.unitType), industry: asString(p.industry),
-    multiSite: p.multiSite === true, keyCandidate: p.keyCandidate === true, secret: p.secret === true, dangerous: p.dangerous === true, crowded: p.crowded === true, dataStorage: p.dataStorage === true,
+    multiSite: p.multiSite === true, keyCandidate: p.keyCandidate === true, keyProtectionLevel: keyProtectionLevels.has(asString(p.keyProtectionLevel)) ? asString(p.keyProtectionLevel) as Profile['keyProtectionLevel'] : defaultProfile.keyProtectionLevel, secret: p.secret === true, dangerous: p.dangerous === true, crowded: p.crowded === true, dataStorage: p.dataStorage === true,
     reviewer: asString(p.reviewer), reviewDate: asString(p.reviewDate, defaultProfile.reviewDate),
   };
   const answers: Answers = { ...defaultAnswers };

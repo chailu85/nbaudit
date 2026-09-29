@@ -1,5 +1,7 @@
 export type Status = 'unreviewed' | 'compliant' | 'partial' | 'noncompliant' | 'na';
 export type BasisKind = 'current' | 'forward' | 'local';
+export type KeyProtectionLevel = '未确定' | '三级' | '二级' | '一级';
+import { detailedMatrixCriteria } from './detailedMatrix';
 export type Criterion = {
   id: string; module: string; title: string; prompt: string; evidence: string;
   weight: 1 | 2 | 3; critical?: boolean; applies?: (p: Profile) => boolean;
@@ -7,7 +9,7 @@ export type Criterion = {
 };
 export type Profile = {
   name: string; region: string; unitType: string; industry: string; multiSite: boolean;
-  keyCandidate: boolean; secret: boolean; dangerous: boolean; crowded: boolean; dataStorage: boolean;
+  keyCandidate: boolean; keyProtectionLevel: KeyProtectionLevel; secret: boolean; dangerous: boolean; crowded: boolean; dataStorage: boolean;
   reviewer: string; reviewDate: string;
 };
 
@@ -16,11 +18,11 @@ export const modules = [
   { id: 'governance', label: '责任制与资源保障', short: '责任' },
   { id: 'people', label: '机构与人员', short: '人员' },
   { id: 'rules', label: '制度与档案', short: '制度' },
-  { id: 'risk', label: '风险评估与重点对象', short: '风险' },
+  { id: 'risk', label: '风险评估、部位/区域与防护设计', short: '风险' },
   { id: 'general', label: '一般单位常态防范', short: '一般' },
-  { id: 'key', label: '重点单位常态防范', short: '重点' },
-  { id: 'access', label: '门卫、巡查与出入控制', short: '出入' },
-  { id: 'defense', label: '实体与电子防范', short: '防范' },
+  { id: 'key', label: '重点单位分类、分级与常态要求', short: '重点' },
+  { id: 'access', label: '访问控制、门卫值守与巡查', short: '出入' },
+  { id: 'defense', label: '设施配置与空间防护', short: '防范' },
   { id: 'unusual', label: '非常态防范', short: '非常态' },
   { id: 'systems', label: '系统技术与全生命周期', short: '系统' },
   { id: 'emergency', label: '应急与处置', short: '应急' },
@@ -33,7 +35,7 @@ const old = (clause: string) => ({ kind: 'current' as const, source: '2004版《
 const forward = (clause: string, note = '征求意见稿内容仅作前瞻性自查参考，不代表现行法定要求。') => ({ kind: 'forward' as const, source: '《单位内部治安保卫条例（修订征求意见稿）》', clause, note });
 const appendix = (clause: string) => ({ kind: 'current' as const, source: 'DB11/T 2552—2026 附录', clause });
 
-export const criteria: Criterion[] = [
+const baseCriteria: Criterion[] = [
   { id:'S-01', module:'scope', title:'单位适用范围已确认', prompt:'已确认本单位属于北京市行政区域内机关、团体、企业、事业单位，或已决定参照执行。', evidence:'单位基本情况、注册/办学/办医资料、适用性判断记录', weight:1, basis:[current('1 范围'), old('第1条'), forward('第1条')] },
   { id:'S-02', module:'scope', title:'重点单位候选特征已排查', prompt:'已排查国家安全、公共安全、国计民生、危险物品、重要数据、人员密集等重点单位特征，并留存判断依据。', evidence:'行业属性清单、公安/主管部门告知、重点单位认定材料', weight:3, critical:true, basis:[current('6.1 重点单位类别'), old('第13条'), forward('第23—24条')] },
   { id:'S-03', module:'scope', title:'多地机构和场站已纳入范围', prompt:'如在多地设有机构、设施、场站，已逐地纳入内部治安保卫责任与监督范围。', evidence:'分支机构/场站清单、逐地责任矩阵', weight:2, applies:p=>p.multiSite, basis:[forward('第6条'), current('4.1.2')] },
@@ -82,6 +84,10 @@ export const criteria: Criterion[] = [
   { id:'H-02', module:'appendix', title:'制度、设施配置与检查表已映射', prompt:'附录C制度内容、附录D/F设施配置、附录E非限制区防护和附录H检查内容已映射到本单位控制清单。', evidence:'控制矩阵、设施配置表、检查表版本', weight:2, basis:[appendix('C、D、E、F、H')] },
   { id:'H-03', module:'appendix', title:'设备采用现行标准并留存检测资料', prompt:'安全防范设备采用附录G所列现行标准或适用的更高标准，并留存检测、验收、维护资料。', evidence:'设备型号标准、检测报告、验收资料、变更记录', weight:2, basis:[appendix('G')] },
 ];
+
+// 用标准逐条矩阵替换早期按主题归并的泛化项，避免以概括性问题覆盖分级、点位和阈值要求。
+const generalizedIds = new Set(['K-01', 'K-02', 'K-03', 'K-04', 'K-05', 'X-01', 'X-02', 'X-03', 'D-01', 'D-02', 'D-03', 'A-02', 'A-03', 'A-04', 'T-02']);
+export const criteria: Criterion[] = [...baseCriteria.filter(c => !generalizedIds.has(c.id)), ...detailedMatrixCriteria];
 
 export const basisLabel = (kind: BasisKind) => kind === 'forward' ? '前瞻参考' : kind === 'local' ? '地方要求' : '现行基线';
 

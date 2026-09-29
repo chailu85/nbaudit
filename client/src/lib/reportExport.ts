@@ -22,7 +22,7 @@ const cleanFilePart = (value: string) => (value || '未命名单位').replace(/[
 const fileBase = (profile: Profile) => `内保合规审核报告-${cleanFilePart(profile.name)}-${profile.reviewDate || new Date().toISOString().slice(0, 10)}`;
 const answerOf = (answers: Answers, id: string): Answer => answers[id] ?? { status: 'unreviewed', evidence: '', owner: '', due: '', action: '', note: '', remediationStatus: 'pending' };
 const basisText = (c: Criterion) => c.basis.map(b => `${b.source} ${b.clause}`).join('；');
-const detailRows = ({ current, forward, answers }: ReportExportInput) => {
+export const reportDetailRows = ({ current, forward, answers }: ReportExportInput) => {
   const currentIds = new Set(current.active.map(c => c.id));
   return forward.active.map(c => {
     const a = answerOf(answers, c.id);
@@ -64,6 +64,7 @@ export async function exportExcelReport(input: ReportExportInput) {
     ['所属地区', profile.region || '未填写'],
     ['单位类型', profile.unitType],
     ['所属行业', profile.industry || '未填写'],
+    ['重点单位审核采用的防范级别', profile.keyCandidate ? profile.keyProtectionLevel : '不适用（非重点单位画像）'],
     ['审核日期', profile.reviewDate || '未填写'],
     ['审核人', profile.reviewer || '未填写'],
     [],
@@ -79,7 +80,7 @@ export async function exportExcelReport(input: ReportExportInput) {
   const workbook = XLSX.utils.book_new();
   const summarySheet = XLSX.utils.aoa_to_sheet(summary);
   summarySheet['!cols'] = [{ wch: 24 }, { wch: 72 }];
-  const detailSheet = XLSX.utils.json_to_sheet(detailRows(input));
+  const detailSheet = XLSX.utils.json_to_sheet(reportDetailRows(input));
   detailSheet['!cols'] = [
     { wch: 12 }, { wch: 14 }, { wch: 28 }, { wch: 46 }, { wch: 12 }, { wch: 42 }, { wch: 8 }, { wch: 9 }, { wch: 12 },
     { wch: 24 }, { wch: 16 }, { wch: 14 }, { wch: 14 }, { wch: 34 }, { wch: 24 },
@@ -93,7 +94,7 @@ export async function exportExcelReport(input: ReportExportInput) {
 export async function exportWordReport(input: ReportExportInput) {
   const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, HeadingLevel, WidthType, AlignmentType } = await import('docx');
   const { profile, current, forward } = input;
-  const rows = detailRows(input).filter(row => row.结论 !== '未审核' || row.口径 === '现行基线');
+  const rows = reportDetailRows(input).filter(row => row.结论 !== '未审核' || row.口径 === '现行基线');
   const cell = (text: string, bold = false) => new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: String(text || '—'), bold, size: 18 })] })] });
   const header = (label: string) => new TableCell({ shading: { fill: '173A5B' }, children: [new Paragraph({ children: [new TextRun({ text: label, bold: true, color: 'FFFFFF', size: 18 })] })] });
   const detailTable = new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, rows: [
@@ -107,7 +108,7 @@ export async function exportWordReport(input: ReportExportInput) {
     new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'DB11/T 2552—2026 全标准审核工作台', size: 20, color: '718096' })] }),
     new Paragraph({ text: '' }),
     new Paragraph({ heading: HeadingLevel.HEADING_1, text: '一、单位画像' }),
-    new Paragraph({ children: [new TextRun({ text: `单位名称：${profile.name || '未命名单位'}\n` }), new TextRun({ text: `地区：${profile.region || '未填写'}　单位类型：${profile.unitType}\n` }), new TextRun({ text: `行业：${profile.industry || '未填写'}　审核日期：${profile.reviewDate || '未填写'}　审核人：${profile.reviewer || '未填写'}` })] }),
+    new Paragraph({ children: [new TextRun({ text: `单位名称：${profile.name || '未命名单位'}\n` }), new TextRun({ text: `地区：${profile.region || '未填写'}　单位类型：${profile.unitType}\n` }), new TextRun({ text: `行业：${profile.industry || '未填写'}　重点单位审核采用的防范级别：${profile.keyCandidate ? profile.keyProtectionLevel : '不适用'}\n` }), new TextRun({ text: `审核日期：${profile.reviewDate || '未填写'}　审核人：${profile.reviewer || '未填写'}` })] }),
     new Paragraph({ heading: HeadingLevel.HEADING_1, text: '二、审核摘要' }),
     new Paragraph({ children: [new TextRun({ text: `现行基线完成率：${current.completion}%　风险等级：${current.level}\n` }), new TextRun({ text: `现行适用项目：${current.counted.length}　关键缺口：${current.criticalGaps.length}　前瞻差距项目：${forward.active.filter(c => !current.active.some(x => x.id === c.id)).length}` })] }),
     new Paragraph({ heading: HeadingLevel.HEADING_1, text: '三、重点缺口与整改明细' }),

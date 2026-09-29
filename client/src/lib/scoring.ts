@@ -19,10 +19,11 @@ export function score(items: Criterion[], answers: Answers, profile: Profile, in
   const completion = max ? Math.round((earned / max) * 100) : 0;
   const criticalGaps = counted.filter(c => c.critical && answers[c.id]?.status === 'noncompliant');
   const open = counted.filter(c => ['unreviewed', 'partial', 'noncompliant'].includes(answers[c.id]?.status ?? 'unreviewed'));
-  const missingNaReason = counted.filter(c => answers[c.id]?.status === 'na' && !answers[c.id]?.note.trim());
+  const missingNaReason = active.filter(c => answers[c.id]?.status === 'na' && !answers[c.id]?.note.trim());
+  const keyLevelUnconfirmed = profile.keyCandidate && profile.keyProtectionLevel === '未确定';
   const manualReview = profile.keyCandidate || profile.secret || profile.dangerous || profile.crowded || profile.dataStorage || missingNaReason.length > 0;
   const level = criticalGaps.length || completion < 60 ? '高风险' : completion < 80 || counted.filter(c => c.weight >= 2 && answers[c.id]?.status === 'partial').length >= 3 ? '中风险' : '低风险';
-  return { active, counted, max, earned, completion, criticalGaps, open, level, manualReview, missingNaReason };
+  return { active, counted, max, earned, completion, criticalGaps, open, level, manualReview, missingNaReason, keyLevelUnconfirmed };
 }
 
 export const statusLabel: Record<Status, string> = { unreviewed: '未审核', compliant: '符合', partial: '部分符合', noncompliant: '不符合', na: '不适用' };
