@@ -1,6 +1,8 @@
 export type Status = 'unreviewed' | 'compliant' | 'partial' | 'noncompliant' | 'na';
 export type BasisKind = 'current' | 'forward' | 'local';
 export type KeyProtectionLevel = '未确定' | '三级' | '二级' | '一级';
+export const unitTypes = ['企业', '事业单位', '机关', '团体', '民办非企业'] as const;
+export type UnitType = typeof unitTypes[number];
 import { detailedMatrixCriteria } from './detailedMatrix';
 export type Criterion = {
   id: string; module: string; title: string; prompt: string; evidence: string;
@@ -8,7 +10,7 @@ export type Criterion = {
   basis: { kind: BasisKind; source: string; clause: string; note?: string }[];
 };
 export type Profile = {
-  name: string; region: string; unitType: string; industry: string; multiSite: boolean;
+  name: string; region: string; unitType: UnitType; industry: string; multiSite: boolean;
   keyCandidate: boolean; keyProtectionLevel: KeyProtectionLevel; secret: boolean; dangerous: boolean; crowded: boolean; dataStorage: boolean;
   reviewer: string; reviewDate: string;
 };
