@@ -87,6 +87,15 @@ describe('DB11/T 2552—2026 第5章与第6章审核矩阵', () => {
     expect(level1.counted.map(c => c.id)).toEqual(expect.arrayContaining(['KF-05', 'KF-06', 'KF-10', 'KF-29', 'KF-42', 'KF-43']));
   });
 
+  it('区分表F.1第17、29、43项的空间层级，且不改变既有项目编号', () => {
+    expect(byId('KF-17')?.title).toContain('周界主要出入口');
+    expect(byId('KF-17')?.prompt).toContain('门卫室、重要部位出入口或其他区域');
+    expect(byId('KF-29')?.title).toContain('重要部位所在建（构）筑物');
+    expect(byId('KF-29')?.prompt).toContain('周界、楼层出入口或重要部位本身出入口');
+    expect(byId('KF-43')?.title).toContain('重要部位本身');
+    expect(byId('KF-43')?.prompt).toContain('重要部位所在建（构）筑物出入口');
+  });
+
   it('不适用但未填写理由时触发人工复核', () => {
     const answers = Object.fromEntries(criteria.map(c => [c.id, emptyAnswer()]));
     answers['KF-23'] = { ...answers['KF-23'], status: 'na', note: '' };
