@@ -1,11 +1,11 @@
 import { Criterion, Profile, Status } from '@/data/criteria';
-import { a04ScopePending, evaluateA04Rule } from '@/data/a04Controls';
+import { evaluateA04Rule } from '@/data/a04Controls';
 import { emptyA04Details, type A04ControlDetails } from '@/data/a04Types';
 
 export type RemediationStatus = 'pending' | 'in_progress' | 'review' | 'closed';
 export type Answer = { status: Status; evidence: string; owner: string; due: string; action: string; note: string; remediationStatus: RemediationStatus; a04: A04ControlDetails };
 export type Answers = Record<string, Answer>;
-export type ReviewReasonCode = 'key_unit_review' | 'key_level_unconfirmed' | 'special_risk' | 'missing_na_reason' | 'a04_scope_pending' | 'a04_atomic_review' | 'invalid_na' | 'invalid_remediation_close';
+export type ReviewReasonCode = 'key_level_unconfirmed' | 'special_risk' | 'missing_na_reason' | 'invalid_na' | 'invalid_remediation_close';
 export type ReviewReason = { code: ReviewReasonCode; title: string; detail: string; criterionIds?: string[] };
 
 export const emptyAnswer = (a04NeedsReview = false): Answer => ({ status: 'unreviewed', evidence: '', owner: '', due: '', action: '', note: '', remediationStatus: 'pending', a04: emptyA04Details(a04NeedsReview) });
@@ -91,15 +91,11 @@ export function score(items: Criterion[], answers: Answers, profile: Profile, in
   const invalidClose = allFindings.filter(item => { const answer = answerOf(answers, item.id); return answer.remediationStatus === 'closed' && !canCloseRemediation(answer); });
   const keyLevelUnconfirmed = profile.keyCandidate && profile.keyProtectionLevel === '未确定';
   const reviewReasons: ReviewReason[] = [];
-  if (keyLevelUnconfirmed) reviewReasons.push({ code: 'key_level_unconfirmed', title: '重点单位防范级别未确认', detail: '当前画像按重点单位模式审核，但防范级别尚未确认；任何低等级控制结论均不能视为满足全部要求。', criterionIds: ['KU-02', 'KU-03'] });
-  else if (profile.keyCandidate) reviewReasons.push({ code: 'key_unit_review', title: '重点单位审核需人工复核', detail: '重点单位资格、等级和适用控制需由业务或主管部门要求进一步确认，系统不作行政认定。', criterionIds: ['KU-01', 'KU-02'] });
+  if (keyLevelUnconfirmed) reviewReasons.push({ code: 'key_level_unconfirmed', title: '重点单位防范级别未确认', detail: '你已选择按重点单位模式审核，但尚未选择防范级别；请确认后再将结果用于重点单位合规判断。', criterionIds: ['KU-02', 'KU-03'] });
   const risks = specialRiskLabels(profile);
   if (risks.length) reviewReasons.push({ code: 'special_risk', title: '特殊风险场景需资格复核', detail: `当前画像包含${risks.join('、')}；该信息只触发专项适用性与资格复核，不会自动改变重点单位审核模式。` });
   if (missingNaReason.length) reviewReasons.push({ code: 'missing_na_reason', title: '不适用理由缺失', detail: `${missingNaReason.length}个“不适用”项目未填写理由，需补充后再解释计分分母。`, criterionIds: missingNaReason.map(item => item.id) });
   if (invalidNa.length) reviewReasons.push({ code: 'invalid_na', title: '不适用结论无效', detail: `${invalidNa.length}项控制使用了禁止的“未安装/未设置”式不适用，或该控制在适用状态下不得标为不适用；已按不符合计入。`, criterionIds: invalidNa.map(item => item.id) });
-  if (a04ScopePending(profile, domestic)) reviewReasons.push({ code: 'a04_scope_pending', title: 'A04扩展控制适用范围待核准', detail: 'A04国内控制已显示以便逐项核验，但工程/系统/法律适用范围尚未由业务、法务或专业人员确认；不得将当前完成率称为完整合规证明。', criterionIds: domestic.filter(item => item.controlMeta?.requiresDomesticApplicabilityApproval).map(item => item.id) });
-  const atomicPending = domestic.filter(item => item.controlMeta && (answerOf(answers, item.id).status === 'unreviewed' || answerOf(answers, item.id).a04.needsReview));
-  if (atomicPending.length) reviewReasons.push({ code: 'a04_atomic_review', title: '原子控制待逐项复核', detail: `${atomicPending.length}项A04原子控制尚无独立结论或由旧档案迁入，旧父项答案不会自动证明新增高度、等级、期限或子断言符合。`, criterionIds: atomicPending.map(item => item.id) });
   if (invalidClose.length) reviewReasons.push({ code: 'invalid_remediation_close', title: '整改关闭证据不完整', detail: `${invalidClose.length}项整改虽标为已关闭，但缺少复核/临时防范等必要字段，仍作为待整改项保留。`, criterionIds: invalidClose.map(item => item.id) });
   const manualReview = reviewReasons.length > 0;
   const level = criticalGaps.length || completion < 60 ? '高风险' : completion < 80 || counted.filter(item => item.weight >= 2 && statusOf(item) === 'partial').length >= 3 ? '中风险' : '低风险';

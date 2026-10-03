@@ -10,6 +10,18 @@ const base: Profile = {
 const answers = () => Object.fromEntries(criteria.map(criterion => [criterion.id, emptyAnswer()])) as Answers;
 
 describe('评分、复核与整改状态', () => {
+  it('普通新建审核不会因A04未筛选或未审核而显示人工复核', () => {
+    const result = score(criteria, answers(), base, false);
+    expect(result.reviewReasons).toEqual([]);
+    expect(result.manualReview).toBe(false);
+  });
+
+  it('重点单位已选择防范级别后不再仅因模式本身触发人工复核', () => {
+    const result = score(criteria, answers(), { ...base, keyCandidate: true, keyProtectionLevel: '三级' }, false);
+    expect(result.reviewReasons.map(reason => reason.code)).not.toContain('key_unit_review');
+    expect(result.reviewReasons.map(reason => reason.code)).not.toContain('key_level_unconfirmed');
+  });
+
   it('特殊场景触发资格复核但不把非重点画像改为重点模式', () => {
     const result = score(criteria, answers(), { ...base, secret: true }, false);
     expect(result.active.filter(criterion => criterion.module === 'key').map(criterion => criterion.id)).toEqual(['KU-00']);
