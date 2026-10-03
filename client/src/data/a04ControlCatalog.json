@@ -1,0 +1,6845 @@
+{
+  "schemaVersion": "a04-design-v1.1",
+  "date": "2026-10-03",
+  "functionalBaseline": "9d824806206d082f171edae699aad3c138828f36",
+  "status": "requirements_design_only_not_implemented",
+  "sources": [
+    {
+      "id": "DB2552",
+      "title": "DB11/T 2552—2026 单位内部安全防范通用要求",
+      "url": "https://std.samr.gov.cn/db/search/stdDBDetailed?id=5A032B884C1C403EE06397BE0A0A9B90",
+      "kind": "推荐性地方标准",
+      "verification": "用户原件相关正文、附录D/F已核对",
+      "localFile": "E:/Documents/neibaoaudit-codex-audit-bundle/reference/DB11T2552-2026鍗曚綅鍐呴儴瀹夊叏闃茶寖閫氱敤瑕佹眰.pdf",
+      "notes": "2026-10-01实施；标准内应/宜分别保留，不统一称法定义务。",
+      "checkedAt": "2026-10-03",
+      "sha256": "d5f3e571f5d2675d47f97bf6bf82359306f5c7f38b71eb3d731b9ec77ff9a565",
+      "originCategory": "domestic_standard"
+    },
+    {
+      "id": "GB55029",
+      "title": "GB 55029—2022 安全防范工程通用规范",
+      "url": "https://cgj.dazhou.gov.cn/uploadfile/1/Attachment/4b3cea19d3.pdf",
+      "kind": "强制性工程建设规范",
+      "verification": "政府转载公告及原文；PDF第6—18页逐页目视核对",
+      "localFile": "E:/Documents/neibaoaudit-codex-audit-bundle/.audit-work/a04-sources/gb55029-notice-government.pdf",
+      "notes": "2022-10-01实施；全部条文强制，工程阶段和条款条件分别适用。",
+      "checkedAt": "2026-10-03",
+      "sha256": "159e3eb0a798440b54302070e4f4d7acd95b329590035f7a87432974dd8c69fb",
+      "originCategory": "domestic_standard"
+    },
+    {
+      "id": "GB17565",
+      "title": "GB 17565—2022 防盗安全门通用技术条件",
+      "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=A75C1C66CB989D0A40BFA7A262C93290",
+      "kind": "强制性产品标准",
+      "verification": "现行题录、替代2007版及2024-01-01实施已核对；全文未取得",
+      "localFile": null,
+      "notes": "≥3级由DB原文确定；不推断厚度/防破坏时间全部细则。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_standard"
+    },
+    {
+      "id": "DOORGRADES",
+      "title": "北京市市场监管局防盗门等级说明",
+      "url": "https://scjgj.beijing.gov.cn/zwxx/gs/202512/t20251231_4381843.html",
+      "kind": "监管部门说明",
+      "verification": "官方正文已核对",
+      "localFile": null,
+      "notes": "2022版1级最低5级最高；旧甲乙丙丁不能无依据自动换算。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_official_explanation"
+    },
+    {
+      "id": "DB855",
+      "title": "DB11/T 855—2025 安全防范系统运行与维护要求",
+      "url": "https://dbba.sacinfo.org.cn/portal/download/23e87a331baf31176115ea55907885f5903c95e7f764c77f963f68b71cc5b333",
+      "kind": "推荐性地方标准",
+      "verification": "国家备案平台原始PDF全文提取，第5—6页目视核对",
+      "localFile": "E:/Documents/neibaoaudit-codex-audit-bundle/.audit-work/a04-sources/db855-official.pdf",
+      "notes": "原件2025-06-24发布2025-10-01实施；6.8的或不可擅自改成且/较长者。",
+      "checkedAt": "2026-10-03",
+      "sha256": "cac4cbec5a9c88f189da441b6303b8d0c5f848108ec6b0ad0306726755c1ed3c",
+      "originCategory": "domestic_standard"
+    },
+    {
+      "id": "VIDEO799",
+      "title": "公共安全视频图像信息系统管理条例 国务院令799号",
+      "url": "https://www.mee.gov.cn/zcwj/gwywj/202502/t20250211_1102044.shtml",
+      "kind": "行政法规",
+      "verification": "官方全文已核对",
+      "localFile": null,
+      "notes": "2025-04-01施行；第9条场所排除第11/14/15/16第二款/17条强制要求，独立法律标准另判。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_administrative_regulation"
+    },
+    {
+      "id": "PIPL",
+      "title": "中华人民共和国个人信息保护法",
+      "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm",
+      "kind": "法律",
+      "verification": "官方全文已核对",
+      "localFile": null,
+      "notes": "处理依据、提示、个人同意、单独同意、单位授权分开；影响评估资料三年并非视频三年。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_law"
+    },
+    {
+      "id": "FACE2025",
+      "title": "人脸识别技术应用安全管理办法",
+      "url": "https://www.cac.gov.cn/2025-03/21/c_1744174262156096.htm",
+      "kind": "部门规章",
+      "verification": "官方全文已核对",
+      "localFile": null,
+      "notes": "2025-06-01施行；身份识别不等于必须人脸识别。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_departmental_rule"
+    },
+    {
+      "id": "CSL2026",
+      "title": "中华人民共和国网络安全法 2025修正2026施行文本",
+      "url": "https://sdca.miit.gov.cn/zwgk/fgbz/art/2026/art_4815dd4ec11d454783b83a91502a3cc7.html",
+      "kind": "法律",
+      "verification": "工信部门修正后全文已核对",
+      "localFile": null,
+      "notes": "现行第23条第3项相关网络日志至少六个月；不是旧第21条或固定180日。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_law"
+    },
+    {
+      "id": "ASISPSP",
+      "title": "ASIS PSP Body of Knowledge updated 2022",
+      "url": "https://www.asisonline.org/globalassets/certification/documents/physical-security-professional----bok.pdf",
+      "kind": "国际方法参考",
+      "verification": "ASIS官方公开知识纲要全文已核对",
+      "localFile": "E:/Documents/neibaoaudit-codex-audit-bundle/.audit-work/a04-sources/asis-psp-bok-2022.pdf",
+      "notes": "评估、设计、实施、生命周期方法；不产生中国法定义务或通用尺寸/频率。",
+      "checkedAt": "2026-10-03",
+      "sha256": "8114be4aefe4b271e025355fc8a796e339df221a4ff50c0f5e1a97feba3300ef",
+      "originCategory": "international_reference"
+    },
+    {
+      "id": "SANDIA",
+      "title": "Sandia Physical Protection Systems",
+      "url": "https://www.sandia.gov/cmc/ttd/physical-protection-systems/",
+      "kind": "国际科学方法参考",
+      "verification": "实验室官方方法说明已核对",
+      "localFile": null,
+      "notes": "探测、延迟、响应的系统工程方法；本文时序表达为工程化建议。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "international_reference"
+    },
+    {
+      "id": "GB35114",
+      "title": "GB 35114—2017 公共安全视频监控联网信息安全技术要求",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82107D3A7E05397BE0A0AB82A",
+      "kind": "强制性标准题录",
+      "verification": "官方题录现行、2024复审继续有效；本轮未逐条核验全文",
+      "localFile": null,
+      "notes": "需业务/法律专家复核详细适用与细则。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_standard"
+    },
+    {
+      "id": "GB37300",
+      "title": "GB 37300—2018 公共安全重点区域视频图像信息采集规范",
+      "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=D232F9374137D1ADB95733694B51F504",
+      "kind": "强制性标准题录",
+      "verification": "官方题录现行；本轮未逐条核验全文",
+      "localFile": null,
+      "notes": "需业务/法律专家复核详细适用与细则。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_standard"
+    },
+    {
+      "id": "GBT28181",
+      "title": "GB/T 28181—2022 视频联网信息传输交换控制",
+      "url": "https://openstd.samr.gov.cn/bzgk/std/std_list?p.p1=0&p.p2=GB%2FT28181-2022&p.p90=circulation_date&p.p91=desc",
+      "kind": "推荐性国家标准题录",
+      "verification": "官方题录现行、2023-07-01实施；全文未逐条核验",
+      "localFile": null,
+      "notes": "需业务/法律专家复核详细适用与细则。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_standard"
+    },
+    {
+      "id": "GBT32581",
+      "title": "GB/T 32581—2016 入侵和紧急报警系统技术要求",
+      "url": "https://openstd.samr.gov.cn/bzgk/std/std_list?p.p1=0&p.p2=GBT32581&p.p90=circulation_date&p.p91=desc",
+      "kind": "推荐性国家标准题录",
+      "verification": "官方题录现行；全文未逐条核验",
+      "localFile": null,
+      "notes": "需业务/法律专家复核详细适用与细则。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_standard"
+    },
+    {
+      "id": "GBT37078",
+      "title": "GB/T 37078—2018 出入口控制系统技术要求",
+      "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=6BC49FE7D57E99B665A9839D881151E3",
+      "kind": "推荐性国家标准题录",
+      "verification": "官方题录现行；全文未逐条核验",
+      "localFile": null,
+      "notes": "需业务/法律专家复核详细适用与细则。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_standard"
+    },
+    {
+      "id": "GAT1127",
+      "title": "GA/T 1127—2025 安全防范视频监控摄像机",
+      "url": "https://ywtb.mps.gov.cn/gabzh/portal/stdDetail/310039",
+      "kind": "推荐性行业标准题录",
+      "verification": "官方题录2025-10-13发布2026-02-01实施现行；全文未取得",
+      "localFile": null,
+      "notes": "需业务/法律专家复核详细适用与细则。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_standard"
+    },
+    {
+      "id": "GB55037",
+      "title": "GB 55037—2022 建筑防火通用规范",
+      "url": "https://sjw.qingdao.gov.cn/cxjsj3/cxjsj200/cxjsj_hydt2/202305/t20230526_7204041.html",
+      "kind": "强制性工程规范实施信息",
+      "verification": "政府2023-06-01实施信息；全文映射本轮未完成",
+      "localFile": null,
+      "notes": "需业务/法律专家复核详细适用与细则。",
+      "checkedAt": "2026-10-03",
+      "originCategory": "domestic_standard"
+    }
+  ],
+  "controls": [
+    {
+      "id": "A04-BAR-01",
+      "topic": "barrier",
+      "title": "一般单位周界屏障采用情况",
+      "module": "general",
+      "applicability": "非重点单位；实际存在周界",
+      "acceptanceRule": "5.3.1及D1为宜；记录风险评估、采用或替代决定，不统一强制2m/2.5m。",
+      "requiredEvidence": [
+        "边界图、风险与采用决定"
+      ],
+      "accountableOwner": "保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "5.3.1、D表序号1",
+          "strength": "标准宜",
+          "pdfPage": 9,
+          "printedPage": 5,
+          "pdfPages": [
+            9
+          ],
+          "printedPages": [
+            5
+          ]
+        }
+      ],
+      "tests": [
+        "非重点1.9m不按重点2m自动扣分；独立适用GB风险要求仍查"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "GD-01"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-BAR-02",
+      "topic": "barrier",
+      "title": "重点屏障最小有效高度",
+      "module": "key",
+      "applicability": "已确认重点；未定级按三级最低；所有周界段",
+      "acceptanceRule": "三级/二级≥2m，一级≥2.5m，含防攀爬设施；取全线最低值，不用平均或比较前舍入。",
+      "requiredEvidence": [
+        "逐段实测、点位/照片、日期和测量人"
+      ],
+      "accountableOwner": "设施/保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.5.2.1",
+          "strength": "标准应",
+          "pdfPage": 12,
+          "printedPage": 8,
+          "pdfPages": [
+            12
+          ],
+          "printedPages": [
+            8
+          ]
+        },
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.2.1",
+          "strength": "标准应",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15
+          ],
+          "printedPages": [
+            11
+          ]
+        }
+      ],
+      "tests": [
+        "三级1.999失败2通过；二级2.4通过；一级2.499失败2.5通过"
+      ],
+      "structuredRule": {
+        "type": "minimum",
+        "field": "minimumHeightM",
+        "unit": "m",
+        "operator": ">=",
+        "thresholdByLevel": {
+          "unknown": 2,
+          "level3": 2,
+          "level2": 2,
+          "level1": 2.5
+        },
+        "roundBeforeCompare": false
+      },
+      "legacyLinks": [
+        "KF-01"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-BAR-03",
+      "topic": "barrier",
+      "title": "重点周界连续性",
+      "module": "key",
+      "applicability": "重点单位全部周界、出入口连接处",
+      "acceptanceRule": "逐段无未防护断点；开口、门、连接与穿越点有保护。不从本条臆造统一网孔/缝隙尺寸。",
+      "requiredEvidence": [
+        "完整段清单、踏勘、开口及验收"
+      ],
+      "accountableOwner": "设施部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.5.2.1",
+          "strength": "标准应",
+          "pdfPage": 12,
+          "printedPage": 8,
+          "pdfPages": [
+            12
+          ],
+          "printedPages": [
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "只有一段围栏照片不能全符合；任一无防护断口失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-01"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-BAR-04",
+      "topic": "barrier",
+      "title": "攀爬可借助物排查",
+      "module": "key",
+      "applicability": "三级/二级查外侧；一级查两侧",
+      "acceptanceRule": "对应侧无可供攀爬物/设施，核查树木、堆物、临建设备；安全清距按批准风险设计，不造统一米数。",
+      "requiredEvidence": [
+        "位置/双侧照片、清理或迁移记录"
+      ],
+      "accountableOwner": "后勤/保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.5.2.1、6.7.2.1",
+          "strength": "标准应",
+          "pdfPage": 12,
+          "printedPage": 8,
+          "pdfPages": [
+            12,
+            15
+          ],
+          "printedPages": [
+            8,
+            11
+          ]
+        }
+      ],
+      "tests": [
+        "一级只查外侧不能全符合；二级不套一级内侧新增要求"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-01"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-BAR-05",
+      "topic": "barrier",
+      "title": "河道涵洞地下穿越点防护",
+      "module": "key",
+      "applicability": "重点单位存在周界地下穿越点",
+      "acceptanceRule": "逐点设置封堵等防护；兼顾批准的排水、检修、应急需求；未调查不能NA。",
+      "requiredEvidence": [
+        "穿越点清单、设计、现场验收"
+      ],
+      "accountableOwner": "设施部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.5.2.3、F序号7",
+          "strength": "标准应",
+          "pdfPage": 13,
+          "printedPage": 9,
+          "pdfPages": [
+            13,
+            24
+          ],
+          "printedPages": [
+            9,
+            20
+          ]
+        }
+      ],
+      "tests": [
+        "有涵洞未核验失败；确实无穿越点有据NA"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-07"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-BAR-06",
+      "topic": "barrier",
+      "title": "材质结构固定及抗风险能力",
+      "module": "systems",
+      "applicability": "适用GB55029；设置或要求实体屏障",
+      "acceptanceRule": "按风险核准材质、结构、固定和防护能力；车辆屏障依车型重量速度等设计验证；不设万能钢板厚度/抗冲撞等级。",
+      "requiredEvidence": [
+        "风险及设计、材料证明、安装验收及状态"
+      ],
+      "accountableOwner": "设计/设施部门",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.1.3(1)、3.4.2、3.4.3(1)(4)",
+          "strength": "国家强制",
+          "pdfPage": 8,
+          "printedPage": 3,
+          "pdfPages": [
+            8
+          ],
+          "printedPages": [
+            3
+          ]
+        }
+      ],
+      "tests": [
+        "有围栏但固定松动或无设计性能证明不能全符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-01",
+        "KF-08",
+        "GD-01"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-BAR-07",
+      "topic": "barrier",
+      "title": "高风险建筑可进入孔洞防护",
+      "module": "systems",
+      "applicability": "GB高风险保护对象；孔洞可容纳防范对象进入",
+      "acceptanceRule": "洞口、管沟管廊、吊顶、风管槽盒管道等逐项封闭或阻挡；高风险认定独立于DB重点标签。",
+      "requiredEvidence": [
+        "穿透点清单、尺寸、设计/隐蔽验收"
+      ],
+      "accountableOwner": "设施部门",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.4.4(3)",
+          "strength": "国家强制",
+          "pdfPage": 12,
+          "printedPage": 7,
+          "pdfPages": [
+            12
+          ],
+          "printedPages": [
+            7
+          ]
+        }
+      ],
+      "tests": [
+        "key=false而GB高风险=true仍适用；只查门遗漏孔洞失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-BAR-08",
+      "topic": "barrier",
+      "title": "锐利防护设施警示",
+      "module": "systems",
+      "applicability": "GB55029适用；触碰易伤害的锐利设施",
+      "acceptanceRule": "安装区域有警示；不把刀刺作为所有单位必选，设计兼顾公众及应急。",
+      "requiredEvidence": [
+        "设施与警示照片、安全检查"
+      ],
+      "accountableOwner": "设施部门",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.4.6",
+          "strength": "国家强制",
+          "pdfPage": 13,
+          "printedPage": 8,
+          "pdfPages": [
+            13
+          ],
+          "printedPages": [
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "有锐利设施无警示失败；无此设施有据NA"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-DOOR-01",
+      "topic": "door",
+      "title": "门卫室对外门防盗等级",
+      "module": "key",
+      "applicability": "二级/一级门卫室、传达室每樘与外界相通门",
+      "acceptanceRule": "按GB17565—2022等级≥3；3/4/5满足等级条件，1/2不满足；旧甲级、普通钢门名称不能自动代替。",
+      "requiredEvidence": [
+        "点位、铭牌型号等级、整门对应检测、安装一致性"
+      ],
+      "accountableOwner": "设施/采购部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.6.2.2、F序号19",
+          "strength": "标准应",
+          "pdfPage": 14,
+          "printedPage": 10,
+          "pdfPages": [
+            14,
+            24
+          ],
+          "printedPages": [
+            10,
+            20
+          ]
+        },
+        {
+          "sourceId": "DOORGRADES",
+          "clause": "等级说明",
+          "strength": "官方说明（非条文本身）",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "二级2失败3/4/5满足；三级不强制此新增要求；旧甲级待专业核验"
+      ],
+      "structuredRule": {
+        "type": "minimum",
+        "field": "certifiedGrade2022",
+        "unit": "grade",
+        "operator": ">=",
+        "threshold": 3,
+        "allowedValues": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "requiredVersion": "GB 17565-2022"
+      },
+      "legacyLinks": [
+        "KF-19"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-DOOR-02",
+      "topic": "door",
+      "title": "成套门安装与闭锁有效",
+      "module": "systems",
+      "applicability": "工程采用防盗门；适用GB/采用DB855",
+      "acceptanceRule": "门框门扇、锁、铰链及固定闭锁与批准设计/成套产品证明一致；改装重新核验，锁具证书不能证明整门等级。",
+      "requiredEvidence": [
+        "成套报告、实装验收、改装/维护及实测"
+      ],
+      "accountableOwner": "设施部门",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "2.0.3、3.4.5、4.0.2",
+          "strength": "国家强制",
+          "pdfPage": 7,
+          "printedPage": 2,
+          "pdfPages": [
+            7,
+            12,
+            16
+          ],
+          "printedPages": [
+            2,
+            7,
+            11
+          ]
+        },
+        {
+          "sourceId": "DB855",
+          "clause": "6.14、C表C.1门类",
+          "strength": "标准应",
+          "pdfPage": 12,
+          "printedPage": 9,
+          "pdfPages": [
+            12
+          ],
+          "printedPages": [
+            9
+          ]
+        }
+      ],
+      "tests": [
+        "3级铭牌但门不能锁闭失败；换锁而无实装一致证明待核验"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-19"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-DOOR-03",
+      "topic": "door",
+      "title": "其他部位门风险定级",
+      "module": "systems",
+      "applicability": "重要部位、其他出入口或特殊库室",
+      "acceptanceRule": "逐门明确防盗/防弹/防爆等需求及行业或设计依据；不把门卫≥3级扩展所有门，不以门卫等级替代特殊库室标准。",
+      "requiredEvidence": [
+        "门资产清单、风险、行业适用与设计"
+      ],
+      "accountableOwner": "设计/保卫部门",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.4.4(4)、3.4.5",
+          "strength": "国家强制",
+          "pdfPage": 12,
+          "printedPage": 7,
+          "pdfPages": [
+            12
+          ],
+          "printedPages": [
+            7
+          ]
+        }
+      ],
+      "tests": [
+        "普通办公室不无依据强制3级；危险库室不能仅按门卫等级通过"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-DOOR-04",
+      "topic": "door",
+      "title": "紧急疏散无需凭证",
+      "module": "systems",
+      "applicability": "疏散通道门禁控制点",
+      "acceptanceRule": "紧急情况下无需刷卡、刷脸、密码即可通行，按批准疏散/消防方案实测；防盗等级不等于防火性能。",
+      "requiredEvidence": [
+        "疏散图、联动方案、紧急释放测试"
+      ],
+      "accountableOwner": "消防/设施部门",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.1.6、3.5.3(2)",
+          "strength": "国家强制",
+          "pdfPage": 9,
+          "printedPage": 4,
+          "pdfPages": [
+            9,
+            14
+          ],
+          "printedPages": [
+            4,
+            9
+          ]
+        },
+        {
+          "sourceId": "DB2552",
+          "clause": "8.4.2",
+          "strength": "标准应",
+          "pdfPage": 16,
+          "printedPage": 12,
+          "pdfPages": [
+            16
+          ],
+          "printedPages": [
+            12
+          ]
+        }
+      ],
+      "tests": [
+        "门3级仍须刷脸逃生失败；停电及消防释放分场景核验"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-04"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-01",
+      "topic": "level1",
+      "title": "独立保卫机构",
+      "module": "key",
+      "applicability": "一级重点单位",
+      "acceptanceRule": "独立机构有正式设置、职责人员及报告关系；继承二级专职管理人员3‰。",
+      "requiredEvidence": [
+        "组织决定、职责及配置"
+      ],
+      "accountableOwner": "单位负责人/人事",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.1.1",
+          "strength": "标准应",
+          "pdfPage": 14,
+          "printedPage": 10,
+          "pdfPages": [
+            14
+          ],
+          "printedPages": [
+            10
+          ]
+        }
+      ],
+      "tests": [
+        "仅兼职联系人不能代替；二级不套一级组织形式"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-02",
+      "topic": "level1",
+      "title": "主出入口双人24h值守",
+      "module": "key",
+      "applicability": "一级每个周界主要出入口",
+      "acceptanceRule": "每个出入口全天各时段至少2名保卫执勤人员实际在岗，缺岗有替补。",
+      "requiredEvidence": [
+        "各门班表、签到交接与抽查"
+      ],
+      "accountableOwner": "保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.1.2",
+          "strength": "标准应",
+          "pdfPage": 14,
+          "printedPage": 10,
+          "pdfPages": [
+            14
+          ],
+          "printedPages": [
+            10
+          ]
+        }
+      ],
+      "tests": [
+        "夜间1人失败；日共2人不等于每时段2人；二级按运营时段"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-03",
+      "topic": "level1",
+      "title": "重要楼层人员值守建议",
+      "module": "key",
+      "applicability": "一级重要部位所在楼层",
+      "acceptanceRule": "逐楼层核准采用；为宜，未采用列建议，不擅自变为法定强制。",
+      "requiredEvidence": [
+        "楼层风险、采用及安排"
+      ],
+      "accountableOwner": "保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.1.4",
+          "strength": "标准宜",
+          "pdfPage": 14,
+          "printedPage": 10,
+          "pdfPages": [
+            14
+          ],
+          "printedPages": [
+            10
+          ]
+        }
+      ],
+      "tests": [
+        "未采用按建议处理；内部已承诺则另审承诺"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-04",
+      "topic": "level1",
+      "title": "监控中心双人24h每班值守",
+      "module": "key",
+      "applicability": "一级安防监控中心/室",
+      "acceptanceRule": "24h每班至少2名值机人员在岗；轮换休息不使在岗人数不足。",
+      "requiredEvidence": [
+        "班表、签到交接、缺岗记录"
+      ],
+      "accountableOwner": "监控运行部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.1.5",
+          "strength": "标准应",
+          "pdfPage": 14,
+          "printedPage": 10,
+          "pdfPages": [
+            14
+          ],
+          "printedPages": [
+            10
+          ]
+        }
+      ],
+      "tests": [
+        "2人各值12h形成单人班失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-05",
+      "topic": "level1",
+      "title": "误侵入点广播建议",
+      "module": "key",
+      "applicability": "一级存在易误侵入周界位置",
+      "acceptanceRule": "按点位核准广播警示采用及效果，为宜。",
+      "requiredEvidence": [
+        "点位、采用决定与可听性测试"
+      ],
+      "accountableOwner": "设施/保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.2.2、F序号3",
+          "strength": "标准宜",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15,
+            24
+          ],
+          "printedPages": [
+            11,
+            20
+          ]
+        }
+      ],
+      "tests": [
+        "无易误侵入点可有据NA；未配不变强制失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-03"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-06",
+      "topic": "level1",
+      "title": "重要建筑周边屏障建议",
+      "module": "key",
+      "applicability": "一级重要部位所在建筑",
+      "acceptanceRule": "单查建筑周边屏障风险及采用，为宜；周界围栏不能冒充此建筑措施。",
+      "requiredEvidence": [
+        "建筑位置、采用与验收"
+      ],
+      "accountableOwner": "设施部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.2.3、F序号22",
+          "strength": "标准宜",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15,
+            24
+          ],
+          "printedPages": [
+            11,
+            20
+          ]
+        }
+      ],
+      "tests": [
+        "周界有围栏不自动判建筑周边采用"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-22"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-07",
+      "topic": "level1",
+      "title": "重要摄像机IV级数据安全建议",
+      "module": "key",
+      "applicability": "一级重要部位区域摄像机",
+      "acceptanceRule": "按GA/T1127—2025对应IV级核验，宜；不是等保四级。全文/项目未核准时待专家，不造细则。",
+      "requiredEvidence": [
+        "对应型号固件及IV检测项目"
+      ],
+      "accountableOwner": "信息安全部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.3.1",
+          "strength": "标准宜",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15
+          ],
+          "printedPages": [
+            11
+          ]
+        }
+      ],
+      "tests": [
+        "等保四级证书不能替代产品IV报告；二级III建议不足以证明一级IV"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "外部标准全文及III/IV含义需业务/法律专家复核。",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "DB条文已核验，外部等级细则待专家核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-08",
+      "topic": "level1",
+      "title": "一级安防平台必设",
+      "module": "key",
+      "applicability": "一级重点单位",
+      "acceptanceRule": "已设置且可使用；未安装属缺口不可NA；8.7功能、权限、故障独立性另按子控制审。",
+      "requiredEvidence": [
+        "架构、验收、实际使用与功能"
+      ],
+      "accountableOwner": "保卫/信息部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.3.2",
+          "strength": "标准应",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15
+          ],
+          "printedPages": [
+            11
+          ]
+        }
+      ],
+      "tests": [
+        "其他低等级设施全符合不能掩盖无平台；缺采购不能NA"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-07"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-09",
+      "topic": "level1",
+      "title": "主出入口身份识别",
+      "module": "key",
+      "applicability": "一级周界主要出入口",
+      "acceptanceRule": "门禁识别人员身份并依授权放行；不得把身份识别等于必须人脸。",
+      "requiredEvidence": [
+        "方案、身份授权及功能实测"
+      ],
+      "accountableOwner": "保卫/信息部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.3.3",
+          "strength": "标准应",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15
+          ],
+          "printedPages": [
+            11
+          ]
+        }
+      ],
+      "tests": [
+        "选择符合设计的非人脸识别不按未刷脸扣分"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-14"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-10",
+      "topic": "level1",
+      "title": "车底成像安检建议",
+      "module": "key",
+      "applicability": "一级有车辆主出入口",
+      "acceptanceRule": "按风险采用车底成像等装置，为宜；不得替代已继承二级安检区/探测设施。",
+      "requiredEvidence": [
+        "采用决定及功能测试"
+      ],
+      "accountableOwner": "安检部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.3.3、F序号16",
+          "strength": "标准宜",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15,
+            24
+          ],
+          "printedPages": [
+            11,
+            20
+          ]
+        }
+      ],
+      "tests": [
+        "未采用不伪装二级强制缺口"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-16"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-11",
+      "topic": "level1",
+      "title": "制高点视频建议及效果",
+      "module": "key",
+      "applicability": "一级有适合制高点；选择采用",
+      "acceptanceRule": "配置为宜，采用后的监视及回放清晰显示区域人员活动车辆行驶；配置/效果分子断言。",
+      "requiredEvidence": [
+        "点位、采用、昼夜监视回放"
+      ],
+      "accountableOwner": "监控运行部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.3.4、F序号21",
+          "strength": "标准宜",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15,
+            24
+          ],
+          "printedPages": [
+            11,
+            20
+          ]
+        }
+      ],
+      "tests": [
+        "装了设备但夜间不清不能判效果符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-21"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-12",
+      "topic": "level1",
+      "title": "重要建筑入口入侵探测",
+      "module": "key",
+      "applicability": "一级重要部位所在建筑入口",
+      "acceptanceRule": "每个适用入口探测有效；二级宜升级一级应，内部探测不能替代入口。",
+      "requiredEvidence": [
+        "入口清单、探测报警测试"
+      ],
+      "accountableOwner": "设施/保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.3.5(a)、F序号29",
+          "strength": "标准应",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15,
+            24
+          ],
+          "printedPages": [
+            11,
+            20
+          ]
+        }
+      ],
+      "tests": [
+        "二级未采用为建议；一级缺失为标准应缺口"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-29"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-13",
+      "topic": "level1",
+      "title": "重要建筑执勤岗紧急报警",
+      "module": "key",
+      "applicability": "一级重要建筑保卫执勤岗",
+      "acceptanceRule": "每个相应岗可触达报警且有效，门卫报警不能替代。",
+      "requiredEvidence": [
+        "岗位点位、报警及联动测试"
+      ],
+      "accountableOwner": "设施/保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.3.5(b)、F序号38",
+          "strength": "标准应",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15,
+            25
+          ],
+          "printedPages": [
+            11,
+            21
+          ]
+        }
+      ],
+      "tests": [
+        "仅门卫室有报警不能通过重要建筑岗"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-38"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-14",
+      "topic": "level1",
+      "title": "建筑入口及重要楼层门禁建议",
+      "module": "key",
+      "applicability": "一级相应建筑入口/重要楼层",
+      "acceptanceRule": "两类位置分别核验采用，为宜；重要部位入口二级已应，不能合并覆盖。",
+      "requiredEvidence": [
+        "分位置点位/采用决定、门禁实测"
+      ],
+      "accountableOwner": "保卫/设施部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.3.5(c)、F序号28、35",
+          "strength": "标准宜",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15,
+            24,
+            25
+          ],
+          "printedPages": [
+            11,
+            20,
+            21
+          ]
+        }
+      ],
+      "tests": [
+        "重要部位门禁不自动覆盖楼层/建筑入口"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-28",
+        "KF-35"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-15",
+      "topic": "level1",
+      "title": "共用重要建筑管理边界门禁",
+      "module": "key",
+      "applicability": "一级且多单位共用重要建筑",
+      "acceptanceRule": "划清管理边界并设置门禁；物业统一管理不自动豁免。",
+      "requiredEvidence": [
+        "责任协议、边界图、授权/功能"
+      ],
+      "accountableOwner": "单位负责人/物业/保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.3.5(d)",
+          "strength": "标准应",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15
+          ],
+          "printedPages": [
+            11
+          ]
+        }
+      ],
+      "tests": [
+        "共用=true无边界控制失败；独用可有据NA"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-16",
+      "topic": "level1",
+      "title": "重要部位入口访客安检建议",
+      "module": "key",
+      "applicability": "一级重要部位有来访",
+      "acceptanceRule": "逐入口核验安检区和手持金属探测等采用，为宜；周界主入口二级应另查。",
+      "requiredEvidence": [
+        "点位、采用、检查流程/测试"
+      ],
+      "accountableOwner": "安检/保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.7.3.6、F序号40",
+          "strength": "标准宜",
+          "pdfPage": 15,
+          "printedPage": 11,
+          "pdfPages": [
+            15,
+            25
+          ],
+          "printedPages": [
+            11,
+            21
+          ]
+        }
+      ],
+      "tests": [
+        "周界安检证据不能自动替代重要部位入口"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-40"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-01",
+      "topic": "records",
+      "title": "所有单位基础工作档案",
+      "module": "governance",
+      "applicability": "所有单位",
+      "acceptanceRule": "收集整理机构、制度、监督检查等档案；一般单位不能因非重点隐藏；目录不等于资料存在。",
+      "requiredEvidence": [
+        "目录及资料编号日期、检索核验"
+      ],
+      "accountableOwner": "保卫/档案部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "4.3.3",
+          "strength": "标准应",
+          "pdfPage": 8,
+          "printedPage": 4,
+          "pdfPages": [
+            8
+          ],
+          "printedPages": [
+            4
+          ]
+        }
+      ],
+      "tests": [
+        "非重点无档案失败；只有制度无检查资料不能全符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "R-03"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-02",
+      "topic": "records",
+      "title": "重点单位逐类完整档案",
+      "module": "key",
+      "applicability": "重点含未定级",
+      "acceptanceRule": "逐类核验基本情况、责任制、制度、重要岗位/部位区域清单、风险评估、措施、工程检验、效能评估、培训奖惩、预案演练、案事件。每类独立结果。",
+      "requiredEvidence": [
+        "分类型目录、实际资料、无事件等说明"
+      ],
+      "accountableOwner": "保卫/档案部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "4.3.4",
+          "strength": "标准应",
+          "pdfPage": 8,
+          "printedPage": 4,
+          "pdfPages": [
+            8
+          ],
+          "printedPages": [
+            4
+          ]
+        }
+      ],
+      "tests": [
+        "只有目录不能全符合；不虚造从未发生事件的记录"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "R-03"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-03",
+      "topic": "records",
+      "title": "巡查检查双签归档",
+      "module": "inspection",
+      "applicability": "所有单位有巡查检查",
+      "acceptanceRule": "记录执行人员及主管签名并归档；9.4未定统一年限，另批准分类保存表。",
+      "requiredEvidence": [
+        "双签记录、归档检索"
+      ],
+      "accountableOwner": "保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "9.4",
+          "strength": "标准应",
+          "pdfPage": 17,
+          "printedPage": 13,
+          "pdfPages": [
+            17
+          ],
+          "printedPages": [
+            13
+          ]
+        }
+      ],
+      "tests": [
+        "缺主管签名失败；不能宣称此条全部记录法定三年"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-04",
+      "topic": "records",
+      "title": "重点访客和机动车记录180日",
+      "module": "key",
+      "applicability": "重点实际访客、机动车登记",
+      "acceptanceRule": "两类分别实际可检索≥180d；未建记录不可NA。",
+      "requiredEvidence": [
+        "分类策略、到期前取回样本"
+      ],
+      "accountableOwner": "保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.4.9",
+          "strength": "标准应",
+          "pdfPage": 12,
+          "printedPage": 8,
+          "pdfPages": [
+            12
+          ],
+          "printedPages": [
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "179日失败180日通过；访客和车辆分别断言"
+      ],
+      "structuredRule": {
+        "type": "retention",
+        "unit": "calendar_day",
+        "operator": ">=",
+        "threshold": 180
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-05",
+      "topic": "records",
+      "title": "报警四类记录90日",
+      "module": "systems",
+      "applicability": "设置或要求设置报警系统",
+      "acceptanceRule": "布防、撤防、故障、报警四类分别可检索≥90d。",
+      "requiredEvidence": [
+        "四类策略与边界样本"
+      ],
+      "accountableOwner": "监控运行部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "8.2.5",
+          "strength": "标准应",
+          "pdfPage": 16,
+          "printedPage": 12,
+          "pdfPages": [
+            16
+          ],
+          "printedPages": [
+            12
+          ]
+        }
+      ],
+      "tests": [
+        "报警90日但故障30日失败；89/90边界"
+      ],
+      "structuredRule": {
+        "type": "retention",
+        "categories": [
+          "arm",
+          "disarm",
+          "fault",
+          "alarm"
+        ],
+        "unit": "calendar_day",
+        "operator": ">=",
+        "threshold": 90
+      },
+      "legacyLinks": [
+        "ST-02"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-06",
+      "topic": "records",
+      "title": "门禁四类记录180日",
+      "module": "systems",
+      "applicability": "设置或要求设置门禁系统",
+      "acceptanceRule": "操作、故障、配置、通行分别保存≥180d。",
+      "requiredEvidence": [
+        "四类策略与可取回样本"
+      ],
+      "accountableOwner": "信息/监控部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "8.4.3",
+          "strength": "标准应",
+          "pdfPage": 16,
+          "printedPage": 12,
+          "pdfPages": [
+            16
+          ],
+          "printedPages": [
+            12
+          ]
+        }
+      ],
+      "tests": [
+        "通行180日但配置无记录失败"
+      ],
+      "structuredRule": {
+        "type": "retention",
+        "categories": [
+          "operation",
+          "fault",
+          "configuration",
+          "passage"
+        ],
+        "unit": "calendar_day",
+        "operator": ">=",
+        "threshold": 180
+      },
+      "legacyLinks": [
+        "ST-04"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-07",
+      "topic": "records",
+      "title": "电子巡查记录90日",
+      "module": "systems",
+      "applicability": "设置或要求电子巡查系统",
+      "acceptanceRule": "保存≥90d并可核路线时间人员；制度不替代实际记录。",
+      "requiredEvidence": [
+        "策略与边界样本"
+      ],
+      "accountableOwner": "保卫/监控部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "8.5.2",
+          "strength": "标准应",
+          "pdfPage": 16,
+          "printedPage": 12,
+          "pdfPages": [
+            16
+          ],
+          "printedPages": [
+            12
+          ]
+        }
+      ],
+      "tests": [
+        "89失败90满足；配置90但取回为空不能符合"
+      ],
+      "structuredRule": {
+        "type": "retention",
+        "unit": "calendar_day",
+        "operator": ">=",
+        "threshold": 90
+      },
+      "legacyLinks": [
+        "ST-05"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-08",
+      "topic": "records",
+      "title": "视频原始完整与30日保存",
+      "module": "systems",
+      "applicability": "DB视频系统或GB适用工程；799第7条另有独立义务",
+      "acceptanceRule": "实时原始完整，实际可回放≥30d，按通道码率容量核验。第9条不因799第17条自动适用30日，但独立DB/GB依据仍另判。",
+      "requiredEvidence": [
+        "配置、容量、最早与连续录像回放"
+      ],
+      "accountableOwner": "信息/监控部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "8.3.1",
+          "strength": "标准应",
+          "pdfPage": 16,
+          "printedPage": 12,
+          "pdfPages": [
+            16
+          ],
+          "printedPages": [
+            12
+          ]
+        },
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.2(5)",
+          "strength": "国家强制",
+          "pdfPage": 14,
+          "printedPage": 9,
+          "pdfPages": [
+            14
+          ],
+          "printedPages": [
+            9
+          ]
+        },
+        {
+          "sourceId": "VIDEO799",
+          "clause": "17、9",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "29失败30满足；第9条且无独立依据不套17；断档不能全符合"
+      ],
+      "structuredRule": {
+        "type": "retention",
+        "unit": "calendar_day",
+        "operator": ">=",
+        "threshold": 30
+      },
+      "legacyLinks": [
+        "ST-03"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-09",
+      "topic": "records",
+      "title": "维护记录保存分支与签名",
+      "module": "systems",
+      "applicability": "适用/已采用DB855运维",
+      "acceptanceRule": "签字归档；6.8原文三年或系统使用期，保留批准分支、起算与证明；未核准待专家。内部可更严取较长者，勿称唯一原文要求。",
+      "requiredEvidence": [
+        "维护报告/签名、保存分支审批、取回证明"
+      ],
+      "accountableOwner": "维护/档案部门",
+      "basis": [
+        {
+          "sourceId": "DB855",
+          "clause": "6.7、6.8",
+          "strength": "标准应",
+          "pdfPage": 6,
+          "printedPage": 3,
+          "pdfPages": [
+            6
+          ],
+          "printedPages": [
+            3
+          ]
+        }
+      ],
+      "tests": [
+        "程序不能静默把或改为且；仅两年且无系统使用期证明不得通过"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "分支内涵及起算需业务/法律专家复核。",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "原文已核验，保存分支待专家核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-10",
+      "topic": "records",
+      "title": "工程竣工资料完整移交",
+      "module": "systems",
+      "applicability": "GB工程竣工验收移交",
+      "acceptanceRule": "验收合格后编制完整竣工资料并移交，图纸实装一致；不合格不得交付。",
+      "requiredEvidence": [
+        "设计、隐蔽验收、检验试运行、质量验收与签收"
+      ],
+      "accountableOwner": "建设/施工/档案部门",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "5.0.3—5.0.5",
+          "strength": "国家强制",
+          "pdfPage": 17,
+          "printedPage": 12,
+          "pdfPages": [
+            17
+          ],
+          "printedPages": [
+            12
+          ]
+        }
+      ],
+      "tests": [
+        "采购合同不替代竣工资料；验收不合格不可放行"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-11",
+      "topic": "records",
+      "title": "影响评估及记录至少三年",
+      "module": "governance",
+      "applicability": "个人信息法55触发事项；实际人脸识别等",
+      "acceptanceRule": "相应处理前做影响评估；评估报告和处理情况记录≥3年，不延长所有视频/脸模板为三年。",
+      "requiredEvidence": [
+        "事前评估审批、处理记录、保存策略"
+      ],
+      "accountableOwner": "个人信息保护/法务",
+      "basis": [
+        {
+          "sourceId": "PIPL",
+          "clause": "55、56",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        },
+        {
+          "sourceId": "FACE2025",
+          "clause": "9",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "首次脸识别无事前评估失败；评估3年不等于脸数据3年"
+      ],
+      "structuredRule": {
+        "type": "retention",
+        "unit": "calendar_year",
+        "operator": ">=",
+        "threshold": 3
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-12",
+      "topic": "records",
+      "title": "相关网络日志六个月",
+      "module": "systems",
+      "applicability": "依法适用网络运营者与相应日志",
+      "acceptanceRule": "相关网络运行安全日志≥六个日历月，独立于门禁180日和报警90日；审核SPA不能替代运行日志。",
+      "requiredEvidence": [
+        "主体/范围认定、配置与边界日志"
+      ],
+      "accountableOwner": "网络安全部门",
+      "basis": [
+        {
+          "sourceId": "CSL2026",
+          "clause": "23(3)",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "2026条号23；六个月不得一律换180日"
+      ],
+      "structuredRule": {
+        "type": "retention",
+        "unit": "calendar_month",
+        "operator": ">=",
+        "threshold": 6
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-13",
+      "topic": "records",
+      "title": "到期删除与合法留置",
+      "module": "governance",
+      "applicability": "个人信息/视频按类别",
+      "acceptanceRule": "登记最低依据、必要期限、起算、删除、依法留置及解除。第7条视频依17条30日后目的实现删除；其余独立适用，不一律永久留或30日删全部。",
+      "requiredEvidence": [
+        "分类保存表、用途/留置审批、删除验证"
+      ],
+      "accountableOwner": "法务/信息/档案",
+      "basis": [
+        {
+          "sourceId": "PIPL",
+          "clause": "19、47",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        },
+        {
+          "sourceId": "VIDEO799",
+          "clause": "17、9",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "目的已实现仍永久留失败；合法调查保留不自动删；第9条单独路由"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-14",
+      "topic": "records",
+      "title": "整改及临时防范闭环记录",
+      "module": "inspection",
+      "applicability": "重点检查发现问题；其他单位按采用制度",
+      "acceptanceRule": "记对象原因责任期限措施、整改期保护及复核；严重且客观无法达标及时上报。关闭不自动改符合。",
+      "requiredEvidence": [
+        "问题单、保护、整改/复核、上报"
+      ],
+      "accountableOwner": "保卫/责任部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "9.6",
+          "strength": "标准应",
+          "pdfPage": 17,
+          "printedPage": 13,
+          "pdfPages": [
+            17
+          ],
+          "printedPages": [
+            13
+          ]
+        }
+      ],
+      "tests": [
+        "无复核证据不能验收关闭；严重无法整改未报失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-15",
+      "topic": "records",
+      "title": "案事件和危险物品丢失记录",
+      "module": "key",
+      "applicability": "重点单位发生事件/危险物品丢失",
+      "acceptanceRule": "按预案处理留事件、动作、报告后续等资料，无事件真实说明。",
+      "requiredEvidence": [
+        "事件/处置与上报编号"
+      ],
+      "accountableOwner": "保卫部门",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.4.13、4.3.4",
+          "strength": "标准应",
+          "pdfPage": 12,
+          "printedPage": 8,
+          "pdfPages": [
+            8,
+            12
+          ],
+          "printedPages": [
+            4,
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "发生丢失却仅口述无记录失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-REC-16",
+      "topic": "records",
+      "title": "设备台账变更可追溯",
+      "module": "systems",
+      "applicability": "适用/采用DB855系统",
+      "acceptanceRule": "型号点位责任、投停用、版本维护可追溯；更换设备有批准方案/测试。",
+      "requiredEvidence": [
+        "台账、批准更换方案与复测"
+      ],
+      "accountableOwner": "运行/维护部门",
+      "basis": [
+        {
+          "sourceId": "DB855",
+          "clause": "4.4、6.5",
+          "strength": "标准应",
+          "pdfPage": 5,
+          "printedPage": 2,
+          "pdfPages": [
+            5,
+            6
+          ],
+          "printedPages": [
+            2,
+            3
+          ]
+        }
+      ],
+      "tests": [
+        "台账数量对但型号/位置不符不能全符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-01",
+      "topic": "privacy",
+      "title": "显著视频采集提示",
+      "module": "general",
+      "applicability": "公共区域采集；重点通过6.4.1承接5.1.5",
+      "acceptanceRule": "显著可读提示并衔接可获取的处理说明，设备参数合格不能替代提示。",
+      "requiredEvidence": [
+        "点位/标识照片、处理说明"
+      ],
+      "accountableOwner": "保卫/个人信息保护",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "5.1.5",
+          "strength": "标准应",
+          "pdfPage": 9,
+          "printedPage": 5,
+          "pdfPages": [
+            9
+          ],
+          "printedPages": [
+            5
+          ]
+        },
+        {
+          "sourceId": "PIPL",
+          "clause": "26",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        },
+        {
+          "sourceId": "VIDEO799",
+          "clause": "13、9",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "1080P设备无提示失败；重点仍承接本要求"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "RM-06"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-02",
+      "topic": "privacy",
+      "title": "逐处理活动合法依据",
+      "module": "governance",
+      "applicability": "视频访客门禁车辆身份等个人信息",
+      "acceptanceRule": "逐活动登记目的、最小范围、依据和期限；同意及第13条其他依据分别判断，内部授权不是法律处理依据。",
+      "requiredEvidence": [
+        "活动台账、法务必要性与依据"
+      ],
+      "accountableOwner": "个人信息保护/法务",
+      "basis": [
+        {
+          "sourceId": "PIPL",
+          "clause": "6、13",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "有法定职责依据不一刀切强制同意；勾同意不掩盖不合法目的"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-03",
+      "topic": "privacy",
+      "title": "禁设图像采集区域排除",
+      "module": "governance",
+      "applicability": "公共采集区域；非公共依独立隐私要求",
+      "acceptanceRule": "排除第8条禁止房间内部等及可窥视窃听隐私区域；同意不豁免禁止设置。",
+      "requiredEvidence": [
+        "全点位/FOV、禁区排查、调整证明"
+      ],
+      "accountableOwner": "保卫/法务",
+      "basis": [
+        {
+          "sourceId": "VIDEO799",
+          "clause": "8、33",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "宿舍房间内部有同意仍不可豁免；走廊与室内单判"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-04",
+      "topic": "privacy",
+      "title": "相邻军队涉密单位事先同意",
+      "module": "general",
+      "applicability": "邻接军事禁区管理区或国家机关等涉密周边",
+      "acceptanceRule": "安装前征得相关单位同意与范围点位对应，不由本单位secret布尔值决定；不是员工个人同意。",
+      "requiredEvidence": [
+        "邻接图、事先同意文件/范围"
+      ],
+      "accountableOwner": "保密/保卫/负责人",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "5.1.5",
+          "strength": "标准应",
+          "pdfPage": 9,
+          "printedPage": 5,
+          "pdfPages": [
+            9
+          ],
+          "printedPages": [
+            5
+          ]
+        },
+        {
+          "sourceId": "VIDEO799",
+          "clause": "10、9",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "自身非涉密但相邻涉密仍触发；安装后补签不能冒充事先"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "RM-06"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-05",
+      "topic": "privacy",
+      "title": "处理告知具体内容",
+      "module": "governance",
+      "applicability": "个人信息处理且无法定告知例外",
+      "acceptanceRule": "告知主体联系方式、目的方式类别、保存与权利途径，变化更新；例外留法律依据。",
+      "requiredEvidence": [
+        "说明版本、获取途径、例外审批"
+      ],
+      "accountableOwner": "个人信息保护",
+      "basis": [
+        {
+          "sourceId": "PIPL",
+          "clause": "17、18",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "只写有监控不足以证明完整告知"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-06",
+      "topic": "privacy",
+      "title": "同意与单独同意核验",
+      "module": "governance",
+      "applicability": "适用同意依据/依法单独同意事项",
+      "acceptanceRule": "同意自愿知情明确可撤回，变更重新核验；敏感信息和其他目的等单独同意与其他依据关系由法务确认。",
+      "requiredEvidence": [
+        "依据批准、同意版本时间、撤回验证摘要"
+      ],
+      "accountableOwner": "个人信息保护/法务",
+      "basis": [
+        {
+          "sourceId": "PIPL",
+          "clause": "13—16、26、28—30",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        },
+        {
+          "sourceId": "FACE2025",
+          "clause": "6",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "默认勾选/内部授权不自动满足；不收实际身份原文"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "同意与其他合法依据关系需业务/法律专家复核。",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-07",
+      "topic": "privacy",
+      "title": "监看导出配置删除最小权限",
+      "module": "general",
+      "applicability": "实际视频/个人信息系统；重点承接要求",
+      "acceptanceRule": "角色分离与最小权限，离岗转岗撤改权限；第9条例外不排除个人信息法/DB独立保护。",
+      "requiredEvidence": [
+        "角色矩阵、越权拒绝与撤权验证"
+      ],
+      "accountableOwner": "信息安全/保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "5.1.5、8.7.2",
+          "strength": "标准应",
+          "pdfPage": 9,
+          "printedPage": 5,
+          "pdfPages": [
+            9,
+            17
+          ],
+          "printedPages": [
+            5,
+            13
+          ]
+        },
+        {
+          "sourceId": "PIPL",
+          "clause": "51",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        },
+        {
+          "sourceId": "VIDEO799",
+          "clause": "16、9",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "普通监看员任意导出删除失败；第9条不能免所有权限保护"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-07",
+        "RM-06"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-08",
+      "topic": "privacy",
+      "title": "视频调用登记",
+      "module": "governance",
+      "applicability": "799第7条系统；其他场景独立依据",
+      "acceptanceRule": "16第二款适用时登记事由内容、调用人单位姓名等；第9条被排除款不能直接套用，内控另标来源。",
+      "requiredEvidence": [
+        "调用审批/登记、账号操作对应"
+      ],
+      "accountableOwner": "监控/个人信息保护",
+      "basis": [
+        {
+          "sourceId": "VIDEO799",
+          "clause": "16第二款、9",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "第7条只有时间缺事由失败；第9条不由该款自动判失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-09",
+      "topic": "privacy",
+      "title": "委托权限保密与终止",
+      "module": "governance",
+      "applicability": "委托安防建设运维或个人信息处理",
+      "acceptanceRule": "约定范围期限保护监督；终止返还删除与撤权，运维不超范围留存；影响评估另审。",
+      "requiredEvidence": [
+        "合同保密、权限终止、返还删除摘要"
+      ],
+      "accountableOwner": "法务/采购/信息",
+      "basis": [
+        {
+          "sourceId": "PIPL",
+          "clause": "21",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        },
+        {
+          "sourceId": "VIDEO799",
+          "clause": "15第二款、19、9",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "第9条不套15但19保密仍查；服务终止继续访问失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-10",
+      "topic": "privacy",
+      "title": "人脸必要性与非人脸替代",
+      "module": "governance",
+      "applicability": "实际算法人脸识别；普通录像不自动触发",
+      "acceptanceRule": "评估必要性最小影响；存在等效非人脸方式时提供合理便利替代，国家另规例外留依据。",
+      "requiredEvidence": [
+        "算法用途、替代评估与非人脸测试"
+      ],
+      "accountableOwner": "个人信息保护/保卫",
+      "basis": [
+        {
+          "sourceId": "FACE2025",
+          "clause": "4、10",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "可刷卡却只许人脸且无例外失败；一级身份识别不等于必须刷脸"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-11",
+      "topic": "privacy",
+      "title": "人脸存储传输与安全",
+      "module": "governance",
+      "applicability": "实际人脸算法",
+      "acceptanceRule": "第8条设备内存储、不经互联网外传默认规则及法定/同意例外核验；第14条保护子项分别验证；不将模板录入SPA。",
+      "requiredEvidence": [
+        "数据流、例外审批、加密权限/审计摘要"
+      ],
+      "accountableOwner": "信息安全/个人信息保护",
+      "basis": [
+        {
+          "sourceId": "FACE2025",
+          "clause": "8、14",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "无例外互联网外传失败；本地宣传语不替代数据流证明"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-12",
+      "topic": "privacy",
+      "title": "第7条视频投入后备案",
+      "module": "governance",
+      "applicability": "799第7条系统；不含第9条例外",
+      "acceptanceRule": "新投用之日起30日内备案，变更及时办理，信息实装一致；2025既有系统90日过渡不在2026重新起算。",
+      "requiredEvidence": [
+        "投用日、回执信息及变更"
+      ],
+      "accountableOwner": "负责人/保卫",
+      "basis": [
+        {
+          "sourceId": "VIDEO799",
+          "clause": "14、9",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "第7条超过30日未备失败；第9条不自动生成此义务"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-13",
+      "topic": "privacy",
+      "title": "人脸十万人触发备案",
+      "module": "governance",
+      "applicability": "存储人脸达到10万人；主体人数口径核准",
+      "acceptanceRule": "按第15条触发30个工作日内省级网信备案及相应变化终止要求；不把十万条模板当然等同十万人。",
+      "requiredEvidence": [
+        "计数、触发日、备案回执"
+      ],
+      "accountableOwner": "个人信息保护/法务",
+      "basis": [
+        {
+          "sourceId": "FACE2025",
+          "clause": "15",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "99999/100000人分界；工作日不能换自然日"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PRI-14",
+      "topic": "privacy",
+      "title": "FOV及隐私保护实际有效",
+      "module": "general",
+      "applicability": "设置视频；实际采集范围",
+      "acceptanceRule": "位置角度范围限于必要目的，邻户非目标及音频单查；调整遮蔽须对显示/存储实际验证，并保持所需防护。",
+      "requiredEvidence": [
+        "FOV与预置位、昼夜验证、遮蔽/调整"
+      ],
+      "accountableOwner": "保卫/个人信息保护",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "5.1.5",
+          "strength": "标准应",
+          "pdfPage": 9,
+          "printedPage": 5,
+          "pdfPages": [
+            9
+          ],
+          "printedPages": [
+            5
+          ]
+        },
+        {
+          "sourceId": "VIDEO799",
+          "clause": "13",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        },
+        {
+          "sourceId": "PIPL",
+          "clause": "6",
+          "strength": "法律义务",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "屏幕遮蔽但录像仍拍禁止区域不能全符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "RM-06"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-01",
+      "topic": "frequency",
+      "title": "内部人员年度培训",
+      "module": "personnel",
+      "applicability": "所有单位内部人员",
+      "acceptanceRule": "每年≥1次安全防范教育培训，核验人员覆盖；管理人员专业定期培训另查。",
+      "requiredEvidence": [
+        "内容日期、参加覆盖与考核"
+      ],
+      "accountableOwner": "人事/保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "4.2.1",
+          "strength": "标准应",
+          "pdfPage": 8,
+          "printedPage": 4,
+          "pdfPages": [
+            8
+          ],
+          "printedPages": [
+            4
+          ]
+        }
+      ],
+      "tests": [
+        "0次失败1次满足频次；不误引4.2.4"
+      ],
+      "structuredRule": {
+        "type": "frequency",
+        "unit": "calendar_year",
+        "operator": ">=",
+        "threshold": 1
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-02",
+      "topic": "frequency",
+      "title": "重点人员分级教育培训",
+      "module": "key",
+      "applicability": "重点单位，分治安保卫人员与保安员",
+      "acceptanceRule": "三级两类每年≥1次；二级/一级原文半年对象为治安保卫人员每半年≥1次，保安员继承年度。角色范围不得无依据扩展。",
+      "requiredEvidence": [
+        "角色清单、每期培训及参加覆盖"
+      ],
+      "accountableOwner": "保卫/人事",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.5.1.3、6.6.1.2",
+          "strength": "标准应",
+          "pdfPage": 12,
+          "printedPage": 8,
+          "pdfPages": [
+            12,
+            14
+          ],
+          "printedPages": [
+            8,
+            10
+          ]
+        }
+      ],
+      "tests": [
+        "二级两次均在上半年不能通过；保安员不自动改成原文半年对象"
+      ],
+      "structuredRule": {
+        "type": "frequency",
+        "ruleByLevel": {
+          "unknown": "both:1/calendar_year",
+          "level3": "both:1/calendar_year",
+          "level2": "guard_staff:1/half_year;security_guards:1/calendar_year",
+          "level1": "guard_staff:1/half_year;security_guards:1/calendar_year"
+        }
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-03",
+      "topic": "frequency",
+      "title": "重点人员分级预案演练",
+      "module": "key",
+      "applicability": "重点角色范围同FRQ-02",
+      "acceptanceRule": "三级两类每年≥1次；二级以上治安保卫人员每半年≥1次，保安员继承年度。培训不能替代演练。",
+      "requiredEvidence": [
+        "预案场景、实际参与、过程及复盘改进"
+      ],
+      "accountableOwner": "保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.5.1.3、6.6.1.2",
+          "strength": "标准应",
+          "pdfPage": 12,
+          "printedPage": 8,
+          "pdfPages": [
+            12,
+            14
+          ],
+          "printedPages": [
+            8,
+            10
+          ]
+        }
+      ],
+      "tests": [
+        "只有培训无演练失败；同一演练可同时满足单位年度但证明各对象覆盖"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-04",
+      "topic": "frequency",
+      "title": "单位年度应急演练",
+      "module": "governance",
+      "applicability": "所有单位",
+      "acceptanceRule": "每年≥1次，有实施和改进记录，演练方案不等于完成。",
+      "requiredEvidence": [
+        "实施、复盘与改进跟踪"
+      ],
+      "accountableOwner": "负责人/保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "4.4.3",
+          "strength": "标准应",
+          "pdfPage": 8,
+          "printedPage": 4,
+          "pdfPages": [
+            8
+          ],
+          "printedPages": [
+            4
+          ]
+        }
+      ],
+      "tests": [
+        "一般无演练失败；有照片无改进记录不能全符合"
+      ],
+      "structuredRule": {
+        "type": "frequency",
+        "unit": "calendar_year",
+        "operator": ">=",
+        "threshold": 1
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-05",
+      "topic": "frequency",
+      "title": "重点巡查最大间隔",
+      "module": "key",
+      "applicability": "重点重要部位和区域；未定级按三级最低",
+      "acceptanceRule": "三级≤24h、二级≤12h、一级≤6h。取相邻及末次到审计时最大间隔，不用月平均次数。",
+      "requiredEvidence": [
+        "路线点位、完整时间序列、漏巡及替补"
+      ],
+      "accountableOwner": "保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.5.1.5、6.6.1.3、6.7.1.3",
+          "strength": "标准应",
+          "pdfPage": 12,
+          "printedPage": 8,
+          "pdfPages": [
+            12,
+            14
+          ],
+          "printedPages": [
+            8,
+            10
+          ]
+        }
+      ],
+      "tests": [
+        "24/12/6h等界通过超1s失败；平均达标仍有大间隔失败"
+      ],
+      "structuredRule": {
+        "type": "maximum_gap",
+        "field": "patrolTimestamps",
+        "unit": "hour",
+        "operator": "<=",
+        "thresholdByLevel": {
+          "unknown": 24,
+          "level3": 24,
+          "level2": 12,
+          "level1": 6
+        },
+        "checkLastToAuditTime": true
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-06",
+      "topic": "frequency",
+      "title": "重点每次巡查至少两人",
+      "module": "key",
+      "applicability": "重点各级重要部位区域巡查",
+      "acceptanceRule": "每次至少2人，核实际同行；电子打点数量不是人数。",
+      "requiredEvidence": [
+        "人员时间路线及抽验"
+      ],
+      "accountableOwner": "保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.5.1.5、6.3.3",
+          "strength": "标准应",
+          "pdfPage": 12,
+          "printedPage": 8,
+          "pdfPages": [
+            11,
+            12
+          ],
+          "printedPages": [
+            7,
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "一级每6h但1人失败"
+      ],
+      "structuredRule": {
+        "type": "minimum",
+        "field": "participantsPerPatrol",
+        "operator": ">=",
+        "threshold": 2
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-07",
+      "topic": "frequency",
+      "title": "重点每日巡查和夜间安排",
+      "module": "inspection",
+      "applicability": "重点单位",
+      "acceptanceRule": "每日治安巡查、结合实际组织夜间巡查，与小时间隔同时满足；9.1不把所有单位/每晚一律固定。",
+      "requiredEvidence": [
+        "每日记录、夜间风险及执行"
+      ],
+      "accountableOwner": "保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "9.1",
+          "strength": "标准应",
+          "pdfPage": 17,
+          "printedPage": 13,
+          "pdfPages": [
+            17
+          ],
+          "printedPages": [
+            13
+          ]
+        }
+      ],
+      "tests": [
+        "每日一次不能代一级6h；夜间有实际需求无安排失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-08",
+      "topic": "frequency",
+      "title": "一般定期巡查检查批准周期",
+      "module": "inspection",
+      "applicability": "一般单位",
+      "acceptanceRule": "制定风险适配的明确周期、对象、人员、日期；原文定期无统一数值，月/季内部周期明确标来源。",
+      "requiredEvidence": [
+        "批准频率表与到期执行"
+      ],
+      "accountableOwner": "保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "5.2.1、9.2",
+          "strength": "标准应",
+          "pdfPage": 9,
+          "printedPage": 5,
+          "pdfPages": [
+            9,
+            17
+          ],
+          "printedPages": [
+            5,
+            13
+          ]
+        }
+      ],
+      "tests": [
+        "只填定期无对象日期不满足产品验收；不能标法定月度"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-09",
+      "topic": "frequency",
+      "title": "重点季度检查覆盖H",
+      "module": "inspection",
+      "applicability": "重点含未定级",
+      "acceptanceRule": "每日历季度≥1次，覆盖附录H并归档；设备维护不能替代体系检查。",
+      "requiredEvidence": [
+        "季度表、H子项、双签及整改"
+      ],
+      "accountableOwner": "保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "9.2",
+          "strength": "标准应",
+          "pdfPage": 17,
+          "printedPage": 13,
+          "pdfPages": [
+            17
+          ],
+          "printedPages": [
+            13
+          ]
+        }
+      ],
+      "tests": [
+        "4次集中Q1、Q2无检查失败；有次数漏H不能全符合"
+      ],
+      "structuredRule": {
+        "type": "frequency",
+        "unit": "calendar_quarter",
+        "operator": ">=",
+        "threshold": 1
+      },
+      "legacyLinks": [
+        "I-01",
+        "H-02"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-10",
+      "topic": "frequency",
+      "title": "特定变更后15日内检查",
+      "module": "inspection",
+      "applicability": "重点确定/变更重要部位或修改相关制度",
+      "acceptanceRule": "触发到完成≤15d；起算节假日截止按核准口径；其他变更不直接套c项。",
+      "requiredEvidence": [
+        "触发文件日、专项检查结果日"
+      ],
+      "accountableOwner": "保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "9.3(c)",
+          "strength": "标准应",
+          "pdfPage": 17,
+          "printedPage": 13,
+          "pdfPages": [
+            17
+          ],
+          "printedPages": [
+            13
+          ]
+        }
+      ],
+      "tests": [
+        "同一起算第15日通过16日逾期；普通人员调整不直接套"
+      ],
+      "structuredRule": {
+        "type": "deadline",
+        "unit": "calendar_day",
+        "operator": "<=",
+        "threshold": 15,
+        "startCounting": "requires_business_legal_approval"
+      },
+      "legacyLinks": [
+        "I-01"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-11",
+      "topic": "frequency",
+      "title": "其他变更及事件及时检查",
+      "module": "inspection",
+      "applicability": "重点9.3 a/b/d/e触发",
+      "acceptanceRule": "责任制、机构/管理人员重大变化及事件后及时；非常态进入或可能进入前检查；内部SLA不冒称统一15d。",
+      "requiredEvidence": [
+        "触发台账、批准SLA与检查"
+      ],
+      "accountableOwner": "保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "9.3(a)(b)(d)(e)",
+          "strength": "标准应",
+          "pdfPage": 17,
+          "printedPage": 13,
+          "pdfPages": [
+            17
+          ],
+          "printedPages": [
+            13
+          ]
+        }
+      ],
+      "tests": [
+        "非常态前检查不能推到进入后；不得套全部15d"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "I-01"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-12",
+      "topic": "frequency",
+      "title": "二级以上每日电子巡视",
+      "module": "key",
+      "applicability": "二级/一级监控值机",
+      "acceptanceRule": "每日用系统电子巡视，异常记录及时报；与实体巡查分开。",
+      "requiredEvidence": [
+        "巡视与异常报告关联"
+      ],
+      "accountableOwner": "监控运行",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.6.1.5、6.3.3",
+          "strength": "标准应",
+          "pdfPage": 14,
+          "printedPage": 10,
+          "pdfPages": [
+            11,
+            14
+          ],
+          "printedPages": [
+            7,
+            10
+          ]
+        }
+      ],
+      "tests": [
+        "实体巡查有记录不代电子巡视；三级不套二级频率"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-13",
+      "topic": "frequency",
+      "title": "日常维护间隔不超过三个月",
+      "module": "systems",
+      "applicability": "适用/采用DB855系统",
+      "acceptanceRule": "连续维护间隔≤3个日历月，按GA/T1081相关要求制定作业、形成报告，效果按C；不能仅说每季度，也不机械换90d。",
+      "requiredEvidence": [
+        "计划、日期序列、报告与效果验证"
+      ],
+      "accountableOwner": "维护单位",
+      "basis": [
+        {
+          "sourceId": "DB855",
+          "clause": "6.10、6.14",
+          "strength": "标准应",
+          "pdfPage": 6,
+          "printedPage": 3,
+          "pdfPages": [
+            6
+          ],
+          "printedPages": [
+            3
+          ]
+        }
+      ],
+      "tests": [
+        "季度各一次但间隔超三个月失败；内部月度标更严内控"
+      ],
+      "structuredRule": {
+        "type": "maximum_gap",
+        "unit": "calendar_month",
+        "operator": "<=",
+        "threshold": 3
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-14",
+      "topic": "frequency",
+      "title": "故障响应修复SLA",
+      "module": "systems",
+      "applicability": "适用/采用DB855；实际故障",
+      "acceptanceRule": "合同/管理核准响应修复时限，分级优先高故障，修后跟踪；无统一48h法定维修期。",
+      "requiredEvidence": [
+        "SLA、工单、临时保护及修后跟踪"
+      ],
+      "accountableOwner": "运行/维护",
+      "basis": [
+        {
+          "sourceId": "DB855",
+          "clause": "6.11",
+          "strength": "标准应",
+          "pdfPage": 6,
+          "printedPage": 3,
+          "pdfPages": [
+            6
+          ],
+          "printedPages": [
+            3
+          ]
+        }
+      ],
+      "tests": [
+        "只关工单无跟踪不能验收；门禁48h供电不得误作维修SLA"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-15",
+      "topic": "frequency",
+      "title": "弱口令漏洞与更新计划",
+      "module": "systems",
+      "applicability": "有账号的系统设备",
+      "acceptanceRule": "不使用弱口令、定期更新并处理漏洞；周期按批准策略，原文无统一90日。审核不收集实际密码。",
+      "requiredEvidence": [
+        "脱敏策略、配置核验、更新及漏洞闭环"
+      ],
+      "accountableOwner": "信息安全",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "8.1.4",
+          "strength": "标准应",
+          "pdfPage": 16,
+          "printedPage": 12,
+          "pdfPages": [
+            16
+          ],
+          "printedPages": [
+            12
+          ]
+        },
+        {
+          "sourceId": "GB55029",
+          "clause": "2.0.4",
+          "strength": "国家强制",
+          "pdfPage": 7,
+          "printedPage": 2,
+          "pdfPages": [
+            7
+          ],
+          "printedPages": [
+            2
+          ]
+        }
+      ],
+      "tests": [
+        "默认弱口令失败；不能声称GB统一90日"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-01"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-16",
+      "topic": "frequency",
+      "title": "风险与效能评估周期",
+      "module": "inspection",
+      "applicability": "重点单位",
+      "acceptanceRule": "按批准周期分别做风险/系统效能评估，使用巡查检查整改结果调整措施；原文无全国统一年度频率。",
+      "requiredEvidence": [
+        "批准周期、两类评估、调整执行"
+      ],
+      "accountableOwner": "保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "9.7",
+          "strength": "标准应",
+          "pdfPage": 17,
+          "printedPage": 13,
+          "pdfPages": [
+            17
+          ],
+          "printedPages": [
+            13
+          ]
+        }
+      ],
+      "tests": [
+        "只更新索引不等于效能评估；内部年度标内控"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-FRQ-17",
+      "topic": "frequency",
+      "title": "保卫管理人员定期专业培训",
+      "module": "personnel",
+      "applicability": "各单位治安保卫管理人员",
+      "acceptanceRule": "专业/法律培训按批准周期实施，与内部人员每年教育分别成立。",
+      "requiredEvidence": [
+        "岗位、内容周期及记录"
+      ],
+      "accountableOwner": "人事/保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "4.2.4",
+          "strength": "标准应",
+          "pdfPage": 8,
+          "printedPage": 4,
+          "pdfPages": [
+            8
+          ],
+          "printedPages": [
+            4
+          ]
+        }
+      ],
+      "tests": [
+        "一般年度宣传不能自动证明管理专业培训"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-L1-17",
+      "topic": "level1",
+      "title": "重要建筑周边入侵探测",
+      "module": "key",
+      "applicability": "一级重要部位所在建筑周边",
+      "acceptanceRule": "附录F序号23为一级应，独立核验周边探测；不能以入口/内部探测替代。",
+      "requiredEvidence": [
+        "周边点位、探测报警实测"
+      ],
+      "accountableOwner": "设施/保卫",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.4.15、表F序号23",
+          "strength": "标准应",
+          "pdfPage": 24,
+          "printedPage": 20,
+          "pdfPages": [
+            12,
+            24
+          ],
+          "printedPages": [
+            8,
+            20
+          ]
+        }
+      ],
+      "tests": [
+        "一级只装建筑入口、周边无探测失败；二级该表列不套一级"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "KF-23"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-BAR-09",
+      "topic": "barrier",
+      "title": "低位室外空气进气口隔离",
+      "module": "key",
+      "applicability": "二级/一级重要建筑进气口低于2.5m",
+      "acceptanceRule": "每个高度<2.5m的室外进气口设置隔离；此处2.5m是触发高度，不是围栏合格高度。",
+      "requiredEvidence": [
+        "进气口清单、高度、隔离验收"
+      ],
+      "accountableOwner": "设施",
+      "basis": [
+        {
+          "sourceId": "DB2552",
+          "clause": "6.6.2.3、F序号25",
+          "strength": "标准应",
+          "pdfPage": 14,
+          "printedPage": 10,
+          "pdfPages": [
+            14,
+            24
+          ],
+          "printedPages": [
+            10,
+            20
+          ]
+        }
+      ],
+      "tests": [
+        "2.499m触发、2.5m本款不触发；三级不自动套二级"
+      ],
+      "structuredRule": {
+        "type": "conditional_presence",
+        "field": "airIntakeHeightM",
+        "unit": "m",
+        "triggerOperator": "<",
+        "triggerThreshold": 2.5
+      },
+      "legacyLinks": [
+        "KF-25"
+      ],
+      "notes": "",
+      "scoringLane": "db_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-01",
+      "topic": "external",
+      "title": "保护目标及风险需求",
+      "module": "systems",
+      "applicability": "GB适用工程设计/改造",
+      "acceptanceRule": "明确对象区域目标风险，按风险确定点位功能性能，设备数量不代需求。",
+      "requiredEvidence": [
+        "目标风险需求、批准设计"
+      ],
+      "accountableOwner": "建设/设计/保卫",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "1.0.3、3.1.1、3.1.2",
+          "strength": "国家强制",
+          "pdfPage": 8,
+          "printedPage": 3,
+          "pdfPages": [
+            6,
+            8
+          ],
+          "printedPages": [
+            1,
+            3
+          ]
+        }
+      ],
+      "tests": [
+        "只有采购清单无目标性能不能符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-02",
+      "topic": "external",
+      "title": "高风险设计前现场勘察",
+      "module": "systems",
+      "applicability": "GB高风险对象设计前",
+      "acceptanceRule": "现场勘察先于设计且与实场对应；认定依据独立于DB重点标签。",
+      "requiredEvidence": [
+        "认定、勘察与设计日期成果"
+      ],
+      "accountableOwner": "建设/设计",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.1.2",
+          "strength": "国家强制",
+          "pdfPage": 8,
+          "printedPage": 3,
+          "pdfPages": [
+            8
+          ],
+          "printedPages": [
+            3
+          ]
+        }
+      ],
+      "tests": [
+        "高风险true重点false仍触发；设计后补记不冒充之前"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-03",
+      "topic": "external",
+      "title": "高风险监控中心选址",
+      "module": "systems",
+      "applicability": "GB高风险保护对象系统",
+      "acceptanceRule": "设中心并远离粉尘油烟有害气体、易燃易爆生产贮存、强震强噪声场所。",
+      "requiredEvidence": [
+        "位置环境、批准设计"
+      ],
+      "accountableOwner": "建设/设施",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.1.8",
+          "strength": "国家强制",
+          "pdfPage": 9,
+          "printedPage": 4,
+          "pdfPages": [
+            9
+          ],
+          "printedPages": [
+            4
+          ]
+        }
+      ],
+      "tests": [
+        "无所需中心仅普通手机显示不能通过"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-04",
+      "topic": "external",
+      "title": "高风险中心视频",
+      "module": "systems",
+      "applicability": "GB高风险中心及独立设备区",
+      "acceptanceRule": "视频清楚显示出入及室内活动，独立设备区按相应要求另验。",
+      "requiredEvidence": [
+        "点位及监视回放"
+      ],
+      "accountableOwner": "监控/设施",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.1.9(1)(5)",
+          "strength": "国家强制",
+          "pdfPage": 9,
+          "printedPage": 4,
+          "pdfPages": [
+            9
+          ],
+          "printedPages": [
+            4
+          ]
+        }
+      ],
+      "tests": [
+        "只值班室视频不覆盖独立设备区"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-05",
+      "topic": "external",
+      "title": "高风险中心内外通信",
+      "module": "systems",
+      "applicability": "GB高风险中心/独立设备区",
+      "acceptanceRule": "配内外通信并验证联络。",
+      "requiredEvidence": [
+        "通信方案及可达测试"
+      ],
+      "accountableOwner": "监控/设施",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.1.9(2)(5)",
+          "strength": "国家强制",
+          "pdfPage": 9,
+          "printedPage": 4,
+          "pdfPages": [
+            9
+          ],
+          "printedPages": [
+            4
+          ]
+        }
+      ],
+      "tests": [
+        "标签有电话但线路不可用失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-06",
+      "topic": "external",
+      "title": "中心对外报警与接收核实",
+      "module": "systems",
+      "applicability": "GB高风险中心；双接公安条件单判",
+      "acceptanceRule": "紧急报警可向外发送；同时接入中心和公安接警时值机核实公安接收。普通报警不无依据强制联网公安。",
+      "requiredEvidence": [
+        "发送接收验证及核实记录"
+      ],
+      "accountableOwner": "监控/保卫",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.1.9(3)(5)、6.0.4",
+          "strength": "国家强制",
+          "pdfPage": 9,
+          "printedPage": 4,
+          "pdfPages": [
+            9,
+            18
+          ],
+          "printedPages": [
+            4,
+            13
+          ]
+        }
+      ],
+      "tests": [
+        "只有本地声提示不能证明对外；未双接不套双端核实"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-07",
+      "topic": "external",
+      "title": "分离中心线缆保护",
+      "module": "systems",
+      "applicability": "高风险中心值守区设备区独立且不相邻",
+      "acceptanceRule": "两区传输线缆保护与路径可验。",
+      "requiredEvidence": [
+        "图纸线缆保护/隐蔽验收"
+      ],
+      "accountableOwner": "设施/施工",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.1.9(4)",
+          "strength": "国家强制",
+          "pdfPage": 9,
+          "printedPage": 4,
+          "pdfPages": [
+            9
+          ],
+          "printedPages": [
+            4
+          ]
+        }
+      ],
+      "tests": [
+        "非相邻两室无线缆保护失败；相邻有据NA"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-08",
+      "topic": "external",
+      "title": "独立设备区探测和门禁",
+      "module": "systems",
+      "applicability": "高风险中心独立设备区",
+      "acceptanceRule": "除视频通信报警外入侵探测、门禁分别验证。",
+      "requiredEvidence": [
+        "设备区点位和分项实测"
+      ],
+      "accountableOwner": "设施/监控",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.1.9(5)",
+          "strength": "国家强制",
+          "pdfPage": 9,
+          "printedPage": 4,
+          "pdfPages": [
+            9
+          ],
+          "printedPages": [
+            4
+          ]
+        }
+      ],
+      "tests": [
+        "仅录像无入侵/门禁不能符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-09",
+      "topic": "external",
+      "title": "高风险专用传输网络",
+      "module": "systems",
+      "applicability": "GB高风险保护对象系统",
+      "acceptanceRule": "采用专用传输网络，边界和隔离有设计核准及验证，不以普通VLAN标签自动宣称满足。",
+      "requiredEvidence": [
+        "架构专用边界、隔离验证"
+      ],
+      "accountableOwner": "信息安全/设计",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.2.4",
+          "strength": "国家强制",
+          "pdfPage": 11,
+          "printedPage": 6,
+          "pdfPages": [
+            11
+          ],
+          "printedPages": [
+            6
+          ]
+        }
+      ],
+      "tests": [
+        "普通办公终端无区分共网失败；实现方案专业核准"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-10",
+      "topic": "external",
+      "title": "设备材料检验与进场查验",
+      "module": "systems",
+      "applicability": "GB系统设备材料安装",
+      "acceptanceRule": "检验合格，进场查验质量证明合格后安装，型号批次对应实装。",
+      "requiredEvidence": [
+        "检验资料及进场验收"
+      ],
+      "accountableOwner": "采购/施工/建设",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "2.0.3、4.0.2",
+          "strength": "国家强制",
+          "pdfPage": 7,
+          "printedPage": 2,
+          "pdfPages": [
+            7,
+            16
+          ],
+          "printedPages": [
+            2,
+            11
+          ]
+        }
+      ],
+      "tests": [
+        "供应商声明无对应证明不能符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-01"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-11",
+      "topic": "external",
+      "title": "跨传输网络边界安全",
+      "module": "systems",
+      "applicability": "不同网络系统设备联网",
+      "acceptanceRule": "每个跨网边界有对应管理措施，远程维护等实际路径入清单。",
+      "requiredEvidence": [
+        "联网清单、边界配置和访问测试"
+      ],
+      "accountableOwner": "信息安全",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "2.0.4",
+          "strength": "国家强制",
+          "pdfPage": 7,
+          "printedPage": 2,
+          "pdfPages": [
+            7
+          ],
+          "printedPages": [
+            2
+          ]
+        }
+      ],
+      "tests": [
+        "有未登记远维出口失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-12",
+      "topic": "external",
+      "title": "无人值守周界门均衡防护",
+      "module": "systems",
+      "applicability": "与周界相连且无人值守出入口",
+      "acceptanceRule": "出入口屏障防护能力与周界相当，薄弱旁门单查。",
+      "requiredEvidence": [
+        "所有旁门风险设计与状态"
+      ],
+      "accountableOwner": "设施/保卫",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.1.4(1)",
+          "strength": "国家强制",
+          "pdfPage": 8,
+          "printedPage": 3,
+          "pdfPages": [
+            8
+          ],
+          "printedPages": [
+            3
+          ]
+        }
+      ],
+      "tests": [
+        "主墙合格不抵消无保护后门"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-13",
+      "topic": "external",
+      "title": "报警防拆功能",
+      "module": "systems",
+      "applicability": "GB报警系统",
+      "acceptanceRule": "探测器和控制指示设备防拆报警实际有效。",
+      "requiredEvidence": [
+        "防拆触发和显示测试"
+      ],
+      "accountableOwner": "设施/监控",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.1(2)",
+          "strength": "国家强制",
+          "pdfPage": 13,
+          "printedPage": 8,
+          "pdfPages": [
+            13
+          ],
+          "printedPages": [
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "只检入侵动作不能代防拆"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-02"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-14",
+      "topic": "external",
+      "title": "报警线路短断路与切电",
+      "module": "systems",
+      "applicability": "GB报警系统",
+      "acceptanceRule": "断路短路及探测器电源切断等各情景分别报警，测试安全受控。",
+      "requiredEvidence": [
+        "线路及分情景验证"
+      ],
+      "accountableOwner": "设施/监控",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.1(3)",
+          "strength": "国家强制",
+          "pdfPage": 13,
+          "printedPage": 8,
+          "pdfPages": [
+            13
+          ],
+          "printedPages": [
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "断路报警而短路无报警不能全符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-02"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-15",
+      "topic": "external",
+      "title": "报警权限布撤旁路胁迫",
+      "module": "systems",
+      "applicability": "GB报警系统",
+      "acceptanceRule": "参数/用户权限、布防撤防旁路胁迫等各功能分别留结果和整改，全部适用子断言通过才全符合。",
+      "requiredEvidence": [
+        "功能与角色矩阵、分项测试"
+      ],
+      "accountableOwner": "监控/信息",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.1(4)(5)",
+          "strength": "国家强制",
+          "pdfPage": 13,
+          "printedPage": 8,
+          "pdfPages": [
+            13
+          ],
+          "printedPages": [
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "布撤正常不能覆盖缺胁迫报警"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-02"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-16",
+      "topic": "external",
+      "title": "报警类别准确指示",
+      "module": "systems",
+      "applicability": "GB报警系统",
+      "acceptanceRule": "入侵紧急防拆故障等准确指示，与点位及事件记录对应。",
+      "requiredEvidence": [
+        "不同类别触发显示"
+      ],
+      "accountableOwner": "监控/设施",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.1(1)(6)",
+          "strength": "国家强制",
+          "pdfPage": 13,
+          "printedPage": 8,
+          "pdfPages": [
+            13
+          ],
+          "printedPages": [
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "全部笼统报警无法辨故障类别不能符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-02"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-17",
+      "topic": "external",
+      "title": "报警事件记录不可更改",
+      "module": "systems",
+      "applicability": "GB报警系统",
+      "acceptanceRule": "操作报警警情处置有记录且不能更改，核完整性权限，不只核有日志。",
+      "requiredEvidence": [
+        "机制权限、更改拒绝测试"
+      ],
+      "accountableOwner": "信息安全/监控",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.1(7)",
+          "strength": "国家强制",
+          "pdfPage": 13,
+          "printedPage": 8,
+          "pdfPages": [
+            13
+          ],
+          "printedPages": [
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "可无痕改原始事件失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-02"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-18",
+      "topic": "external",
+      "title": "报警控制器响应≤2s",
+      "module": "systems",
+      "applicability": "GB报警系统",
+      "acceptanceRule": "按批准测法核报警控制器响应≤2s，定义起止点；不是保安到场时限。",
+      "requiredEvidence": [
+        "方案仪器及时间原始结果"
+      ],
+      "accountableOwner": "检验/设施",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.1(8)",
+          "strength": "国家强制",
+          "pdfPage": 13,
+          "printedPage": 8,
+          "pdfPages": [
+            13
+          ],
+          "printedPages": [
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "2通过2.001失败；不混人员响应"
+      ],
+      "structuredRule": {
+        "type": "maximum",
+        "field": "alarmControllerResponseSeconds",
+        "unit": "second",
+        "operator": "<=",
+        "threshold": 2
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-19",
+      "topic": "external",
+      "title": "报警备用供电≥8h",
+      "module": "systems",
+      "applicability": "GB报警系统",
+      "acceptanceRule": "实际必要负载正常运行≥8h，核容量状态和受控验证，不只看UPS铭牌。",
+      "requiredEvidence": [
+        "负载续航、电池状态与验证"
+      ],
+      "accountableOwner": "设施/检验",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.1(9)",
+          "strength": "国家强制",
+          "pdfPage": 13,
+          "printedPage": 8,
+          "pdfPages": [
+            13
+          ],
+          "printedPages": [
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "7.99失败8满足；只供主机而探测器失效不全符合"
+      ],
+      "structuredRule": {
+        "type": "minimum",
+        "field": "alarmBackupHours",
+        "unit": "hour",
+        "operator": ">=",
+        "threshold": 8
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-20",
+      "topic": "external",
+      "title": "视频覆盖和用途图像有效",
+      "module": "systems",
+      "applicability": "GB视频保护区域部位目标",
+      "acceptanceRule": "逐点昼夜监看回放满足用途，覆盖完整；分辨率不能代实际识别。",
+      "requiredEvidence": [
+        "目标点位矩阵、昼夜验证摘要"
+      ],
+      "accountableOwner": "监控/设计",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.2(1)、3.1.3(3)、3.1.4(4)",
+          "strength": "国家强制",
+          "pdfPage": 13,
+          "printedPage": 8,
+          "pdfPages": [
+            8,
+            9,
+            13
+          ],
+          "printedPages": [
+            3,
+            4,
+            8
+          ]
+        }
+      ],
+      "tests": [
+        "1080P却逆光车牌不清不能满足相应用途"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-03"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-21",
+      "topic": "external",
+      "title": "视频授权控制调看管理",
+      "module": "systems",
+      "applicability": "GB视频系统",
+      "acceptanceRule": "前端控制调整、实时调看依授权，显示设备用户日志管理分子结果。",
+      "requiredEvidence": [
+        "功能权限、日志样本"
+      ],
+      "accountableOwner": "监控/信息",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.2(2)(3)(4)(6)",
+          "strength": "国家强制",
+          "pdfPage": 13,
+          "printedPage": 8,
+          "pdfPages": [
+            13,
+            14
+          ],
+          "printedPages": [
+            8,
+            9
+          ]
+        }
+      ],
+      "tests": [
+        "可越权调整/调看失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-03"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-22",
+      "topic": "external",
+      "title": "门禁外置部件线缆防护",
+      "module": "systems",
+      "applicability": "GB门禁受控区外部件/执行线缆",
+      "acceptanceRule": "外部件防拆、外执行线缆封闭保护，两类分别验证。",
+      "requiredEvidence": [
+        "图纸防护、安装验收"
+      ],
+      "accountableOwner": "设施",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.3(1)(5)",
+          "strength": "国家强制",
+          "pdfPage": 14,
+          "printedPage": 9,
+          "pdfPages": [
+            14
+          ],
+          "printedPages": [
+            9
+          ]
+        }
+      ],
+      "tests": [
+        "读卡器防拆合格但锁线裸露不能全符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-04"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-23",
+      "topic": "external",
+      "title": "断电开启门禁备用48h",
+      "module": "systems",
+      "applicability": "GB断电开启型门禁点",
+      "acceptanceRule": "备用保障执行装置≥48h；不套所有门，紧急疏散释放另查，不得续航锁死逃生。",
+      "requiredEvidence": [
+        "锁型点位、负载续航和验证"
+      ],
+      "accountableOwner": "设施/检验",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.3(3)",
+          "strength": "国家强制",
+          "pdfPage": 14,
+          "printedPage": 9,
+          "pdfPages": [
+            14
+          ],
+          "printedPages": [
+            9
+          ]
+        }
+      ],
+      "tests": [
+        "47.99失败48满足；断电闭锁不套本款但仍审疏散"
+      ],
+      "structuredRule": {
+        "type": "minimum",
+        "field": "failOpenAccessBackupHours",
+        "unit": "hour",
+        "operator": ">=",
+        "threshold": 48
+      },
+      "legacyLinks": [
+        "ST-04"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-24",
+      "topic": "external",
+      "title": "一卡通安防门禁独立管理",
+      "module": "systems",
+      "applicability": "GB共用非安防凭证/一卡通",
+      "acceptanceRule": "门禁独立管理，消费业务权限不自动赋安防通行。",
+      "requiredEvidence": [
+        "架构边界与权限实测"
+      ],
+      "accountableOwner": "信息安全/保卫",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.3(4)",
+          "strength": "国家强制",
+          "pdfPage": 14,
+          "printedPage": 9,
+          "pdfPages": [
+            14
+          ],
+          "printedPages": [
+            9
+          ]
+        }
+      ],
+      "tests": [
+        "消费管理员能任改门禁失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-25",
+      "topic": "external",
+      "title": "停车阻挡防砸有效",
+      "module": "systems",
+      "applicability": "GB停车管理执行装置",
+      "acceptanceRule": "用批准安全测试实测防砸停止/回升，无人员危险。",
+      "requiredEvidence": [
+        "安全方案及功能结果"
+      ],
+      "accountableOwner": "设施",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.4(2)",
+          "strength": "国家强制",
+          "pdfPage": 14,
+          "printedPage": 9,
+          "pdfPages": [
+            14
+          ],
+          "printedPages": [
+            9
+          ]
+        }
+      ],
+      "tests": [
+        "标注防砸但失效失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-06"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-26",
+      "topic": "external",
+      "title": "停车紧急人工开启",
+      "module": "systems",
+      "applicability": "GB停车管理执行装置",
+      "acceptanceRule": "紧急能人工开启，规程工具和培训可用。",
+      "requiredEvidence": [
+        "规程及实际开闸测试"
+      ],
+      "accountableOwner": "设施/保卫",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.4(3)",
+          "strength": "国家强制",
+          "pdfPage": 14,
+          "printedPage": 9,
+          "pdfPages": [
+            14
+          ],
+          "printedPages": [
+            9
+          ]
+        }
+      ],
+      "tests": [
+        "断电无人会开闸不能符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-06"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-27",
+      "topic": "external",
+      "title": "人体安检图像隐私",
+      "module": "systems",
+      "applicability": "GB人体安全检查设备",
+      "acceptanceRule": "输出图像有隐私保护，不因安检免隐私。",
+      "requiredEvidence": [
+        "输出权限与隐私验证"
+      ],
+      "accountableOwner": "安检/个人信息保护",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.5(1)",
+          "strength": "国家强制",
+          "pdfPage": 14,
+          "printedPage": 9,
+          "pdfPages": [
+            14
+          ],
+          "printedPages": [
+            9
+          ]
+        }
+      ],
+      "tests": [
+        "人体图像无保护向无关人显示失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-28",
+      "topic": "external",
+      "title": "微剂量X射线工位≤0.5μSv/h",
+      "module": "systems",
+      "applicability": "GB微剂量X射线安检",
+      "acceptanceRule": "正常工作时工作人员工作位置周围剂量当量率≤0.5μSv/h，由具备能力人员按方法测量，其他辐射法规另判。",
+      "requiredEvidence": [
+        "工位工况、仪器方法和报告"
+      ],
+      "accountableOwner": "职业健康/检验",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.5(2)",
+          "strength": "国家强制",
+          "pdfPage": 15,
+          "printedPage": 10,
+          "pdfPages": [
+            15
+          ],
+          "printedPages": [
+            10
+          ]
+        }
+      ],
+      "tests": [
+        "0.5通过0.501失败；非X设备不套"
+      ],
+      "structuredRule": {
+        "type": "maximum",
+        "field": "workerPositionDoseRate",
+        "unit": "μSv/h",
+        "operator": "<=",
+        "threshold": 0.5
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-29",
+      "topic": "external",
+      "title": "安检防爆处置设施",
+      "module": "systems",
+      "applicability": "GB安全检查系统",
+      "acceptanceRule": "有防爆处置设施及状态/处置方案，类型按批准风险设计。",
+      "requiredEvidence": [
+        "清单状态与处置方案"
+      ],
+      "accountableOwner": "安检/保卫",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.5(3)",
+          "strength": "国家强制",
+          "pdfPage": 15,
+          "printedPage": 10,
+          "pdfPages": [
+            15
+          ],
+          "printedPages": [
+            10
+          ]
+        }
+      ],
+      "tests": [
+        "只有金属探测器不能代防爆处置"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-30",
+      "topic": "external",
+      "title": "在线电子巡查异常报警",
+      "module": "systems",
+      "applicability": "GB电子巡查；在线式额外条件",
+      "acceptanceRule": "按方案管理路线时间人员统计；在线偏离方案及时报警，离线不直接套在线条件。",
+      "requiredEvidence": [
+        "配置异常模拟、报警/统计"
+      ],
+      "accountableOwner": "保卫/信息",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "3.5.7",
+          "strength": "国家强制",
+          "pdfPage": 15,
+          "printedPage": 10,
+          "pdfPages": [
+            15
+          ],
+          "printedPages": [
+            10
+          ]
+        }
+      ],
+      "tests": [
+        "在线漏巡只有报表无及时警报失败"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [
+        "ST-05"
+      ],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-31",
+      "topic": "external",
+      "title": "隐蔽验收与永久线缆编号",
+      "module": "systems",
+      "applicability": "GB施工隐蔽工程",
+      "acceptanceRule": "覆盖前验收合格再下工序；接续/两端/检修孔等线缆编号永久标识按原文各位置验证。",
+      "requiredEvidence": [
+        "隐蔽签认顺序日期、标识竣工图"
+      ],
+      "accountableOwner": "施工/建设",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "4.0.3、4.0.4",
+          "strength": "国家强制",
+          "pdfPage": 16,
+          "printedPage": 11,
+          "pdfPages": [
+            16
+          ],
+          "printedPages": [
+            11
+          ]
+        }
+      ],
+      "tests": [
+        "覆盖后补记不冒充覆盖前验收"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-32",
+      "topic": "external",
+      "title": "试运行≥30日",
+      "module": "systems",
+      "applicability": "GB初步验收通过或项目建设完成后",
+      "acceptanceRule": "触发后试运行≥30d，有运行及故障记录；不是视频存储30日。",
+      "requiredEvidence": [
+        "初验/完成日、起止日志及结论"
+      ],
+      "accountableOwner": "建设/运行",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "4.0.7",
+          "strength": "国家强制",
+          "pdfPage": 16,
+          "printedPage": 11,
+          "pdfPages": [
+            16
+          ],
+          "printedPages": [
+            11
+          ]
+        }
+      ],
+      "tests": [
+        "29失败30满足；录像保留不代试运行"
+      ],
+      "structuredRule": {
+        "type": "minimum",
+        "field": "trialOperationDays",
+        "unit": "calendar_day",
+        "operator": ">=",
+        "threshold": 30
+      },
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "结构化测量加证据",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-33",
+      "topic": "external",
+      "title": "高风险检验及竣工验收放行",
+      "module": "systems",
+      "applicability": "GB工程；高风险检验条件单判",
+      "acceptanceRule": "高风险工程检验，检验审功能性能；竣工施工/技术验收资料审查和质量结论分别通过，不合格不得交付。",
+      "requiredEvidence": [
+        "认定检验、各环节验收及结论"
+      ],
+      "accountableOwner": "建设/检验/验收",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "5.0.1—5.0.5",
+          "strength": "国家强制",
+          "pdfPage": 17,
+          "printedPage": 12,
+          "pdfPages": [
+            17
+          ],
+          "printedPages": [
+            12
+          ]
+        }
+      ],
+      "tests": [
+        "低风险不套高风险检验但不免竣工验收；一环失败不总符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-34",
+      "topic": "external",
+      "title": "运维人员经费制度保障",
+      "module": "systems",
+      "applicability": "GB已移交运行系统",
+      "acceptanceRule": "实施运维，批准方案保障人员经费制度技术；岗位日常值机现场处置保密培训考核各有子结果。",
+      "requiredEvidence": [
+        "方案、作业书及保障执行"
+      ],
+      "accountableOwner": "建设/运行/维护",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "6.0.1—6.0.3",
+          "strength": "国家强制",
+          "pdfPage": 18,
+          "printedPage": 13,
+          "pdfPages": [
+            18
+          ],
+          "printedPages": [
+            13
+          ]
+        }
+      ],
+      "tests": [
+        "有合同无实际运维不能符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-GB-35",
+      "topic": "external",
+      "title": "特殊期运维与临时保护",
+      "module": "systems",
+      "applicability": "GB维护；特殊期触发时",
+      "acceptanceRule": "日常/故障/特殊保障按方案执行；特殊期协调增员备件等落实，故障期间临时保护；GB原文无统一月季度周期。",
+      "requiredEvidence": [
+        "方案、人员备件与保护执行"
+      ],
+      "accountableOwner": "运行/维护",
+      "basis": [
+        {
+          "sourceId": "GB55029",
+          "clause": "6.0.5",
+          "strength": "国家强制",
+          "pdfPage": 18,
+          "printedPage": 13,
+          "pdfPages": [
+            18
+          ],
+          "printedPages": [
+            13
+          ]
+        },
+        {
+          "sourceId": "DB855",
+          "clause": "6.12",
+          "strength": "标准应",
+          "pdfPage": 6,
+          "printedPage": 3,
+          "pdfPages": [
+            6
+          ],
+          "printedPages": [
+            3
+          ]
+        }
+      ],
+      "tests": [
+        "特殊期只有日常表无对应保障不能符合"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "external_current",
+      "implementationPriority": "P1",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "domestic_control",
+      "uiBadge": "中国法规/标准依据",
+      "contributesToDomesticScore": true,
+      "requiresDomesticApplicabilityApproval": true,
+      "domesticAnchors": [],
+      "supplementOf": [],
+      "supplementReason": "",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true
+    },
+    {
+      "id": "A04-PSP-01",
+      "topic": "method",
+      "title": "资产威胁脆弱性场景评估",
+      "module": "governance",
+      "applicability": "单位采用PSP方法",
+      "acceptanceRule": "记录资产/损失、威胁、脆弱性、现有措施、后果及剩余风险接受人，未知不标零风险。",
+      "requiredEvidence": [
+        "场景台账、方法、接受审批"
+      ],
+      "accountableOwner": "风险/保卫",
+      "basis": [
+        {
+          "sourceId": "ASISPSP",
+          "clause": "Domain1 Tasks1—5",
+          "strength": "最佳实践",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "只有设备数量不是场景评估"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "practice",
+      "implementationPriority": "P2",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "international_method_supplement",
+      "uiBadge": "国际方法补充｜非中国法定义务",
+      "contributesToDomesticScore": false,
+      "requiresDomesticApplicabilityApproval": false,
+      "domesticAnchors": [
+        "DB2552 4.1.4、6.4.3、9.7；GB55029 3.1.1—3.1.2"
+      ],
+      "supplementOf": [
+        "A04-GB-01",
+        "A04-FRQ-16"
+      ],
+      "supplementReason": "补充风险场景、未知与残余风险记录方法",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true,
+      "acceptanceScope": "补充方法/单位已批准目标；不是国内合规门槛"
+    },
+    {
+      "id": "A04-PSP-02",
+      "topic": "method",
+      "title": "分层及最薄弱路径",
+      "module": "systems",
+      "applicability": "单位采用PSP/Sandia方法",
+      "acceptanceRule": "逐周界缓冲重要资产核探测/评估、延迟、响应，后门共享/维护通道等薄弱路径独立验证，缺口整改或审批。",
+      "requiredEvidence": [
+        "分层路径及覆盖验证"
+      ],
+      "accountableOwner": "设计/保卫",
+      "basis": [
+        {
+          "sourceId": "ASISPSP",
+          "clause": "Domain2 Tasks1—2",
+          "strength": "最佳实践",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        },
+        {
+          "sourceId": "SANDIA",
+          "clause": "Detection delay response methods",
+          "strength": "最佳实践",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "正门全合格不掩盖重要后门缺保护"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "practice",
+      "implementationPriority": "P2",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "international_method_supplement",
+      "uiBadge": "国际方法补充｜非中国法定义务",
+      "contributesToDomesticScore": false,
+      "requiresDomesticApplicabilityApproval": false,
+      "domesticAnchors": [
+        "DB2552 6.4.6；GB55029 1.0.3(2)(3)、3.1.4(1)"
+      ],
+      "supplementOf": [
+        "A04-BAR-03",
+        "A04-GB-12"
+      ],
+      "supplementReason": "补充逐路径与最薄弱部位效能验证方法",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true,
+      "acceptanceScope": "补充方法/单位已批准目标；不是国内合规门槛"
+    },
+    {
+      "id": "A04-PSP-03",
+      "topic": "method",
+      "title": "发现后保护延迟与响应匹配",
+      "module": "systems",
+      "applicability": "批准场景的效能验证",
+      "acceptanceRule": "同一有效发现起点，剩余保护时间≥核验+通信+动员+到场+实施处置时间+批准余量；同时验证探测可靠性和响应能力。工程指标由单位批准，无统一法定秒数。",
+      "requiredEvidence": [
+        "受控时序、假设不确定性、能力和余量"
+      ],
+      "accountableOwner": "设计/保卫",
+      "basis": [
+        {
+          "sourceId": "SANDIA",
+          "clause": "Physical protection systems principles",
+          "strength": "最佳实践",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "剩余延迟30s响应45s不满足批准目标；不得重复加探测前延迟"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "时序是本文工程化建议，不是ASIS考试纲要条文或美国核设施规则直接移植。",
+      "scoringLane": "practice",
+      "implementationPriority": "P2",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "international_method_supplement",
+      "uiBadge": "国际方法补充｜非中国法定义务",
+      "contributesToDomesticScore": false,
+      "requiresDomesticApplicabilityApproval": false,
+      "domesticAnchors": [
+        "GB55029 1.0.3(2)、3.4.2；DB2552 6.4.3、9.7"
+      ],
+      "supplementOf": [
+        "A04-BAR-06",
+        "A04-FRQ-16"
+      ],
+      "supplementReason": "补充探测后延迟和实际响应的场景时序验证；无统一法定秒数",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true,
+      "acceptanceScope": "补充方法/单位已批准目标；不是国内合规门槛"
+    },
+    {
+      "id": "A04-PSP-04",
+      "topic": "method",
+      "title": "CPTED照明视线及安全通行",
+      "module": "general",
+      "applicability": "采用CPTED场地",
+      "acceptanceRule": "按用途核昼夜视线照明、自然监视、边界导向维护，兼顾隐私疏散；不臆造纲要统一照度/尺寸。",
+      "requiredEvidence": [
+        "踏勘、批准用途指标、测试与改进"
+      ],
+      "accountableOwner": "设计/设施/保卫",
+      "basis": [
+        {
+          "sourceId": "ASISPSP",
+          "clause": "Domain2 Task1、Task2 CPTED",
+          "strength": "最佳实践",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "白天正常夜间失效应列改进；无来源数值不标法定"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "practice",
+      "implementationPriority": "P2",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "international_method_supplement",
+      "uiBadge": "国际方法补充｜非中国法定义务",
+      "contributesToDomesticScore": false,
+      "requiresDomesticApplicabilityApproval": false,
+      "domesticAnchors": [
+        "DB2552 6.5.2.2、5.1.4；GB55029 3.1.3、3.1.6"
+      ],
+      "supplementOf": [
+        "A04-GB-20",
+        "A04-DOOR-04"
+      ],
+      "supplementReason": "补充用途导向的昼夜视线、照明及通行检查方法",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true,
+      "acceptanceScope": "补充方法/单位已批准目标；不是国内合规门槛"
+    },
+    {
+      "id": "A04-PSP-05",
+      "topic": "method",
+      "title": "故障状态与实际可用性",
+      "module": "systems",
+      "applicability": "采用PSP生命周期方法",
+      "acceptanceRule": "批准断电断网关键故障/人工接管场景；在线率、有效探测、误报、恢复、响应各有分母时窗数据源和目标。",
+      "requiredEvidence": [
+        "故障验证、指标定义实际结果"
+      ],
+      "accountableOwner": "运行/信息/保卫",
+      "basis": [
+        {
+          "sourceId": "ASISPSP",
+          "clause": "Domain2 Tasks1—2、Domain3 Task5",
+          "strength": "最佳实践",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "设备在线100%但图像不可用不能证明防护有效"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "practice",
+      "implementationPriority": "P2",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "international_method_supplement",
+      "uiBadge": "国际方法补充｜非中国法定义务",
+      "contributesToDomesticScore": false,
+      "requiresDomesticApplicabilityApproval": false,
+      "domesticAnchors": [
+        "GB55029 1.0.3(4)、6.0.5；DB2552 8.7.3、9.7"
+      ],
+      "supplementOf": [
+        "A04-GB-35",
+        "A04-FRQ-16"
+      ],
+      "supplementReason": "补充故障/降级和实际可用性指标；单位批准目标",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true,
+      "acceptanceScope": "补充方法/单位已批准目标；不是国内合规门槛"
+    },
+    {
+      "id": "A04-PSP-06",
+      "topic": "method",
+      "title": "需求到实装生命周期验收",
+      "module": "systems",
+      "applicability": "采用PSP采购实施方法",
+      "acceptanceRule": "需求关联设计产品位置、验收用例、运维责任和退役，采购前定验收，变更替代批准复验。",
+      "requiredEvidence": [
+        "需求设计资产测试矩阵及变更"
+      ],
+      "accountableOwner": "建设/采购/设计/运行",
+      "basis": [
+        {
+          "sourceId": "ASISPSP",
+          "clause": "Domain2 Task3、Domain3 Tasks1—5",
+          "strength": "最佳实践",
+          "pdfPage": null,
+          "printedPage": null,
+          "pdfPages": [],
+          "printedPages": []
+        }
+      ],
+      "tests": [
+        "供应商演示不代现场验收；换型无复验未闭环"
+      ],
+      "structuredRule": null,
+      "legacyLinks": [],
+      "notes": "",
+      "scoringLane": "practice",
+      "implementationPriority": "P2",
+      "evaluationMode": "证据与子断言人工核验",
+      "remediation": [
+        "记录具体缺失对象、证据或逾期区间",
+        "落实验收规则并补证；责任部门批准整改期限，期限来源单列",
+        "复测/重新取证后独立复核，留存原结论与复核轨迹"
+      ],
+      "closureEvidence": "本项复测/取证记录、复核人、复核日期和结果；采购订单和整改计划不能单独关闭",
+      "reviewStatus": "控制设计；具体法律适用/业务计分待核准",
+      "originCategory": "international_method_supplement",
+      "uiBadge": "国际方法补充｜非中国法定义务",
+      "contributesToDomesticScore": false,
+      "requiresDomesticApplicabilityApproval": false,
+      "domesticAnchors": [
+        "GB55029 3.1.1—3.1.2、4.0.1、5.0.3—5.0.5、6.0.2"
+      ],
+      "supplementOf": [
+        "A04-GB-01",
+        "A04-REC-10"
+      ],
+      "supplementReason": "补充需求到证据、实装及生命周期可追溯方法",
+      "extraTargetsMustBeLabeledAsInternalPolicy": true,
+      "acceptanceScope": "补充方法/单位已批准目标；不是国内合规门槛"
+    }
+  ],
+  "externalStandardsRegister": [
+    {
+      "sourceId": "GB55029",
+      "reference": "DB2552 8.1.5",
+      "version": "2022",
+      "scope": "按建设/运行阶段和具体条件",
+      "status": "A04核心控制设计；不是全规范已实现证明",
+      "action": "对全条款建立子控制覆盖，仍未覆盖的细则留可见待办"
+    },
+    {
+      "sourceId": "GB17565",
+      "reference": "DB2552 6.6.2.2",
+      "version": "2022注日期",
+      "scope": "指定门卫室对外门；其他门独立依据",
+      "status": "≥3级安装要求核准；产品全文细则未取得",
+      "action": "取得受控全文、产品等级指标和实装一致性证明"
+    },
+    {
+      "sourceId": "DB855",
+      "reference": "DB2552引用清单及独立适用/采用依据",
+      "version": "2025",
+      "scope": "安全防范系统建设使用运行维护",
+      "status": "6.8、6.10等已核准；B/C全文条目仍需逐项控制",
+      "action": "批准保存分支，按实际资产展开附录B/C，勿只列标准名称"
+    },
+    {
+      "sourceId": "GB35114",
+      "reference": "DB2552 8.3.5",
+      "version": "2017",
+      "scope": "适用公共安全视频联网信息安全",
+      "status": "metadata_verified_detailed_controls_pending",
+      "action": "取得全文，按实际系统拆分认证、密钥/传输等原文要求与测试"
+    },
+    {
+      "sourceId": "GB37300",
+      "reference": "DB2552 8.3.4",
+      "version": "2018",
+      "scope": "适用公共安全重点区域",
+      "status": "metadata_verified_detailed_controls_pending",
+      "action": "取得全文，拆部位、采集类别、技术/设备控制"
+    },
+    {
+      "sourceId": "GBT28181",
+      "reference": "DB2552 8.3.5",
+      "version": "2022",
+      "scope": "对应视频联网接口协议",
+      "status": "metadata_verified_detailed_controls_pending",
+      "action": "取得全文，拆实际接口与协议用例，不把保留接口等于必须上传"
+    },
+    {
+      "sourceId": "GBT32581",
+      "reference": "DB2552 8.2.6",
+      "version": "2016",
+      "scope": "相应入侵报警系统",
+      "status": "metadata_verified_detailed_controls_pending",
+      "action": "取得全文及等级，拆GB55029未覆盖细则"
+    },
+    {
+      "sourceId": "GBT37078",
+      "reference": "DB2552 8.4.4",
+      "version": "2018",
+      "scope": "适用门禁系统",
+      "status": "metadata_verified_detailed_controls_pending",
+      "action": "取得全文核分级功能环境及测试"
+    },
+    {
+      "sourceId": "GAT1127",
+      "reference": "DB2552 6.6.3.5、6.7.3.1",
+      "version": "2025注日期",
+      "scope": "二级重要摄像机III或以上宜，一级IV宜",
+      "status": "metadata_verified_detailed_controls_pending",
+      "action": "核原文等级及产品报告，不用等保替代"
+    },
+    {
+      "sourceId": "GB55037",
+      "reference": "DB2552 5.1.4及门禁疏散",
+      "version": "2022",
+      "scope": "建筑消防疏散按用途工程阶段",
+      "status": "metadata_verified_detailed_controls_pending",
+      "action": "消防专业核准原文和防火门/疏散指标；本轮疏散先用GB55029/DB确切条文"
+    }
+  ],
+  "commonRules": {
+    "lanes": [
+      "db_current",
+      "external_current",
+      "practice",
+      "forward"
+    ],
+    "dataStorage": "审核信息只存浏览器localStorage；仅脱敏证据编号位置/测量摘要，不上传，不存原视频、脸模板、身份证、密码",
+    "sourceReview": "原文事实核验与法律适用/计分核准分开；保留需业务/法律专家复核状态",
+    "notApplicable": "有据合法范围排除；缺设备缺证据或范围未知不可NA",
+    "conformity": "多子断言须分别留结果/整改，全部适用子断言通过才全符合",
+    "scoring": "中国合规主线；国际/内部补充与前瞻独立，不能修改国内得分分母或国内关键项/风险结论；额外目标失败不自动改国内结论",
+    "unknownLevel": "已认定重点未定级按6.3.3三级最低，等级待定不输出完整核查结论；非重点保留KU-00",
+    "records": "配置和实际可取回并验；新系统历史不足时证明容量与投用以来完整性，成熟历史状态另标",
+    "closure": "措施证据复核完成后关闭；不自动改变原审核答案",
+    "time": "日、日历月、季度、半年、年、工作日分别计算；不完整审计期和起算经核准",
+    "sourceLabel": "凡非国内法规标准的独立目标/方法，在题目整改各导出持续特殊标注，不能仅末尾免责声明"
+  },
+  "productPolicy": {
+    "primaryBasis": "中国国内法律、法规和标准",
+    "internationalUse": "仅补充国内已核准控制的检查与效能核验方法，先查询国内适用细则",
+    "internationalBadge": "国际方法补充｜非中国法定义务",
+    "internalBadge": "单位内控/合同约定｜非统一法定要求",
+    "methodBadge": "核验方法建议｜非独立法规义务",
+    "mandatoryBadgeSurfaces": [
+      "question",
+      "detail",
+      "filter",
+      "remediation",
+      "screen_report",
+      "word",
+      "excel",
+      "json"
+    ],
+    "internationalContributesToDomesticScore": false,
+    "externalCurrentMeaning": "DB基线之外的国内现行依据；不是国外要求",
+    "domesticScoreUnaffectedBy": [
+      "international_result",
+      "international_visibility",
+      "practice_toggle",
+      "forward_toggle"
+    ],
+    "foreignFailureRule": "仅国外目标失败不得自动改国内结论；国内违反须独立依据及证据；效能风险另列"
+  }
+}

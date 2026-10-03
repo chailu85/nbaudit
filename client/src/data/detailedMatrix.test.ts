@@ -68,12 +68,15 @@ describe('DB11/T 2552—2026 第5章与第6章审核矩阵', () => {
 
   it('按已确认政策将附录F“应”计入强制分母、“宜”单列建议分', () => {
     const answers = Object.fromEntries(criteria.map(c => [c.id, emptyAnswer()]));
-    const level3 = score(criteria, answers, { ...base, keyProtectionLevel: '三级' }, false);
+    // A04原子控制上线后，旧KF父项仅作为总览，不与子控制混合计分。
+    // 本用例专门保护既有附录F“应/宜”规则本身。
+    const legacyCriteria = criteria.filter(c => !c.controlMeta);
+    const level3 = score(legacyCriteria, answers, { ...base, keyProtectionLevel: '三级' }, false);
     expect(level3.recommended.map(c => c.id)).toEqual(expect.arrayContaining(['KF-02', 'KF-05', 'KF-06', 'KF-10']));
     expect(level3.counted.map(c => c.id)).not.toContain('KF-02');
     expect(level3.counted.map(c => c.id)).toContain('KF-01');
 
-    const level2 = score(criteria, answers, { ...base, keyProtectionLevel: '二级' }, false);
+    const level2 = score(legacyCriteria, answers, { ...base, keyProtectionLevel: '二级' }, false);
     expect(level2.recommended.map(c => c.id)).toContain('KF-02');
     expect(level2.recommended.map(c => c.id)).not.toContain('KF-05');
     expect(level2.counted.map(c => c.id)).toContain('KF-05');
@@ -83,7 +86,7 @@ describe('DB11/T 2552—2026 第5章与第6章审核矩阵', () => {
       expect(level2.counted.map(c => c.id)).toContain(id);
     });
     expect(level2.recommended.map(c => c.id)).toContain('KF-29');
-    const level1 = score(criteria, answers, { ...base, keyProtectionLevel: '一级' }, false);
+    const level1 = score(legacyCriteria, answers, { ...base, keyProtectionLevel: '一级' }, false);
     expect(level1.counted.map(c => c.id)).toEqual(expect.arrayContaining(['KF-05', 'KF-06', 'KF-10', 'KF-29', 'KF-42', 'KF-43']));
   });
 

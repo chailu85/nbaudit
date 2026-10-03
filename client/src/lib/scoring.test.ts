@@ -26,11 +26,14 @@ describe('评分、复核与整改状态', () => {
     expect(result.reviewReasons.find(reason => reason.code === 'missing_na_reason')?.criterionIds).toContain('KU-01');
   });
 
-  it('已关闭整改仍是合规缺口，但不计入未关闭待办', () => {
+  it('已关闭整改仍是合规缺口；关闭证据不足时仍计入待办', () => {
     const next = answers();
     next['GD-04'] = { ...next['GD-04'], status: 'noncompliant', remediationStatus: 'closed' };
     const result = score(criteria, next, base, false);
     expect(result.findings.map(criterion => criterion.id)).toContain('GD-04');
-    expect(result.remediationOpen.map(criterion => criterion.id)).not.toContain('GD-04');
+    expect(result.remediationOpen.map(criterion => criterion.id)).toContain('GD-04');
+    next['GD-04'] = { ...next['GD-04'], owner: '保卫部', due: '2026-10-31', action: '完成整改', a04: { ...next['GD-04'].a04, temporaryProtection: '整改期间加强值守', verificationEvidence: '复核记录', verifier: '审核员', verifiedAt: '2026-10-03' } };
+    const closed = score(criteria, next, base, false);
+    expect(closed.remediationOpen.map(criterion => criterion.id)).not.toContain('GD-04');
   });
 });

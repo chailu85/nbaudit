@@ -4,16 +4,44 @@ export type KeyProtectionLevel = '未确定' | '三级' | '二级' | '一级';
 export const unitTypes = ['企业', '事业单位', '机关', '团体', '民办非企业'] as const;
 export type UnitType = typeof unitTypes[number];
 import { detailedMatrixCriteria } from './detailedMatrix';
+import { a04Criteria } from './a04Controls';
+import type { A04ProfileFacts } from './a04Types';
+
+export type ControlMeta = {
+  controlSetVersion: string;
+  originCategory: 'domestic_control' | 'international_method_supplement';
+  uiBadge: string;
+  scoringLane: 'db_current' | 'external_current' | 'practice';
+  applicability: string;
+  acceptanceRule: string;
+  requiredEvidence: string[];
+  sourceRequirements: { sourceId: string; source: string; clause: string; strength: string }[];
+  accountableOwner: string;
+  legacyLinks: string[];
+  structuredRule?: Record<string, unknown>;
+  remediation: string[];
+  closureEvidence: string;
+  reviewStatus: string;
+  domesticAnchors: string[];
+  supplementOf: string[];
+  supplementReason: string;
+  requiresDomesticApplicabilityApproval: boolean;
+  cannotBeNaWhenActive?: boolean;
+};
 export type Criterion = {
   id: string; module: string; title: string; prompt: string; evidence: string;
   weight: 1 | 2 | 3; critical?: boolean; applies?: (p: Profile) => boolean;
   recommendation?: (p: Profile) => boolean;
+  scoreContribution?: 'domestic' | 'supplemental';
+  hardRequirement?: boolean;
+  controlMeta?: ControlMeta;
   basis: { kind: BasisKind; source: string; clause: string; note?: string }[];
 };
 export type Profile = {
   name: string; region: string; unitType: UnitType; industry: string; multiSite: boolean;
   keyCandidate: boolean; keyProtectionLevel: KeyProtectionLevel; secret: boolean; dangerous: boolean; crowded: boolean; dataStorage: boolean;
   reviewer: string; reviewDate: string;
+  a04?: A04ProfileFacts;
 };
 
 export const modules = [
@@ -72,7 +100,7 @@ const baseCriteria: Criterion[] = [
 ];
 
 // 基础条款与逐条标准矩阵共同构成最终审核库。
-export const criteria: Criterion[] = [...baseCriteria, ...detailedMatrixCriteria];
+export const criteria: Criterion[] = [...baseCriteria, ...detailedMatrixCriteria, ...a04Criteria];
 
 export const basisLabel = (kind: BasisKind) => kind === 'forward' ? '前瞻参考' : kind === 'local' ? '地方要求' : '现行基线';
 
