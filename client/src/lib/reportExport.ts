@@ -6,8 +6,10 @@ import { businessDate } from './businessDate';
 
 type ScoreSnapshot = {
   active: Criterion[];
+  recommended: Criterion[];
   counted: Criterion[];
   completion: number;
+  suggestedCompletion: number;
   level: string;
   criticalGaps: Criterion[];
   findings: Criterion[];
@@ -38,6 +40,7 @@ export const reviewReasonRows = (reasons: ReviewReason[]) => reasons.map(reason 
 
 export const reportDetailRows = ({ current, forward, answers }: ReportExportInput) => {
   const currentIds = new Set(current.active.map(criterion => criterion.id));
+  const recommendedIds = new Set(current.recommended.map(criterion => criterion.id));
   return forward.active.map(criterion => {
     const answer = answerOf(answers, criterion.id);
     return {
@@ -46,6 +49,7 @@ export const reportDetailRows = ({ current, forward, answers }: ReportExportInpu
       审核项目: criterion.title,
       审核要求: criterion.prompt,
       口径: currentIds.has(criterion.id) ? '现行基线' : '前瞻参考',
+      评分属性: recommendedIds.has(criterion.id) ? '建议项（宜）' : '强制合规项（应/其他）',
       依据: basisText(criterion),
       权重: criterion.weight,
       关键项: criterion.critical ? '是' : '否',
@@ -64,7 +68,7 @@ export const wordDetailCells = (row: ReturnType<typeof reportDetailRows>[number]
   row.条款编号,
   row.模块,
   row.口径,
-  `${row.审核项目}\n要求：${row.审核要求}\n依据：${row.依据}\n证据：${row.证据编号或位置 || '未填写'}`,
+  `${row.审核项目}\n评分：${row.评分属性}\n要求：${row.审核要求}\n依据：${row.依据}\n证据：${row.证据编号或位置 || '未填写'}`,
   `${row.结论}\n整改状态：${row.整改状态}`,
   `${row.整改负责人 || '待指定'} / ${row.整改期限 || '待定'}`,
   `措施：${row.整改措施 || '未填写'}\n不适用理由：${row.不适用理由 || '—'}`,
@@ -93,6 +97,7 @@ export async function exportExcelReport(input: ReportExportInput) {
     ['审核人', profile.reviewer || '未填写'],
     [],
     ['现行基线完成率', `${current.completion}%`],
+    ['附录F建议项得分', `${current.suggestedCompletion}%`],
     ['风险等级', current.level],
     ['现行适用项目', current.counted.length],
     ['现行关键缺口', current.criticalGaps.length],
@@ -143,7 +148,7 @@ export async function exportWordReport(input: ReportExportInput) {
     new Paragraph({ heading: HeadingLevel.HEADING_1, text: '一、单位画像' }),
     new Paragraph({ children: [new TextRun({ text: `单位名称：${profile.name || '未命名单位'}\n` }), new TextRun({ text: `地区：${profile.region || '未填写'}　单位类型：${profile.unitType}\n` }), new TextRun({ text: `行业：${profile.industry || '未填写'}　重点单位审核采用的防范级别：${profile.keyCandidate ? profile.keyProtectionLevel : '不适用'}\n` }), new TextRun({ text: `审核日期：${profile.reviewDate || '未填写'}　审核人：${profile.reviewer || '未填写'}` })] }),
     new Paragraph({ heading: HeadingLevel.HEADING_1, text: '二、审核摘要' }),
-    new Paragraph({ children: [new TextRun({ text: `现行基线完成率：${current.completion}%　风险等级：${current.level}\n` }), new TextRun({ text: `现行适用项目：${current.counted.length}　关键缺口：${current.criticalGaps.length}　待整改（未关闭）：${current.remediationOpen.length}　前瞻差距项目：${forward.active.filter(criterion => !current.active.some(currentCriterion => currentCriterion.id === criterion.id)).length}` })] }),
+    new Paragraph({ children: [new TextRun({ text: `现行基线完成率：${current.completion}%　附录F建议项得分：${current.suggestedCompletion}%　风险等级：${current.level}\n` }), new TextRun({ text: `现行适用项目：${current.counted.length}　关键缺口：${current.criticalGaps.length}　待整改（未关闭）：${current.remediationOpen.length}　前瞻差距项目：${forward.active.filter(criterion => !current.active.some(currentCriterion => currentCriterion.id === criterion.id)).length}` })] }),
     new Paragraph({ heading: HeadingLevel.HEADING_1, text: '三、人工复核与使用限制' }),
     ...reviewParagraphs,
     new Paragraph({ heading: HeadingLevel.HEADING_1, text: '四、逐项审核与整改明细' }),

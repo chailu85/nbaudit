@@ -7,6 +7,7 @@ import { detailedMatrixCriteria } from './detailedMatrix';
 export type Criterion = {
   id: string; module: string; title: string; prompt: string; evidence: string;
   weight: 1 | 2 | 3; critical?: boolean; applies?: (p: Profile) => boolean;
+  recommendation?: (p: Profile) => boolean;
   basis: { kind: BasisKind; source: string; clause: string; note?: string }[];
 };
 export type Profile = {

@@ -21,13 +21,22 @@ export const reviewReasonText = (reason: ReviewReason) => `${reason.title}：${r
 
 export function score(items: Criterion[], answers: Answers, profile: Profile, includeForward = false) {
   const active = activeCriteria(items, profile).filter(c => includeForward || c.basis.some(b => b.kind !== 'forward'));
-  const counted = active.filter(c => answers[c.id]?.status !== 'na');
+  const recommended = active.filter(c => c.recommendation?.(profile));
+  const mandatory = active.filter(c => !c.recommendation?.(profile));
+  const counted = mandatory.filter(c => answers[c.id]?.status !== 'na');
+  const suggestedCounted = recommended.filter(c => answers[c.id]?.status !== 'na');
   const max = counted.reduce((n, c) => n + c.weight, 0);
   const earned = counted.reduce((n, c) => {
     const status = answers[c.id]?.status;
     return n + (status === 'compliant' ? c.weight : status === 'partial' ? c.weight * 0.5 : 0);
   }, 0);
   const completion = max ? Math.round((earned / max) * 100) : 0;
+  const suggestedMax = suggestedCounted.reduce((n, c) => n + c.weight, 0);
+  const suggestedEarned = suggestedCounted.reduce((n, c) => {
+    const status = answers[c.id]?.status;
+    return n + (status === 'compliant' ? c.weight : status === 'partial' ? c.weight * 0.5 : 0);
+  }, 0);
+  const suggestedCompletion = suggestedMax ? Math.round((suggestedEarned / suggestedMax) * 100) : 0;
   const criticalGaps = counted.filter(c => c.critical && answers[c.id]?.status === 'noncompliant');
   const findings = counted.filter(c => ['partial', 'noncompliant'].includes(answers[c.id]?.status ?? 'unreviewed'));
   const remediationOpen = findings.filter(c => answers[c.id]?.remediationStatus !== 'closed');
@@ -76,7 +85,7 @@ export function score(items: Criterion[], answers: Answers, profile: Profile, in
       ? '中风险'
       : '低风险';
 
-  return { active, counted, max, earned, completion, criticalGaps, findings, remediationOpen, level, manualReview, missingNaReason, keyLevelUnconfirmed, reviewReasons };
+  return { active, mandatory, recommended, counted, max, earned, completion, suggestedCounted, suggestedMax, suggestedEarned, suggestedCompletion, criticalGaps, findings, remediationOpen, level, manualReview, missingNaReason, keyLevelUnconfirmed, reviewReasons };
 }
 
 export const statusLabel: Record<Status, string> = { unreviewed: '未审核', compliant: '符合', partial: '部分符合', noncompliant: '不符合', na: '不适用' };

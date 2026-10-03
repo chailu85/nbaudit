@@ -195,7 +195,7 @@ function Dashboard({ profile, score: snapshot, forward, answers, onModule, onSta
     <section className="hero-grid">
       <div className={`score-card ${snapshot.level === '高风险' ? 'danger' : ''}`}><div className="score-label">现行基线完成率</div><div className="score-number">{snapshot.completion}<small>%</small></div><div className="score-level">{snapshot.level} <span>· {snapshot.criticalGaps.length} 个关键缺口</span></div><div className="score-track"><i style={{ width: `${snapshot.completion}%` }} /></div><div className="score-foot">已审核 {reviewedCount} / 适用 {snapshot.counted.length} 项</div></div>
       <div className="metric-card"><div className="metric-icon amber"><AlertTriangle size={20} /></div><div><span>待整改</span><strong>{snapshot.remediationOpen.length}</strong><small>含 {snapshot.criticalGaps.length} 项关键项</small></div></div>
-      <div className="metric-card"><div className="metric-icon blue"><BookOpen size={20} /></div><div><span>前瞻差距</span><strong>{forwardOnlyCount}</strong><small>征求意见稿新增/强化 · 可在审核中作答</small></div></div>
+      <div className="metric-card"><div className="metric-icon blue"><BookOpen size={20} /></div><div><span>附录F建议得分</span><strong>{snapshot.suggestedCompletion}%</strong><small>{snapshot.recommended.length} 项“宜”单列建议分，不计强制合规分母</small></div></div>
     </section>
     {keyReviewPending && <div className="review-banner key-review"><AlertTriangle size={16} /><span><strong>重点单位资格待判定。</strong> 当前未按重点单位模式审核；第6章模块保留6.1判定入口，不会显示为0项。</span><button className="outline-btn" onClick={() => onModule('key')}>进入第6章判定</button></div>}
     <ReviewReasons reasons={snapshot.reviewReasons} />

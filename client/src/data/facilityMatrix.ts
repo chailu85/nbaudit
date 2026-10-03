@@ -5,6 +5,10 @@ const appendix = (clause: string) => ({ kind: 'current' as const, source: 'DB11/
 const order: Record<KeyProtectionLevel, number> = { '未确定': 0, '三级': 1, '二级': 2, '一级': 3 };
 const atLeast = (level: Exclude<KeyProtectionLevel, '未确定'>) => (p: Profile) => p.keyCandidate && order[p.keyProtectionLevel] >= order[level];
 const generalUnit = (p: Profile) => !p.keyCandidate;
+const levelStrength = (rating: string, level: KeyProtectionLevel) => rating.split('；')
+  .map(part => part.trim())
+  .find(part => part.split('：')[0]?.includes(level))
+  ?.split('：')[1]?.trim();
 
 const d = (id: string, title: string, requirement: string, strength: '应' | '宜') : Criterion => ({
   id: `GD-${id}`, module: 'general', title: `附录D-${id} ${title}（一般单位：${strength}）`,
@@ -19,6 +23,7 @@ const f = (id: string, title: string, requirement: string, level: Exclude<KeyPro
   prompt: `${requirement}。该具体空间或设施不存在时，可选择“不适用”并说明理由；不得以其他点位的配置替代本项结论。`,
   evidence: '附录F逐行对照表、点位图/平面图、现场照片、设备台账、验收/联动或巡检记录',
   weight: critical ? 3 : 2, critical, applies: atLeast(level),
+  recommendation: p => levelStrength(rating, p.keyProtectionLevel) === '宜',
   basis: [current(level === '三级' ? '6.5.2—6.5.3' : level === '二级' ? '6.6.2—6.6.3' : '6.7.2—6.7.3'), appendix(`F.1 表F.1 序号${Number(id)}`)],
 });
 
