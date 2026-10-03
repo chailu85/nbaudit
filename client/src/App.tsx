@@ -6,7 +6,7 @@ import { canCloseRemediation, closureMissingFields, effectiveStatus, type Answer
 import { type AuditState, SCHEMA_VERSION, clearAudit, createBlankAnswers, downloadJson, downloadRawAudit, loadAudit, readJsonFile, saveAudit } from '@/lib/storage';
 import { exportExcelReport, exportWordReport, reportDetailRows } from '@/lib/reportExport';
 import { businessDate, isBusinessDate } from '@/lib/businessDate';
-import { hasSpecialRisk, normalizeProfileDraft } from '@/lib/profile';
+import { createAuditProfile, hasSpecialRisk, normalizeProfileDraft, prepareAuditProfileDraft } from '@/lib/profile';
 import { A04_CONTROL_SET_VERSION, evaluateA04Rule } from '@/data/a04Controls';
 import { defaultA04Profile, type A04Fact, type A04ProfileFacts } from '@/data/a04Types';
 import './index.css';
@@ -14,35 +14,19 @@ import './index.css';
 type View = 'dashboard' | 'assessment' | 'remediation' | 'sources' | 'report';
 
 const today = businessDate();
-const defaultProfile: Profile = {
-  name: '',
-  region: '',
-  unitType: '企业',
-  industry: '',
-  multiSite: false,
-  keyCandidate: false,
-  keyProtectionLevel: '未确定',
-  secret: false,
-  dangerous: false,
-  crowded: false,
-  dataStorage: false,
-  reviewer: '',
-  reviewDate: today,
-  a04: { ...defaultA04Profile },
-};
-
 const makeAnswers = (): Answers => createBlankAnswers(criteria);
-const initialLoad = loadAudit(defaultProfile, makeAnswers());
+const initialLoad = loadAudit(createAuditProfile(), makeAnswers());
 const initialAudit = initialLoad.state;
 const statusValues = new Set(['compliant', 'partial', 'noncompliant', 'na']);
 
 function App() {
-  const [profile, setProfile] = useState<Profile>(initialAudit?.profile ?? defaultProfile);
+  const [profile, setProfile] = useState<Profile>(initialAudit?.profile ?? createAuditProfile());
   const [answers, setAnswers] = useState<Answers>(initialAudit?.answers ?? makeAnswers());
   const [view, setView] = useState<View>('dashboard');
   const [activeModule, setActiveModule] = useState('governance');
   const [query, setQuery] = useState('');
   const [showProfile, setShowProfile] = useState(!initialAudit);
+  const [isNewAudit, setIsNewAudit] = useState(!initialAudit);
   const [notice, setNotice] = useState('');
   const [autoSavePaused, setAutoSavePaused] = useState(Boolean(initialLoad.issue));
   const [persistenceIssue, setPersistenceIssue] = useState(initialLoad.issue?.message ?? '');
@@ -104,8 +88,9 @@ function App() {
       return;
     }
     setAutoSavePaused(true);
-    setProfile(defaultProfile);
+    setProfile(createAuditProfile());
     setAnswers(makeAnswers());
+    setIsNewAudit(true);
     setShowProfile(true);
     setPersistenceIssue('');
     setRecoveryRaw(undefined);
@@ -115,11 +100,12 @@ function App() {
   const importFile = async (file?: File) => {
     if (!file) return;
     try {
-      const imported = await readJsonFile(file, defaultProfile, makeAnswers());
+      const imported = await readJsonFile(file, createAuditProfile(), makeAnswers());
       const next = { ...imported, savedAt: new Date().toISOString() };
       const persisted = saveAudit(next);
       setProfile(next.profile);
       setAnswers(next.answers);
+      setIsNewAudit(false);
       if (!persisted.ok) {
         recordSaveFailure(persisted.message);
         showNotice('档案已导入当前页面，但未能保存到浏览器；请立即导出JSON备份。');
@@ -177,7 +163,7 @@ function App() {
         {view === 'report' && <Report profile={profile} current={currentScore} forward={forwardScore} answers={answers} />}
       </main>
     </div>
-    {showProfile && <ProfileModal profile={profile} setProfile={next => { setProfile(next); setAutoSavePaused(false); }} onClose={() => setShowProfile(false)} onReset={() => { setAnswers(makeAnswers()); setView('dashboard'); }} />}
+    {showProfile && <ProfileModal profile={profile} isNewAudit={isNewAudit} setProfile={next => { setProfile(next); setIsNewAudit(false); setAutoSavePaused(false); }} onClose={() => setShowProfile(false)} onReset={() => { setAnswers(makeAnswers()); setView('dashboard'); }} />}
   </div>;
 }
 
@@ -265,8 +251,8 @@ function Report({ profile, current, forward, answers }: { profile: Profile; curr
   return <div className="report-page"><div className="page-head compact no-print"><div><div className="eyebrow">REPORT / INTERNAL USE</div><h1>审核报告</h1><p>生成时间：{new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}</p></div><div className="report-actions"><button className="outline-btn" onClick={() => void exportWordReport({ profile, current, forward, answers }).catch(() => window.alert('Word导出失败，请重试'))}><FileText size={16} /> 导出Word</button><button className="outline-btn" onClick={() => void exportExcelReport({ profile, current, forward, answers }).catch(() => window.alert('Excel导出失败，请重试'))}><Table2 size={16} /> 导出Excel</button><button className="primary-btn" onClick={() => window.print()}><FileText size={16} /> 打印报告</button></div></div><div className="report-sheet"><div className="report-header"><div><div className="report-kicker">单位内部治安保卫合规审核</div><h1>{profile.name || '未命名单位'}</h1><p>{profile.region || '未填写地区'} · {profile.unitType} · {profile.industry || '未填写行业'} · 审核日期 {profile.reviewDate || today}</p></div><div className={`report-score ${current.level === '高风险' ? 'danger' : ''}`}><strong>{current.completion}%</strong><span>{current.level}</span></div></div><div className="report-warning"><AlertTriangle size={16} /> 本报告为内部自查辅助，不等同于公安机关、主管部门或其他监管机构的法定合格证明。国际方法补充明确标注为“国际方法补充｜非中国法定义务”，不计入国内合规分。</div><ReviewReasons reasons={current.reviewReasons} /><div className="report-stats"><div><span>国内适用项目</span><strong>{current.counted.length}</strong></div><div><span>现行关键缺口</span><strong>{current.criticalGaps.length}</strong></div><div><span>现行待整改</span><strong>{current.remediationOpen.length}</strong></div><div><span>国际补充问题</span><strong>{current.supplementalFindings.length}</strong></div></div><h2>缺口、不适用与整改明细</h2><div className="report-table">{exceptionRows.length === 0 ? <div className="empty">暂无部分符合、不符合或不适用项目</div> : exceptionRows.map(row => <div className="report-row report-row-rich" key={`${row.口径}-${row.条款编号}`}><b>{row.条款编号}</b><span><strong>{row.审核项目}</strong><small>{row.来源类别} · {row.来源标签}</small><small>{row.模块} · {row.口径} · {row.评分属性} · {row.依据}</small><small>证据：{row.证据编号或位置 || '未填写'}{row.不适用理由 ? ` · 不适用理由：${row.不适用理由}` : ''}</small></span><span>{row.结论}<small>{row.整改状态}</small></span><span>{row.整改负责人 || '待指定'}<small>{row.整改期限 || '待定'}</small></span><span>{row.整改措施 || '未填写措施'}</span></div>)}</div><div className="report-foot">依据：DB11/T 2552—2026（第1—9章及附录A—H）、2004版《企业事业单位内部治安保卫条例》；征求意见稿为前瞻参考。审核人：{profile.reviewer || '未填写'}。证据索引、逐来源适用性、整改状态、临时防范、整改措施、复核与关闭信息来自本机审核档案。</div></div></div>;
 }
 
-function ProfileModal({ profile, setProfile, onClose, onReset }: { profile: Profile; setProfile: (profile: Profile) => void; onClose: () => void; onReset: () => void }) {
-  const [draft, setDraft] = useState(profile);
+function ProfileModal({ profile, isNewAudit, setProfile, onClose, onReset }: { profile: Profile; isNewAudit: boolean; setProfile: (profile: Profile) => void; onClose: () => void; onReset: () => void }) {
+  const [draft, setDraft] = useState(() => prepareAuditProfileDraft(profile, isNewAudit));
   const set = (key: keyof Profile, value: unknown) => setDraft(current => ({ ...current, [key]: value }));
   const requiresQualificationReview = hasSpecialRisk(draft);
   const a04 = { ...defaultA04Profile, ...draft.a04 };
@@ -284,7 +270,7 @@ function ProfileModal({ profile, setProfile, onClose, onReset }: { profile: Prof
     setProfile(normalizeProfileDraft(draft));
     onClose();
   };
-  return <div className="modal-backdrop"><div className="modal profile-modal"><div className="modal-head"><div><div className="eyebrow">UNIT PROFILE</div><h2>创建 / 编辑单位画像</h2></div><button className="icon-btn" onClick={onClose}><X size={18} /></button></div><p className="modal-note"><strong>先创建，再逐项审核。</strong> 只填写下列基本信息即可开始；未填写高级筛选不会自动产生“需人工复核”，也不会阻止你进入审核。</p>{requiresQualificationReview && !draft.keyCandidate && <div className="profile-review-hint"><AlertTriangle size={15} /> 已标记专项场景。请在“适用性与单位画像”模块完成重点单位资格排查；当前仍按一般单位模式审核。</div>}<div className="form-grid"><label className="wide">单位名称<input value={draft.name} onChange={event => set('name', event.target.value)} placeholder="例如：某科技有限公司" /></label><label>所属地区<input value={draft.region} onChange={event => set('region', event.target.value)} placeholder="省/市/区" /></label><label>单位类型<select value={draft.unitType} onChange={event => set('unitType', event.target.value)}>{unitTypes.map(unitType => <option key={unitType}>{unitType}</option>)}</select></label><label>所属行业<input value={draft.industry} onChange={event => set('industry', event.target.value)} placeholder="例如：互联网、医疗、教育" /></label><label>审核人<input value={draft.reviewer} onChange={event => set('reviewer', event.target.value)} placeholder="姓名/部门" /></label><label>审核日期<input type="date" value={draft.reviewDate} onChange={event => set('reviewDate', event.target.value)} /></label></div><section className="profile-section"><div className="profile-section-head"><div><h3>审核范围</h3><p>仅在已经明确时选择；未选择重点单位不会触发第6章人工复核提示。</p></div></div><div className="check-grid compact-check-grid"><label className="check-item"><input type="checkbox" checked={draft.multiSite} onChange={event => set('multiSite', event.target.checked)} /><span>多地机构、设施或场站</span></label><label className="check-item"><input type="checkbox" checked={draft.keyCandidate} onChange={event => set('keyCandidate', event.target.checked)} /><span>按重点单位模式审核</span></label></div>{draft.keyCandidate && <label className="key-level-field">重点单位审核采用的防范级别<select value={draft.keyProtectionLevel} onChange={event => set('keyProtectionLevel', event.target.value)}><option value="未确定">未确定（保存后提示确认）</option><option value="三级">三级防范（第6.5）</option><option value="二级">二级防范（第6.5 + 6.6）</option><option value="一级">一级防范（第6.5 + 6.6 + 6.7）</option></select></label>}</section><details className="profile-optional"><summary>专项场景（仅符合时填写）</summary><p>这些场景会增加专项审核提示，但不会自动切换重点单位模式。</p><div className="check-grid compact-check-grid">{([['secret', '涉及国家秘密/涉密载体'], ['dangerous', '涉及危险物品/菌种/武器弹药'], ['crowded', '人员密集/大型活动场所'], ['dataStorage', '重要数据存储/重要高科技或互联网业务']] as [keyof Profile, string][]).map(([key, label]) => <label className="check-item" key={key}><input type="checkbox" checked={Boolean(draft[key])} onChange={event => set(key, event.target.checked)} /><span>{label}</span></label>)}</div></details><details className="a04-profile"><summary>高级：精确筛选 A04 原子控制（可选）</summary><p>仅用于在<strong>明确不涉及</strong>时缩小技术/设施控制范围。保持“未核实”即可在后续条款中逐项判断；这不是创建审核的必填项，也不会单独触发人工复核。</p><div className="a04-profile-grid a04-core-grid"><label>工程/高风险项目<select value={projectScope} onChange={event => setProjectScope(event.target.value)}><option value="unknown">未核实（不预先排除）</option><option value="none">不涉及 GB 55029 工程/高风险对象</option><option value="gb_project">一般 GB 55029 安防工程</option><option value="high_risk">GB 55029 高风险保护对象</option></select></label><label>工程/运行阶段<select value={a04.engineeringStage} onChange={event => setA04('engineeringStage', event.target.value as A04ProfileFacts['engineeringStage'])}><option value="unknown">未核实</option><option value="not_applicable">不涉及工程/系统阶段</option><option value="design">设计/改造设计</option><option value="construction">施工/安装</option><option value="commissioning">试运行/验收</option><option value="operation">运行维护</option></select></label><label>公共视频场所类型<select value={a04.publicVideoContext} onChange={event => setA04('publicVideoContext', event.target.value as A04ProfileFacts['publicVideoContext'])}><option value="unknown">未核实（不预先排除）</option><option value="none">不涉及公共视频场所</option><option value="article7">第7条公共场所</option><option value="article9_exception">第9条例外场所</option></select></label></div><details className="a04-fact-details"><summary>更多系统、点位和数据场景（按需精确排除）</summary><p>每项默认“未核实”，不会影响创建。只有确认“明确不涉及”时才会隐藏相应的条件控制。</p><div className="a04-profile-grid">{a04FactFields.map(([key, label]) => <label key={key}>{label}<select value={a04[key] as A04Fact} onChange={event => setA04(key, event.target.value as A04Fact)}><option value="unknown">未核实</option><option value="yes">存在/涉及</option><option value="no">明确不涉及（排除相关控制）</option></select></label>)}</div></details></details><div className="modal-actions"><button className="outline-btn" onClick={() => { onReset(); onClose(); }}>重置审核答案</button><div><button className="outline-btn" onClick={onClose}>取消</button><button className="primary-btn" onClick={saveProfile}>保存画像</button></div></div></div></div>;
+  return <div className="modal-backdrop"><div className="modal profile-modal"><div className="modal-head"><div><div className="eyebrow">UNIT PROFILE</div><h2>创建 / 编辑单位画像</h2></div><button className="icon-btn" onClick={onClose}><X size={18} /></button></div><p className="modal-note"><strong>先创建，再逐项审核。</strong> 只填写下列基本信息即可开始；未填写高级筛选不会自动产生“需人工复核”，也不会阻止你进入审核。</p>{requiresQualificationReview && !draft.keyCandidate && <div className="profile-review-hint"><AlertTriangle size={15} /> 已标记专项场景。请在“适用性与单位画像”模块完成重点单位资格排查；当前仍按一般单位模式审核。</div>}<div className="form-grid"><label className="wide">单位名称<input value={draft.name} onChange={event => set('name', event.target.value)} placeholder="例如：某科技有限公司" /></label><label>所属地区<input value={draft.region} onChange={event => set('region', event.target.value)} placeholder="省/市/区" /></label><label>单位类型<select value={draft.unitType} onChange={event => set('unitType', event.target.value)}>{unitTypes.map(unitType => <option key={unitType}>{unitType}</option>)}</select></label><label>所属行业<input value={draft.industry} onChange={event => set('industry', event.target.value)} placeholder="例如：互联网、医疗、教育" /></label><label>审核人<input value={draft.reviewer} onChange={event => set('reviewer', event.target.value)} placeholder="姓名/部门" /></label><label>审核创建日期（默认今天）<input type="date" value={draft.reviewDate} onChange={event => set('reviewDate', event.target.value)} /></label></div><section className="profile-section"><div className="profile-section-head"><div><h3>审核范围</h3><p>仅在已经明确时选择；未选择重点单位不会触发第6章人工复核提示。</p></div></div><div className="check-grid compact-check-grid"><label className="check-item"><input type="checkbox" checked={draft.multiSite} onChange={event => set('multiSite', event.target.checked)} /><span>多地机构、设施或场站</span></label><label className="check-item"><input type="checkbox" checked={draft.keyCandidate} onChange={event => set('keyCandidate', event.target.checked)} /><span>按重点单位模式审核</span></label></div>{draft.keyCandidate && <label className="key-level-field">重点单位审核采用的防范级别<select value={draft.keyProtectionLevel} onChange={event => set('keyProtectionLevel', event.target.value)}><option value="未确定">未确定（保存后提示确认）</option><option value="三级">三级防范（第6.5）</option><option value="二级">二级防范（第6.5 + 6.6）</option><option value="一级">一级防范（第6.5 + 6.6 + 6.7）</option></select></label>}</section><details className="profile-optional"><summary>专项场景（仅符合时填写）</summary><p>这些场景会增加专项审核提示，但不会自动切换重点单位模式。</p><div className="check-grid compact-check-grid">{([['secret', '涉及国家秘密/涉密载体'], ['dangerous', '涉及危险物品/菌种/武器弹药'], ['crowded', '人员密集/大型活动场所'], ['dataStorage', '重要数据存储/重要高科技或互联网业务']] as [keyof Profile, string][]).map(([key, label]) => <label className="check-item" key={key}><input type="checkbox" checked={Boolean(draft[key])} onChange={event => set(key, event.target.checked)} /><span>{label}</span></label>)}</div></details><details className="a04-profile"><summary>高级：精确筛选 A04 原子控制（可选）</summary><p>仅用于在<strong>明确不涉及</strong>时缩小技术/设施控制范围。保持“未核实”即可在后续条款中逐项判断；这不是创建审核的必填项，也不会单独触发人工复核。</p><div className="a04-profile-grid a04-core-grid"><label>工程/高风险项目<select value={projectScope} onChange={event => setProjectScope(event.target.value)}><option value="unknown">未核实（不预先排除）</option><option value="none">不涉及 GB 55029 工程/高风险对象</option><option value="gb_project">一般 GB 55029 安防工程</option><option value="high_risk">GB 55029 高风险保护对象</option></select></label><label>工程/运行阶段<select value={a04.engineeringStage} onChange={event => setA04('engineeringStage', event.target.value as A04ProfileFacts['engineeringStage'])}><option value="unknown">未核实</option><option value="not_applicable">不涉及工程/系统阶段</option><option value="design">设计/改造设计</option><option value="construction">施工/安装</option><option value="commissioning">试运行/验收</option><option value="operation">运行维护</option></select></label><label>公共视频场所类型<select value={a04.publicVideoContext} onChange={event => setA04('publicVideoContext', event.target.value as A04ProfileFacts['publicVideoContext'])}><option value="unknown">未核实（不预先排除）</option><option value="none">不涉及公共视频场所</option><option value="article7">第7条公共场所</option><option value="article9_exception">第9条例外场所</option></select></label></div><details className="a04-fact-details"><summary>更多系统、点位和数据场景（按需精确排除）</summary><p>每项默认“未核实”，不会影响创建。只有确认“明确不涉及”时才会隐藏相应的条件控制。</p><div className="a04-profile-grid">{a04FactFields.map(([key, label]) => <label key={key}>{label}<select value={a04[key] as A04Fact} onChange={event => setA04(key, event.target.value as A04Fact)}><option value="unknown">未核实</option><option value="yes">存在/涉及</option><option value="no">明确不涉及（排除相关控制）</option></select></label>)}</div></details></details><div className="modal-actions"><button className="outline-btn" onClick={() => { onReset(); onClose(); }}>重置审核答案</button><div><button className="outline-btn" onClick={onClose}>取消</button><button className="primary-btn" onClick={saveProfile}>保存画像</button></div></div></div></div>;
 }
 
 export default App;
