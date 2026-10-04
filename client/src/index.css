@@ -794,3 +794,120 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
     font-variant-numeric: tabular-nums;
   }
 }
+
+
+/* Desktop redesign round 3: dashboard and report layouts only. */
+@media (min-width: 1024px) {
+  :root {
+    --desktop-progress-width: 6rem;
+    --desktop-report-gap: 0.75rem;
+    --desktop-serial-width: 4rem;
+    --desktop-count-width: 8rem;
+    --desktop-percent-width: 6rem;
+  }
+
+  .dashboard-summary {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .dashboard-score {
+    grid-column: span 4;
+  }
+  .dashboard-metrics {
+    grid-column: span 8;
+  }
+
+  .key-entry {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+    column-gap: var(--desktop-grid-gap);
+  }
+  .key-entry svg { display: none; }
+  .key-entry > span {
+    grid-column: 1 / span 9;
+    min-width: var(--space-0);
+  }
+  .key-entry > button {
+    grid-column: 10 / -1;
+    justify-self: end;
+    white-space: nowrap;
+  }
+
+  .module-table-head,
+  .module-table-row {
+    grid-template-columns: var(--desktop-serial-width) minmax(0, 1fr) var(--desktop-count-width) var(--desktop-progress-width) var(--desktop-percent-width);
+  }
+  .module-table-head > :nth-child(3) { grid-column: 3; }
+  .module-table-head > :nth-child(4) { grid-column: 5; text-align: right; }
+  .module-table-row {
+    grid-template-rows: auto;
+    border-bottom: var(--line-width) solid var(--color-line);
+  }
+  .module-table-row > .module-table-measure > span:first-child { grid-column: 3; }
+  .module-table-row > .module-table-measure > span:last-child {
+    grid-column: 5;
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .module-table-row > i {
+    grid-column: 4;
+    grid-row: 1;
+    align-self: center;
+    justify-self: start;
+    width: var(--desktop-progress-width);
+    height: var(--line-width-active);
+    margin: var(--space-0);
+    background: var(--color-line);
+  }
+  .module-table-row > i > b { height: var(--line-width-active); }
+
+  .report-page {
+    width: 100%;
+    max-width: var(--content-width);
+    margin-left: var(--space-0);
+    margin-right: var(--space-0);
+  }
+  .report-page-head > .report-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--desktop-report-gap);
+  }
+  .report-header h1 {
+    font-size: 0;
+    text-wrap: balance;
+  }
+  .report-header h1::after {
+    content: "单位内部治安保卫合规审核报告";
+    display: block;
+    font-size: var(--font-size-40);
+    line-height: var(--line-height-tight);
+  }
+  .report-row,
+  .report-row-rich {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 6fr) minmax(0, 1fr) minmax(0, 2fr) minmax(0, 2fr);
+    gap: var(--desktop-grid-gap);
+  }
+  .report-row > span,
+  .report-row-rich > span {
+    min-width: var(--space-0);
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+  .report-row > span:nth-child(3),
+  .report-row > span:nth-child(4),
+  .report-row > span:nth-child(5),
+  .report-row > .criterion-link {
+    white-space: nowrap;
+  }
+  .report-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .main-content:has(> .toast) .page-head > .primary-btn,
+  .main-content:has(> .toast) .page-head > .outline-btn,
+  .main-content:has(> .toast) .page-head > .report-actions {
+    margin-top: var(--desktop-report-gap);
+  }
+}
