@@ -1,5 +1,6 @@
 :root {
   --font-sans: "Inter", "Noto Sans SC", "Source Han Sans SC", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", monospace;
   --font-weight-regular: 400;
   --font-weight-bold: 700;
   --font-size-12: 12px;
@@ -20,6 +21,7 @@
   --color-transparent: transparent;
   --color-overlay: rgba(17, 17, 17, 0.28);
 
+  --space-0: 0;
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;
