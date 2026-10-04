@@ -1037,3 +1037,160 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
     background: var(--color-background);
   }
 }
+
+
+/* Desktop redesign round 5: remediation tracker and source library only. */
+@media (min-width: 1024px) {
+  .remediation-page-head {
+    align-items: flex-end;
+    margin-bottom: var(--space-2);
+    padding-bottom: var(--space-2);
+    border-bottom: var(--line-width) solid var(--color-text);
+  }
+  .remediation-total {
+    white-space: nowrap;
+  }
+  .remediation-total strong,
+  .remediation-total span {
+    white-space: nowrap;
+  }
+  .remediation-filters {
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-0);
+    border-bottom: var(--space-0);
+  }
+  .remediation-filters .remediation-search {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .remediation-filters .text-btn {
+    white-space: nowrap;
+  }
+  .remediation-filter-panel {
+    max-width: none;
+    border-top: var(--line-width) solid var(--color-text);
+    border-bottom: var(--line-width) solid var(--color-line);
+  }
+  .remediation-filter-panel select,
+  .source-controls select {
+    appearance: none;
+    border: var(--space-0);
+    border-bottom: var(--line-width) solid var(--color-text);
+    border-radius: var(--radius-none);
+    box-shadow: var(--shadow-none);
+  }
+  .remediation-page .empty svg {
+    display: none;
+  }
+  .remediation-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 6fr) minmax(0, 2fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--desktop-grid-gap);
+    align-items: center;
+  }
+  .remediation-row > .remediation-id {
+    grid-column: 1;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .remediation-row-toggle {
+    grid-column: 2 / -1;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 2fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--desktop-grid-gap);
+  }
+  .remediation-row-toggle h3 {
+    min-width: var(--space-0);
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+  .remediation-row-toggle .remediation-owner,
+  .remediation-row-toggle .remediation-due,
+  .remediation-row-toggle .remediation-priority,
+  .remediation-row-toggle .remediation-status {
+    min-width: var(--space-0);
+    overflow-wrap: normal;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .remediation-row-toggle .remediation-priority { color: var(--color-muted); }
+  .remediation-row-toggle .remediation-priority.high { color: var(--color-signal); }
+
+  .source-page .page-head {
+    align-items: flex-end;
+  }
+  .source-count {
+    justify-items: end;
+    white-space: nowrap;
+  }
+  .source-count strong {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .source-count span {
+    display: block;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .source-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--line-width) solid var(--color-text);
+    border-bottom: var(--line-width) solid var(--color-text);
+  }
+  .source-card {
+    min-height: calc(var(--space-10) + var(--space-4));
+    padding: var(--space-2);
+    border-right: var(--line-width) solid var(--color-line);
+    border-bottom: var(--space-0);
+  }
+  .source-card:first-child { border-top: var(--space-0); }
+  .source-card:last-child { border-right: var(--space-0); border-bottom: var(--space-0); }
+  .source-difference-table > div {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 6fr) minmax(0, 2fr);
+  }
+  .source-difference-table strong {
+    white-space: nowrap;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .source-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: var(--space-2);
+    margin: var(--space-4) var(--space-0);
+  }
+  .source-controls .chapter-selector {
+    display: none;
+  }
+  .source-controls .source-search {
+    grid-column: 1;
+    min-width: var(--space-0);
+  }
+  .source-controls select {
+    grid-column: 2;
+    color: var(--color-text);
+    background: var(--color-transparent);
+    font-size: var(--font-size-14);
+  }
+  .source-controls .muted {
+    grid-column: 3;
+    margin-left: var(--space-0);
+    white-space: nowrap;
+    text-align: right;
+  }
+  .source-workspace {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+    gap: var(--space-3);
+    align-items: start;
+  }
+  .source-chapter-list {
+    position: sticky;
+    top: var(--space-0);
+    height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+  .source-workspace .clause-list {
+    width: 100%;
+    min-width: var(--space-0);
+  }
+}
