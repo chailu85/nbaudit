@@ -126,19 +126,23 @@ function App() {
   };
   const forwardOnlyCount = forwardScore.active.filter(criterion => !currentScore.active.some(current => current.id === criterion.id)).length;
 
-  return <div className="min-h-screen bg-[#f5f7fb] text-slate-900">
+  return <div className="app-root">
     <header className="topbar">
       <div className="brand">
         <div className="brand-mark"><ShieldCheck size={22} /></div>
         <div><div className="brand-title">内保合规审核台</div><div className="brand-sub">单位内部治安保卫 · 全标准版</div></div>
       </div>
-      <div className="top-actions">
-        <span className={`status-dot ${persistenceIssue ? 'status-warning' : ''}`}><span />{persistenceIssue ? '本机保存异常' : '本地模式 · 不上传材料'}</span>
-        <button className="icon-btn" onClick={save} title="保存"><Save size={18} /></button>
-        <button className="outline-btn import-action" onClick={() => fileRef.current?.click()}><Upload size={16} /> 导入</button>
-        <input ref={fileRef} type="file" accept="application/json,.json" hidden onChange={event => importFile(event.target.files?.[0])} />
-        <button className="primary-btn" onClick={() => downloadJson(makeState())}><Download size={16} /> 导出JSON</button>
-      </div>
+      <details className="data-menu">
+        <summary>数据</summary>
+        <div className="data-menu-panel">
+          <span className={`status-dot ${persistenceIssue ? 'status-warning' : ''}`}><span />{persistenceIssue ? '本机保存异常' : '本地模式 · 不上传材料'}</span>
+          <button className="icon-btn" onClick={save} title="保存"><Save size={18} /> 保存</button>
+          <button className="outline-btn import-action" onClick={() => fileRef.current?.click()}><Upload size={16} /> 导入</button>
+          <input ref={fileRef} type="file" accept="application/json,.json" hidden onChange={event => importFile(event.target.files?.[0])} />
+          <button className="primary-btn" onClick={() => downloadJson(makeState())}><Download size={16} /> 导出JSON</button>
+          <button className="danger-link" onClick={reset}>清空本机草稿</button>
+        </div>
+      </details>
     </header>
     <div className="disclaimer"><AlertTriangle size={16} /><span>内部自查辅助工具，不替代公安机关监督检查、主管部门要求或法律意见。征求意见稿内容仅作前瞻性参考。</span><button onClick={() => showNotice('现行基线：2004版条例 + DB11/T 2552—2026；前瞻口径另行显示')}>查看口径</button></div>
     <div className="app-shell">
@@ -151,7 +155,7 @@ function App() {
           <NavItem active={view === 'sources'} icon={<BookOpen size={18} />} label="依据与差异" onClick={() => setView('sources')} />
           <NavItem active={view === 'report'} icon={<FileText size={18} />} label="审核报告" onClick={() => setView('report')} />
         </nav>
-        <div className="sidebar-foot"><div>审核标准库</div><strong>DB11/T 2552—2026</strong><span>第1—9章 · 附录A—H</span><span>2004版条例 · 修订征求意见稿</span><button className="danger-link" onClick={reset}>清空本机草稿</button></div>
+        <div className="sidebar-foot"><div>审核标准库</div><strong>DB11/T 2552—2026</strong><span>第1—9章 · 附录A—H</span><span>2004版条例 · 修订征求意见稿</span></div>
       </aside>
       <main className="main-content">
         {notice && <div className="toast"><CheckCircle2 size={16} /> {notice}</div>}

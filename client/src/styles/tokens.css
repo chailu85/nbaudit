@@ -1,0 +1,46 @@
+:root {
+  --font-sans: "Inter", "Noto Sans SC", "Source Han Sans SC", sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --font-size-12: 12px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-24: 24px;
+  --font-size-40: 40px;
+  --font-size-72: 72px;
+  --line-height-tight: 1.1;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.7;
+
+  --color-background: #FFFFFF;
+  --color-text: #111111;
+  --color-muted: #6B6B6B;
+  --color-line: #D9D9D9;
+  --color-signal: #E30613;
+  --color-transparent: transparent;
+  --color-overlay: rgba(17, 17, 17, 0.28);
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-10: 80px;
+
+  --line-width: 1px;
+  --line-width-active: 2px;
+  --radius-none: 0;
+  --shadow-none: none;
+  --control-height: 48px;
+  --sidebar-width: 240px;
+  --content-width: 880px;
+  --header-height: 64px;
+  --bottom-nav-height: 64px;
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  --modal-width: 720px;
+  --side-nav-top: 152px;
+  --side-data-space: 208px;
+}
