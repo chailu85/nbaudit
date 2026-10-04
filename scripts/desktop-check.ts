@@ -93,6 +93,52 @@ async function assertCustomSelectKeyboard(page: import('playwright-core').Page) 
   if (await page.locator('.responsive-select-list').count() !== 0) throw new Error('自定义下拉 Tab 未收起');
 }
 
+
+async function openA04Assessment(page: import('playwright-core').Page) {
+  await page.locator('button.nav-item').filter({ hasText: '分模块审核' }).click();
+  await page.locator('.assessment-page .module-nav').filter({ hasText: '系统技术' }).click();
+  await page.getByText('58 个适用项目', { exact: true }).waitFor({ state: 'visible', timeout: 10_000 });
+  const criterionId = page.locator('.assessment-item .criterion-id');
+  let found = false;
+  for (let index = 0; index < 80; index += 1) {
+    if ((await criterionId.textContent())?.includes('A04-FRQ-13')) { found = true; break; }
+    await page.keyboard.press('ArrowDown');
+  }
+  if (!found) throw new Error('完整系统技术模块中未找到 A04-FRQ-13');
+}
+
+async function assertA04SelectKeyboardAndEdge(page: import('playwright-core').Page) {
+  await openA04Assessment(page);
+  const criterionId = page.locator('.assessment-item .criterion-id');
+  const originalId = (await criterionId.textContent())?.trim();
+  await page.locator('.assessment-item .a04-control > summary').click();
+  const triggers = page.locator('.assessment-item .a04-control .responsive-select-trigger');
+  const triggerCount = await triggers.count();
+  if (triggerCount < 2) throw new Error(`A04-FRQ-13 可见下拉数量不足：${triggerCount}`);
+  for (let index = 0; index < triggerCount; index += 1) {
+    const trigger = triggers.nth(index);
+    await trigger.click();
+    await trigger.press('ArrowDown');
+    await trigger.press('ArrowUp');
+    if ((await criterionId.textContent())?.trim() !== originalId) throw new Error(`A04 下拉方向键误切条款：第${index + 1}个下拉`);
+    if (await page.locator('.responsive-select-list').count() !== 1) throw new Error(`A04 下拉方向键错误关闭面板：第${index + 1}个下拉`);
+    await trigger.press('Escape');
+    if (await page.locator('.responsive-select-list').count() !== 0) throw new Error(`A04 下拉 Esc 未收起：第${index + 1}个下拉`);
+    if (!(await trigger.evaluate(element => document.activeElement === element))) throw new Error(`A04 下拉收起后焦点未回到触发器：第${index + 1}个下拉`);
+  }
+  const edgeTrigger = triggers.first();
+  await edgeTrigger.evaluate(element => element.scrollIntoView({ block: 'end', inline: 'nearest' }));
+  await edgeTrigger.click();
+  await page.waitForTimeout(50);
+  const bounds = await page.locator('.responsive-select-list').evaluate(element => {
+    const rect = element.getBoundingClientRect();
+    const options = Array.from(element.querySelectorAll<HTMLElement>('[role="option"]')).map(option => option.getBoundingClientRect());
+    return { rect: [rect.top, rect.bottom], options: options.map(option => [option.top, option.bottom]), viewport: window.innerHeight };
+  });
+  if (bounds.options.some(([top, bottom]) => top < 0 || bottom > bounds.viewport)) throw new Error(`下拉面板贴边后存在视口外选项：${JSON.stringify(bounds)}`);
+  await edgeTrigger.press('Escape');
+}
+
 async function main() {
   if (!existsSync(samplePath)) throw new Error(`缺少样例数据：${samplePath}`);
   const preview = startPreview();
@@ -128,7 +174,8 @@ async function main() {
       if (item.width === 1024) {
         await assertNarrowDesktopText(page);
         await assertCustomSelectKeyboard(page);
-        console.log('1024px 断行与自定义下拉键盘检查通过。');
+        await assertA04SelectKeyboardAndEdge(page);
+        console.log('1024px 断行、自定义下拉键盘、A04方向键隔离与贴边检查通过。');
       }
       await context.close();
     }

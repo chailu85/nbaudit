@@ -1428,3 +1428,77 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
     transform: none;
   }
 }
+
+
+/* Round P1/P2 acceptance fixes: desktop-only layout and interaction safeguards. */
+.report-counted-label-desktop { display: none; }
+
+@media (min-width: 1024px) {
+  .report-counted-label-mobile { display: none; }
+  .report-counted-label-desktop { display: block; }
+
+  .responsive-select-list.opens-up {
+    top: auto;
+    bottom: calc(100% + var(--space-1));
+  }
+
+  .desktop-scope-disclosure summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+  }
+  .desktop-scope-disclosure summary::-webkit-details-marker { display: none; }
+  .desktop-scope-disclosure summary > b {
+    color: var(--color-muted);
+    font-size: var(--font-size-24);
+    font-weight: var(--font-weight-regular);
+    line-height: 1;
+  }
+  .desktop-scope-disclosure[open] summary > b { transform: rotate(90deg); }
+
+  .dashboard-count-group,
+  .dashboard-score > p,
+  .report-header > p,
+  .report-unit-grid strong,
+  .report-score strong,
+  .module-table-measure > span,
+  .source-card small {
+    white-space: nowrap;
+  }
+  .dashboard-count-group { display: inline-block; }
+
+  .assessment-page .module-nav strong {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .remediation-table-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 6fr) minmax(0, 2fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--desktop-grid-gap);
+    align-items: baseline;
+    padding: var(--space-1) var(--space-0);
+    color: var(--color-muted);
+    border-bottom: var(--line-width) solid var(--color-line);
+    font-size: var(--font-size-12);
+    line-height: var(--line-height-normal);
+  }
+  .remediation-row,
+  .remediation-row-toggle,
+  .remediation-row-toggle > * { align-items: baseline; }
+  .remediation-row-toggle .remediation-priority { min-height: var(--space-0); }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .assessment-page .assessment-layout {
+    grid-template-columns: minmax(15rem, 4fr) minmax(0, 8fr);
+  }
+}
+
+@media (max-width: 1023px) {
+  .remediation-table-head { display: none; }
+}
