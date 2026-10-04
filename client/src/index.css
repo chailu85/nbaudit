@@ -911,3 +911,129 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
     margin-top: var(--desktop-report-gap);
   }
 }
+
+
+/* Desktop redesign round 4: assessment workspace only. */
+@media (min-width: 1024px) {
+  .assessment-page .assessment-layout {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+    gap: var(--space-3);
+    align-items: start;
+  }
+  .assessment-page .module-list {
+    position: sticky;
+    top: var(--space-0);
+    height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+  .assessment-page .criteria-pane {
+    display: flex;
+    flex-direction: column;
+    min-width: var(--space-0);
+    max-width: none;
+    min-height: calc(100vh - var(--desktop-content-padding) * 2);
+  }
+  .assessment-page .criteria-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-2);
+  }
+  .assessment-page .criteria-toolbar > div:first-child {
+    min-width: var(--space-0);
+  }
+  .assessment-page .criteria-toolbar > div:first-child h2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .assessment-page .toolbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--space-3);
+    width: 100%;
+  }
+  .assessment-page .toolbar-actions .search {
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .assessment-page .toolbar-actions .supplemental-toggle {
+    order: 2;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .assessment-page .criterion-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: var(--space-2);
+  }
+  .assessment-page .criterion-id {
+    white-space: nowrap;
+  }
+  .assessment-page .criterion h3 {
+    font-size: var(--font-size-24);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+  }
+  .assessment-page .prompt {
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-normal);
+  }
+  .assessment-page .status-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-0);
+    margin: var(--space-3) 0;
+    border-top: var(--line-width) solid var(--color-text);
+  }
+  .assessment-page .status-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: var(--assessment-choice-height);
+    padding: var(--space-0) var(--space-2);
+    color: var(--color-text);
+    background: var(--color-transparent);
+    border: var(--space-0);
+    border-bottom: var(--line-width) solid var(--color-line);
+    text-align: left;
+  }
+  .assessment-page .status-btn::before {
+    width: var(--space-3);
+    color: var(--color-muted);
+    content: "○";
+    font-size: var(--font-size-16);
+    line-height: 1;
+  }
+  .assessment-page .status-btn:hover:not(.selected) {
+    background: var(--color-line);
+  }
+  .assessment-page .status-btn.selected {
+    color: var(--color-background);
+    background: var(--color-text);
+    border-color: var(--color-text);
+  }
+  .assessment-page .status-btn.selected::before {
+    color: var(--color-background);
+    content: "●";
+  }
+  .assessment-page .status-btn.selected.noncompliant {
+    color: var(--color-signal);
+    background: var(--color-text);
+    border-color: var(--color-text);
+  }
+  .assessment-page .status-btn.selected.noncompliant::before {
+    color: var(--color-signal);
+  }
+  .assessment-page textarea { resize: none; }
+  .assessment-page .assessment-item-pagination {
+    position: static;
+    margin-top: var(--space-3);
+    padding: var(--space-0) var(--space-2);
+    background: var(--color-background);
+  }
+}
