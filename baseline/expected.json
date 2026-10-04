@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 5,
+  "controlSetVersion": "a04-design-v1.1",
+  "sampleSha256": "ce0e57e30d54d02af6643c95f6c91bc3d75b0b8065d588644c42669d0236b392",
+  "dashboard": {
+    "completion": 14,
+    "level": "高风险",
+    "domesticApplicable": 221,
+    "scoreApplicable": 180,
+    "reviewed": 27,
+    "criticalGaps": 1,
+    "remediationBadge": 2,
+    "suggestedCompletion": 0,
+    "recommended": 20,
+    "moduleProgress": {
+      "scope": { "total": 4, "reviewed": 3, "percent": 75 },
+      "governance": { "total": 17, "reviewed": 3, "percent": 18 },
+      "people": { "total": 8, "reviewed": 3, "percent": 38 },
+      "rules": { "total": 2, "reviewed": 2, "percent": 100 },
+      "risk": { "total": 4, "reviewed": 3, "percent": 75 },
+      "general": { "total": 5, "reviewed": 2, "percent": 40 },
+      "key": { "total": 105, "reviewed": 3, "percent": 3 },
+      "unusual": { "total": 2, "reviewed": 2, "percent": 100 },
+      "systems": { "total": 58, "reviewed": 3, "percent": 5 },
+      "emergency": { "total": 3, "reviewed": 3, "percent": 100 },
+      "inspection": { "total": 10, "reviewed": 3, "percent": 30 },
+      "appendix": { "total": 3, "reviewed": 3, "percent": 100 }
+    }
+  },
+  "assessment": {
+    "applicable": 222,
+    "modules": {
+      "scope": 4,
+      "governance": 17,
+      "people": 8,
+      "rules": 3,
+      "risk": 4,
+      "general": 5,
+      "key": 105,
+      "unusual": 2,
+      "systems": 58,
+      "emergency": 3,
+      "inspection": 10,
+      "appendix": 3
+    }
+  },
+  "remediation": { "findings": 2, "outstanding": 2, "sidebarBadge": 2 },
+  "report": {
+    "domesticApplicable": 180,
+    "completion": 14,
+    "criticalGaps": 1,
+    "remediationOpen": 2,
+    "exceptions": 4,
+    "reviewCodes": ["special_risk", "missing_na_reason"]
+  },
+  "sample": {
+    "answers": 261,
+    "statusCounts": { "na": 2, "compliant": 30, "partial": 1, "unreviewed": 227, "noncompliant": 1 },
+    "missingNaReasonIds": ["S-01", "G-02"],
+    "remediationIds": ["G-01", "U-01"]
+  },
+  "jsonExport": {
+    "rootKeys": ["answers", "controlMetadata", "controlSetVersion", "profile", "savedAt", "version"],
+    "profileKeys": ["a04", "crowded", "dangerous", "dataStorage", "industry", "keyCandidate", "keyProtectionLevel", "multiSite", "name", "region", "reviewDate", "reviewer", "secret", "unitType"],
+    "a04ProfileKeys": ["accessControlSystem", "alarmSystem", "controlCenter", "engineeringStage", "faceRecognition", "gb55029Applicable", "gbHighRiskObject", "guardhouseExteriorDoor", "lowAirIntake", "networkOperator", "parkingSystem", "patrolSystem", "personalDataProcessing", "publicVideoContext", "scopeApproved", "secretAdjacentUnit", "securityCheckSystem", "securityDoorInstalled", "sharedImportantBuilding", "showSupplemental", "specialDoorOrStorage", "undergroundCrossing", "videoSystem"],
+    "answerCount": 261,
+    "answerKeys": ["a04", "action", "due", "evidence", "note", "owner", "remediationStatus", "status"],
+    "a04AnswerKeys": ["applicabilityReason", "closedAt", "deadlineSource", "measuredUnit", "measuredValue", "naBasis", "needsReview", "objectLocation", "reviewReason", "sourceApplicability", "sourceAssessments", "subAssertions", "temporaryProtection", "verificationEvidence", "verifiedAt", "verifier"],
+    "controlMetadataCount": 118,
+    "controlMetadataKeys": ["contributesToDomesticScore", "domesticAnchors", "id", "originCategory", "sourceRequirements", "uiBadge"],
+    "sourceRequirementKeys": ["clause", "source", "sourceId", "strength"]
+  }
+}
