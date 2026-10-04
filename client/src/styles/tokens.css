@@ -37,6 +37,10 @@
   --control-height: 48px;
   --sidebar-width: 240px;
   --content-width: 880px;
+  --assessment-module-width: 280px;
+  --assessment-criterion-width: 640px;
+  --assessment-choice-height: 56px;
+  --assessment-footer-height: 64px;
   --header-height: 64px;
   --bottom-nav-height: 64px;
   --safe-area-bottom: env(safe-area-inset-bottom);

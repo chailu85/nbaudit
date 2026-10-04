@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import React, { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { AlertTriangle, BookOpen, CheckCircle2, ChevronRight, ClipboardCheck, Download, FileText, LayoutDashboard, ListChecks, Save, Search, ShieldCheck, SlidersHorizontal, Table2, Upload, X } from 'lucide-react';
 import { basisLabel, criteria, type Criterion, modules, type Profile, standardClauses, unitTypes } from '@/data/criteria';
 import { SourceLibrary } from '@/components/SourceLibrary';
@@ -204,17 +204,92 @@ function Dashboard({ profile, score: snapshot, forward, answers, onModule, onSta
   </div>;
 }
 
+const assessmentStatuses = ['compliant', 'partial', 'noncompliant', 'na'] as const;
+type AssessmentStatus = typeof assessmentStatuses[number];
+
+export const assessmentFieldVisibility = (status: Answer['status']) => ({
+  showRemediationFields: status === 'partial' || status === 'noncompliant',
+  showNaReason: status === 'na',
+});
+
+export const assessmentStatusForKey = (key: string): AssessmentStatus | undefined => ({ '1': 'compliant', '2': 'partial', '3': 'noncompliant', '4': 'na' }[key] as AssessmentStatus | undefined);
+
+export const assessmentIndexAfter = (index: number, length: number, delta: number) => Math.min(Math.max(index + delta, 0), Math.max(length - 1, 0));
+
+export const assessmentStatusPatch = (answer: Answer, status: AssessmentStatus): Partial<Answer> => ({
+  status,
+  a04: { ...answer.a04, needsReview: false },
+});
+
 function Assessment({ profile, activeModule, setActiveModule, moduleList, items, allCriteria, answers, updateAnswer, query, setQuery, keyCandidate, supplementalEnabled, onToggleSupplement, onEnableKeyReview, onBack }: { profile: Profile; activeModule: string; setActiveModule: (value: string) => void; moduleList: typeof modules; items: Criterion[]; allCriteria: Criterion[]; answers: Answers; updateAnswer: (id: string, patch: Partial<Answer>) => void; query: string; setQuery: (value: string) => void; keyCandidate: boolean; supplementalEnabled: boolean; onToggleSupplement: () => void; onEnableKeyReview: () => void; onBack: () => void }) {
+  const [activeCriterionIndex, setActiveCriterionIndex] = useState(0);
+  const [isModulePickerOpen, setIsModulePickerOpen] = useState(false);
+  const moduleIndex = Math.max(0, moduleList.findIndex(module => module.id === activeModule));
+  const activeCriterion = items[activeCriterionIndex];
   const keyModeOff = activeModule === 'key' && !keyCandidate;
-  return <div><div className="page-head compact"><div><div className="eyebrow">ASSESSMENT / FULL STANDARD</div><h1>分模块审核</h1><p>按第5章和第6章分别审核一般单位、重点单位；A04原子控制按其独立适用条件、来源和强度核验。</p></div><button className="outline-btn" onClick={onBack}><LayoutDashboard size={16} /> 返回总览</button></div><div className="assessment-layout"><div className="module-list">{moduleList.map(module => { const count = allCriteria.filter(criterion => criterion.module === module.id).length; const pending = module.id === 'key' && !keyCandidate; return <button className={`module-nav ${activeModule === module.id ? 'active' : ''}`} onClick={() => setActiveModule(module.id)} key={module.id}><span>{module.short}</span><div><strong>{module.label}</strong><small>{pending ? '第6.1筛查入口' : `${count} 项审核`}</small></div><ChevronRight size={15} /></button>; })}</div><div className="criteria-pane"><div className="criteria-toolbar"><div><h2>{moduleList.find(module => module.id === activeModule)?.label}</h2><span>{keyModeOff ? '第6.1筛查入口' : `${items.length} 个适用项目`}</span></div><div className="toolbar-actions"><button className={`outline-btn supplemental-toggle ${supplementalEnabled ? 'enabled' : ''}`} onClick={onToggleSupplement}>{supplementalEnabled ? '隐藏补充核验' : '显示补充核验'}</button><div className="search"><Search size={16} /><input value={query} onChange={event => setQuery(event.target.value)} placeholder="搜索条款、项目或关键词" /></div></div></div>{keyModeOff && <div className="info-banner key-entry"><BookOpen size={16} /><span><strong>当前按一般单位模式审核。</strong> 可先完成第6.1类别筛查；如需审核重点单位要求，可展开重点单位模式并选择相应防范级别。</span><button className="primary-btn" onClick={onEnableKeyReview}>展开重点单位模式</button></div>}{items.length === 0 ? <div className="empty"><CheckCircle2 size={32} /><h3>暂无适用项目</h3><p>当前单位画像未触发该模块；请在单位画像中补充A04工程和系统适用事实。</p></div> : items.map(criterion => <AssessmentItem key={criterion.id} criterion={criterion} answer={answers[criterion.id] ?? emptyAnswer()} profile={profile} update={patch => updateAnswer(criterion.id, patch)} />)}</div></div></div>;
+  const moduleStats = moduleList.map((module, index) => {
+    const moduleItems = allCriteria.filter(criterion => criterion.module === module.id);
+    const completed = moduleItems.filter(criterion => statusValues.has(answers[criterion.id]?.status)).length;
+    return { module, index, total: moduleItems.length, completed, pending: module.id === 'key' && !keyCandidate };
+  });
+
+  useEffect(() => {
+    setActiveCriterionIndex(current => assessmentIndexAfter(current, items.length, 0));
+  }, [activeModule, items.length, query]);
+
+  const selectModule = (moduleId: string) => {
+    setActiveModule(moduleId);
+    setActiveCriterionIndex(0);
+    setIsModulePickerOpen(false);
+  };
+  const moveModule = (delta: number) => selectModule(moduleList[assessmentIndexAfter(moduleIndex, moduleList.length, delta)]!.id);
+  const moveCriterion = (delta: number) => setActiveCriterionIndex(current => assessmentIndexAfter(current, items.length, delta));
+  const selectStatus = (status: AssessmentStatus) => {
+    if (!activeCriterion) return;
+    updateAnswer(activeCriterion.id, assessmentStatusPatch(answers[activeCriterion.id] ?? emptyAnswer(), status));
+  };
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target;
+      const isEditable = target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement || (target instanceof HTMLElement && target.isContentEditable);
+      if (isModulePickerOpen || isEditable || event.altKey || event.ctrlKey || event.metaKey || items.length === 0) return;
+      if (event.key === 'ArrowUp') { event.preventDefault(); moveCriterion(-1); return; }
+      if (event.key === 'ArrowDown') { event.preventDefault(); moveCriterion(1); return; }
+      const status = assessmentStatusForKey(event.key);
+      if (status) { event.preventDefault(); selectStatus(status); }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [activeCriterion, answers, isModulePickerOpen, items.length]);
+
+  const activeModuleLabel = moduleList[moduleIndex]?.label ?? '分模块审核';
+  return <div className="assessment-page">
+    <div className="page-head compact assessment-page-head"><div><div className="eyebrow">ASSESSMENT / FULL STANDARD</div><h1>分模块审核</h1><p>按第5章和第6章分别审核一般单位、重点单位；A04原子控制按其独立适用条件、来源和强度核验。</p></div><button className="outline-btn" onClick={onBack}><LayoutDashboard size={16} /> 返回总览</button></div>
+    <div className="mobile-module-bar">
+      <button className="text-btn" onClick={() => moveModule(-1)} disabled={moduleIndex === 0}>← 上一模块</button>
+      <button className="module-selector" onClick={() => setIsModulePickerOpen(true)}>{String(moduleIndex + 1).padStart(2, '0')} / {String(moduleList.length).padStart(2, '0')} {activeModuleLabel} <span>▾</span></button>
+      <button className="text-btn" onClick={() => moveModule(1)} disabled={moduleIndex === moduleList.length - 1}>下一模块 →</button>
+    </div>
+    {isModulePickerOpen && <div className="module-picker-overlay" role="dialog" aria-modal="true" aria-label="选择审核模块"><div className="module-picker-head"><span>选择审核模块</span><button className="text-btn" onClick={() => setIsModulePickerOpen(false)}>关闭</button></div><div className="module-picker-list">{moduleStats.map(({ module, index, total, completed, pending }) => <button className={`module-picker-item ${module.id === activeModule ? 'active' : ''}`} onClick={() => selectModule(module.id)} key={module.id}><span>{String(index + 1).padStart(2, '0')}</span><strong>{module.label}</strong><small>{pending ? '第6.1筛查入口' : `${completed} / ${total}`}</small></button>)}</div></div>}
+    <div className="assessment-layout">
+      <aside className="module-list" aria-label="审核模块列表">{moduleStats.map(({ module, index, total, completed, pending }) => <button className={`module-nav ${activeModule === module.id ? 'active' : ''}`} onClick={() => selectModule(module.id)} key={module.id}><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{module.label}</strong><small>{pending ? '第6.1筛查入口' : `${completed} / ${total} 项已完成`}</small></div></button>)}</aside>
+      <div className="criteria-pane">
+        <div className="criteria-toolbar"><div><h2>{activeModuleLabel}</h2><span>{keyModeOff ? '第6.1筛查入口' : `${items.length} 个适用项目`}</span></div><div className="toolbar-actions"><button className={`outline-btn supplemental-toggle ${supplementalEnabled ? 'enabled' : ''}`} onClick={onToggleSupplement}>{supplementalEnabled ? '隐藏补充核验' : '显示补充核验'}</button><div className="search"><Search size={16} /><input value={query} onChange={event => setQuery(event.target.value)} placeholder="搜索条款、项目或关键词" /></div></div></div>
+        {keyModeOff && <div className="info-banner key-entry"><BookOpen size={16} /><span><strong>当前按一般单位模式审核。</strong> 可先完成第6.1类别筛查；如需审核重点单位要求，可展开重点单位模式并选择相应防范级别。</span><button className="primary-btn" onClick={onEnableKeyReview}>展开重点单位模式</button></div>}
+        {items.length === 0 ? <div className="empty"><CheckCircle2 size={32} /><h3>暂无适用项目</h3><p>当前单位画像未触发该模块；请在单位画像中补充A04工程和系统适用事实。</p></div> : <><AssessmentItem criterion={activeCriterion!} answer={answers[activeCriterion!.id] ?? emptyAnswer()} profile={profile} update={patch => updateAnswer(activeCriterion!.id, patch)} /><div className="assessment-item-pagination"><span>第 {activeCriterionIndex + 1} / {items.length} 项</span><button className="text-btn" onClick={() => moveCriterion(1)} disabled={activeCriterionIndex === items.length - 1}>下一项 →</button></div></>}
+      </div>
+    </div>
+  </div>;
 }
 
-function AssessmentItem({ criterion, answer, profile, update }: { criterion: Criterion; answer: Answer; profile: Profile; update: (patch: Partial<Answer>) => void }) {
+export function AssessmentItem({ criterion, answer, profile, update }: { criterion: Criterion; answer: Answer; profile: Profile; update: (patch: Partial<Answer>) => void }) {
   const hasForward = criterion.basis.some(basis => basis.kind === 'forward');
   const meta = criterion.controlMeta;
   const effective = effectiveStatus(criterion, answer, profile);
-  const selectStatus = (status: Answer['status']) => update({ status, a04: { ...answer.a04, needsReview: false } });
-  return <article className={`criterion ${effective === 'noncompliant' ? 'is-danger' : ''}`}><div className="criterion-head"><div><div className="criterion-id">{criterion.id} {hasForward && <span className="pill forward">含前瞻依据</span>}{criterion.critical && <span className="pill critical">关键项</span>}{meta && <span className={`pill ${criterion.scoreContribution === 'supplemental' ? 'supplemental' : 'current'}`}>{meta.uiBadge}</span>}</div><h3>{criterion.title}</h3></div><span className="weight">{criterion.scoreContribution === 'supplemental' ? '不计国内分' : criterion.recommendation?.(profile) ? '建议项（宜）' : `权重 ${criterion.weight}`}</span></div><p className="prompt">{criterion.prompt}</p><div className="basis-line"><BookOpen size={14} /><span>{criterion.basis.map((basis, index) => <span key={`${basis.source}-${basis.clause}`}>{index > 0 && ' · '}{basisLabel(basis.kind)}：{basis.source} · {basis.clause}{basis.note ? `（${basis.note}）` : ''}</span>)}</span></div>{meta && <A04ReviewFields criterion={criterion} answer={answer} profile={profile} update={update} />}{effective !== answer.status && <div className="effective-status-warning"><AlertTriangle size={14} /> 已选结论“{statusLabel[answer.status]}”受结构化指标、逐来源核验、子断言或不适用规则约束；有效结论为“{statusLabel[effective]}”。</div>}{criterion.scoreContribution === 'supplemental' && <div className="supplemental-note">此项为补充方法/效能观察；其结论、整改和证据会保留，但不会改变中国国内合规分、分母、关键缺口或国内风险结论。</div>}<div className="status-row">{(['compliant', 'partial', 'noncompliant', 'na'] as const).map(status => <button key={status} className={`status-btn ${answer.status === status ? 'selected' : ''} ${status}`} onClick={() => selectStatus(status)}>{status === 'compliant' ? '符合' : status === 'partial' ? '部分符合' : status === 'noncompliant' ? '不符合' : '不适用'}</button>)}</div><div className="evidence-grid"><label>证据编号/位置<input value={answer.evidence} onChange={event => update({ evidence: event.target.value })} placeholder={criterion.evidence} /></label><label>整改负责人<input value={answer.owner} onChange={event => update({ owner: event.target.value })} placeholder="未整改时填写" /></label><label>整改期限<input type="date" value={answer.due} onChange={event => update({ due: event.target.value })} /></label><label>整改措施<textarea value={answer.action} onChange={event => update({ action: event.target.value })} placeholder="记录拟采取的措施" /></label>{answer.status === 'na' && <label className="na-reason">不适用理由<input value={answer.note} onChange={event => update({ note: event.target.value, a04: { ...answer.a04, naBasis: event.target.value } })} placeholder="请说明为何不适用；不能只填未安装/未设置" required /></label>}</div></article>;
+  const fields = assessmentFieldVisibility(answer.status);
+  const selectStatus = (status: AssessmentStatus) => update(assessmentStatusPatch(answer, status));
+  return <article className={`criterion assessment-item ${effective === 'noncompliant' ? 'is-danger' : ''}`}><div className="criterion-head"><div className="criterion-title-block"><div className="criterion-id">{criterion.id} {hasForward && <span className="forward-label">前瞻</span>}{criterion.critical && <span className="pill critical">关键项</span>}{meta && <span className={`pill ${criterion.scoreContribution === 'supplemental' ? 'supplemental' : 'current'}`}>{meta.uiBadge}</span>}</div><h3>{criterion.title}</h3></div><span className="weight">{criterion.scoreContribution === 'supplemental' ? '不计国内分' : criterion.recommendation?.(profile) ? '建议项（宜）' : `权重 ${criterion.weight}`}</span></div><p className="prompt">{criterion.prompt}</p><details className="basis-details"><summary>依据</summary><div><BookOpen size={14} /><span>{criterion.basis.map((basis, index) => <span key={`${basis.source}-${basis.clause}`}>{index > 0 && ' · '}{basisLabel(basis.kind)}：{basis.source} · {basis.clause}{basis.note ? `（${basis.note}）` : ''}</span>)}</span></div></details>{meta && <A04ReviewFields criterion={criterion} answer={answer} profile={profile} update={update} />}{effective !== answer.status && <div className="effective-status-warning"><AlertTriangle size={14} /> 已选结论“{statusLabel[answer.status]}”受结构化指标、逐来源核验、子断言或不适用规则约束；有效结论为“{statusLabel[effective]}”。</div>}{criterion.scoreContribution === 'supplemental' && <div className="supplemental-note">此项为补充方法/效能观察；其结论、整改和证据会保留，但不会改变中国国内合规分、分母、关键缺口或国内风险结论。</div>}<div className="status-row" role="radiogroup" aria-label="审核结论">{assessmentStatuses.map(status => <button key={status} aria-pressed={answer.status === status} className={`status-btn ${answer.status === status ? 'selected' : ''} ${status}`} onClick={() => selectStatus(status)}>{status === 'compliant' ? '符合' : status === 'partial' ? '部分符合' : status === 'noncompliant' ? '不符合' : '不适用'}</button>)}</div><div className="evidence-grid"><label>证据编号/位置<input value={answer.evidence} onChange={event => update({ evidence: event.target.value })} placeholder={criterion.evidence} /></label>{fields.showRemediationFields && <><label>整改负责人<input value={answer.owner} onChange={event => update({ owner: event.target.value })} placeholder="未整改时填写" /></label><label>整改期限<input type="date" value={answer.due} onChange={event => update({ due: event.target.value })} /></label></>}<label>整改措施<textarea value={answer.action} onChange={event => update({ action: event.target.value })} placeholder="记录拟采取的措施" /></label>{fields.showNaReason && <label className="na-reason">不适用理由<input value={answer.note} onChange={event => update({ note: event.target.value, a04: { ...answer.a04, naBasis: event.target.value } })} placeholder="请说明为何不适用；不能只填未安装/未设置" required /></label>}</div></article>;
 }
 
 function A04ReviewFields({ criterion, answer, profile, update }: { criterion: Criterion; answer: Answer; profile: Profile; update: (patch: Partial<Answer>) => void }) {
