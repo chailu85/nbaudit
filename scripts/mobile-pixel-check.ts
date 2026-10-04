@@ -9,6 +9,7 @@ const baseUrl = process.env.CHECK_BASE_URL ?? 'http://127.0.0.1:4173';
 const samplePath = resolve(projectRoot, 'baseline/sample.json');
 const mobileDir = resolve(projectRoot, 'baseline/mobile');
 const desktopDir = resolve(projectRoot, 'baseline/desktop');
+const updateDesktopBaseline = process.env.UPDATE_DESKTOP_BASELINE === '1';
 const pages = [
   { key: 'dashboard', label: '审核总览' },
   { key: 'assessment', label: '分模块审核' },
@@ -134,6 +135,8 @@ async function main() {
           if (viewport.key === '390x844') {
             const result = comparePng(path, baseline);
             if (!result.same) throw new Error(`手机页面 ${item.label} 像素差异：${JSON.stringify(result)}`);
+          } else if (updateDesktopBaseline) {
+            await writeFile(baseline, await readFile(path));
           }
         } else {
           await mkdir(resolve(viewport.dir, viewport.key), { recursive: true });

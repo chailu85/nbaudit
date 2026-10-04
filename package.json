@@ -10,6 +10,7 @@
     "check": "tsc --noEmit && vitest run && tsx scripts/baseline-check.ts",
     "format": "prettier --write .",
     "test": "vitest run",
+    "check:desktop": "pnpm build:static && tsx scripts/desktop-check.ts",
     "check:mobile": "pnpm build:static && tsx scripts/mobile-pixel-check.ts",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "db:migrate": "drizzle-kit migrate",

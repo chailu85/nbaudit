@@ -701,3 +701,96 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   html { font-size: 18px; }
   :root { --content-width: 88.8889rem; }
 }
+
+
+/* Desktop redesign round 2 fixes: explicit rail/content geometry and desktop-only details. */
+@media (min-width: 1024px) {
+  :root {
+    --desktop-count-width: 8rem;
+    --desktop-percent-width: 6rem;
+    --desktop-toast-top: 1.5rem;
+  }
+
+  .app-root {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 100vh;
+    padding-left: var(--space-0);
+  }
+  .topbar {
+    position: sticky;
+    top: var(--space-0);
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: var(--sidebar-width);
+    height: 100vh;
+    max-height: 100vh;
+    inset: auto;
+  }
+  .disclaimer {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: var(--space-0);
+  }
+  .app-shell {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: var(--space-0);
+  }
+  .main-content {
+    position: relative;
+    width: min(calc(100vw - var(--sidebar-width)), var(--content-width));
+    max-width: var(--content-width);
+    margin-left: var(--space-0);
+  }
+  .sidebar {
+    position: fixed;
+    top: var(--side-nav-top);
+    bottom: var(--side-data-space);
+    left: var(--space-0);
+    width: var(--sidebar-width);
+  }
+
+  .toast {
+    position: absolute;
+    top: var(--desktop-toast-top);
+    right: var(--desktop-content-padding);
+    padding: var(--space-0);
+    color: var(--color-muted);
+    background: var(--color-transparent);
+    border: var(--space-0);
+    font-size: var(--font-size-12);
+  }
+  .toast::before { content: "✓"; margin-right: var(--space-1); color: var(--color-muted); }
+  .toast svg { display: none !important; }
+
+  .page-head {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
+    gap: var(--desktop-grid-gap);
+  }
+  .page-head > div:first-child { grid-column: span 9; min-width: var(--space-0); }
+  .page-head > .primary-btn,
+  .page-head > .outline-btn,
+  .page-head > .report-actions {
+    grid-column: 10 / -1;
+    justify-self: end;
+    white-space: nowrap;
+  }
+  .page-head h1 { text-wrap: balance; }
+  button > svg { display: none !important; }
+
+  .module-table-head,
+  .module-table-row {
+    grid-template-columns: var(--space-4) minmax(0, 1fr) var(--desktop-count-width) var(--desktop-percent-width);
+  }
+  .module-table-head > :nth-child(3),
+  .module-table-head > :nth-child(4),
+  .module-table-row > .module-table-measure > span {
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+}
