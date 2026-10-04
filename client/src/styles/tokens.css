@@ -53,4 +53,7 @@
   --modal-width: 720px;
   --side-nav-top: 152px;
   --side-data-space: 208px;
+  --select-option-height: 2.5rem;
+  --select-menu-max-height: 20rem;
+  --z-popover: 20;
 }

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { BookOpen } from 'lucide-react';
 import { Criterion, StandardClause } from '@/data/criteria';
+import { ResponsiveSelect } from '@/components/ResponsiveSelect';
 
 type Props = {
   items: Criterion[];
@@ -56,7 +57,7 @@ export function SourceLibrary({ items, clauses, activeCriterionIds, onCriterion 
     <div className="source-controls">
       <button className="chapter-selector" onClick={() => setIsChapterPickerOpen(true)}>{selectedChapter} <span>▾</span></button>
       <div className="source-search"><input value={query} onChange={event => setQuery(event.target.value)} placeholder="搜索关键词或条款编号" /></div>
-      <select value={type} onChange={event => setType(event.target.value as typeof type)}><option value="all">全部类型</option><option value="规范性">规范性条款</option><option value="资料性">资料性附录</option><option value="定义">术语定义</option><option value="引用">规范性引用</option></select>
+      <ResponsiveSelect aria-label="全部类型" value={type} onChange={value => setType(value as typeof type)} options={[{ value: 'all', label: '全部类型' }, { value: '规范性', label: '规范性条款' }, { value: '资料性', label: '资料性附录' }, { value: '定义', label: '术语定义' }, { value: '引用', label: '规范性引用' }]} />
       <span className="muted">显示 {filtered.length} / {clauses.length} 条</span>
     </div>
     {isChapterPickerOpen && <div className="chapter-picker-overlay" role="dialog" aria-modal="true" aria-label="选择章节"><div className="chapter-picker-head"><span>选择章节</span><button className="text-btn" onClick={() => setIsChapterPickerOpen(false)}>关闭</button></div><div className="chapter-picker-list"><button className={`chapter-picker-item ${chapter === 'all' ? 'active' : ''}`} onClick={() => selectChapter('all')}><strong>全部章节</strong><span>{clauses.length}</span></button>{chapters.map(chapterName => <button className={`chapter-picker-item ${chapter === chapterName ? 'active' : ''}`} onClick={() => selectChapter(chapterName)} key={chapterName}><strong>{chapterName}</strong><span>{countFor(chapterName)}</span></button>)}</div></div>}
