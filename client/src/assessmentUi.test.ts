@@ -49,7 +49,7 @@ describe('审核页单条款工作流', () => {
     expect(noncompliant).toContain('整改负责人');
     expect(noncompliant).toContain('整改期限');
     expect(na).toContain('不适用理由');
-    expect(na).toContain('不能只填未安装/未设置');
+    expect(na).toContain('不建议只填未安装/未设置');
   });
 
   it('映射键盘结论并在边界内切换当前条款', () => {

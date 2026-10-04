@@ -1325,3 +1325,81 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .source-difference-table strong { white-space: nowrap; }
   .source-card small { text-wrap: pretty; }
 }
+
+/* Copy and display refinements; desktop presentation is isolated below. */
+.desktop-scope-disclosure,
+.module-list-note,
+.remediation-filter-summary { display: none; }
+.dashboard-scope-desktop { display: none; }
+
+@media (min-width: 1024px) {
+  .disclaimer-warning-mark { display: none; }
+  .desktop-scope-disclosure {
+    display: block;
+    margin: var(--space-3) var(--space-0);
+    padding: var(--space-2) var(--space-0);
+    border-top: var(--line-width) solid var(--color-line);
+    border-bottom: var(--line-width) solid var(--color-line);
+    color: var(--color-muted);
+    font-size: var(--font-size-12);
+    line-height: var(--line-height-normal);
+  }
+  .desktop-scope-disclosure summary {
+    color: var(--color-text);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+  }
+  .desktop-scope-disclosure > div {
+    display: grid;
+    gap: var(--space-1);
+    margin-top: var(--space-2);
+  }
+  .desktop-scope-disclosure p { margin: var(--space-0); }
+  .dashboard-scope-mobile { display: none; }
+  .dashboard-scope-desktop { display: inline; }
+  .module-list-note {
+    display: block;
+    margin: var(--space-2) var(--space-1) var(--space-0);
+    color: var(--color-muted);
+    font-size: var(--font-size-12);
+    line-height: var(--line-height-normal);
+  }
+  .remediation-page-head > div:first-child {
+    display: grid;
+    gap: var(--space-1);
+  }
+  .remediation-filter-summary {
+    display: block;
+    margin: var(--space-0);
+    color: var(--color-muted);
+    font-size: var(--font-size-12);
+    line-height: var(--line-height-normal);
+  }
+  .report-counted-label {
+    display: block;
+    overflow: hidden;
+    height: var(--line-height-normal);
+    font-size: var(--space-0);
+    white-space: nowrap;
+  }
+  .report-counted-label::after {
+    content: '现行基线计分项目';
+    font-size: var(--font-size-12);
+  }
+  .report-na-cell {
+    overflow: hidden;
+    font-size: var(--space-0);
+    white-space: nowrap;
+  }
+  .report-na-cell::before {
+    content: '—';
+    font-size: var(--font-size-14);
+  }
+  .report-row > span:nth-child(3).report-na-cell::before { content: '不适用待复核'; }
+  .report-na-cell small { display: none; }
+  .remediation-row,
+  .remediation-row-toggle,
+  .remediation-row-toggle > * { align-items: center; }
+  .remediation-row-toggle > * { align-self: center; }
+  .remediation-row-toggle .remediation-priority { display: flex; align-items: center; min-height: var(--control-height); }
+}
