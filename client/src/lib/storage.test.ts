@@ -1,8 +1,8 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { criteria, type Profile } from '@/data/criteria';
 import { defaultA04Profile, emptyA04Details } from '@/data/a04Types';
-import { emptyAnswer, type Answers } from './scoring';
-import { normalizeAuditState, SCHEMA_VERSION } from './storage';
+import { emptyAnswer, score, type Answers } from './scoring';
+import { clearAudit, loadAudit, normalizeAuditState, SCHEMA_VERSION } from './storage';
 
 const profile: Profile = {
   name: '测试单位', region: '北京市', unitType: '企业', industry: '测试', multiSite: false,
@@ -71,4 +71,21 @@ it('导入时将缺少关闭证据的已关闭整改降级为待整改', () => {
   const normalized = normalizeAuditState(raw, profile, defaults);
   expect(normalized.answers['GD-04'].remediationStatus).toBe('pending');
   expect(normalized.answers['GD-04'].a04.reviewReason).toContain('已降级为待整改');
+});
+
+it('清空时只移除本工具档案，刷新后的初始状态没有整改项', () => {
+  const values = new Map([['neibao-audit-v1', JSON.stringify(valid())], ['theme', 'dark']]);
+  vi.stubGlobal('localStorage', {
+    getItem: (key: string) => values.get(key) ?? null,
+    removeItem: (key: string) => { values.delete(key); },
+  });
+  try {
+    expect(clearAudit()).toEqual({ ok: true });
+    expect(values.has('neibao-audit-v1')).toBe(false);
+    expect(values.get('theme')).toBe('dark');
+    expect(loadAudit(profile, defaults).state).toBeNull();
+    expect(score(criteria, defaults, profile, false).remediationOpen).toHaveLength(0);
+  } finally {
+    vi.unstubAllGlobals();
+  }
 });

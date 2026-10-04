@@ -28,6 +28,7 @@ function App() {
   const [query, setQuery] = useState('');
   const [showProfile, setShowProfile] = useState(!initialAudit);
   const [isNewAudit, setIsNewAudit] = useState(!initialAudit);
+  const [showClearLocalData, setShowClearLocalData] = useState(false);
   const [notice, setNotice] = useState('');
   const [autoSavePaused, setAutoSavePaused] = useState(Boolean(initialLoad.issue));
   const [persistenceIssue, setPersistenceIssue] = useState(initialLoad.issue?.message ?? '');
@@ -79,23 +80,14 @@ function App() {
     setAnswers(previous => ({ ...previous, [id]: { ...(previous[id] ?? emptyAnswer()), ...patch } }));
   };
 
-  const reset = () => {
-    if (!window.confirm('确定清空本机审核草稿吗？此操作会删除浏览器中的已保存档案。')) return;
-    if (!window.confirm('请再次确认：清空后只能依靠此前导出的JSON恢复，是否继续？')) return;
+  const confirmClearLocalData = () => {
     const result = clearAudit();
     if (!result.ok) {
       recordSaveFailure(result.message);
       showNotice('未能清空本机草稿，请先导出JSON备份。');
       return;
     }
-    setAutoSavePaused(true);
-    setProfile(createAuditProfile());
-    setAnswers(makeAnswers());
-    setIsNewAudit(true);
-    setShowProfile(true);
-    setPersistenceIssue('');
-    setRecoveryRaw(undefined);
-    showNotice('已清空本机草稿；请保存新审核后恢复自动保存。');
+    window.location.reload();
   };
 
   const importFile = async (file?: File) => {
@@ -149,7 +141,7 @@ function App() {
           <button className="outline-btn import-action" onClick={() => fileRef.current?.click()}><Upload size={16} /> 导入</button>
           <input ref={fileRef} type="file" accept="application/json,.json" hidden onChange={event => importFile(event.target.files?.[0])} />
           <button className="primary-btn" onClick={() => downloadJson(makeState())}><Download size={16} /> 导出JSON</button>
-          <button className="danger-link" onClick={reset}>清空本机草稿</button>
+          <button className="danger-link" onClick={() => setShowClearLocalData(true)}>清空本地数据</button>
         </div>
       </details>
     </header>
@@ -177,6 +169,7 @@ function App() {
       </main>
     </div>
     {showProfile && <ProfileModal profile={profile} isNewAudit={isNewAudit} setProfile={next => { setProfile(next); setIsNewAudit(false); setAutoSavePaused(false); }} onClose={() => setShowProfile(false)} onReset={() => { setAnswers(makeAnswers()); setView('dashboard'); }} />}
+    {showClearLocalData && <ClearLocalDataModal onClose={() => setShowClearLocalData(false)} onExport={() => downloadJson(makeState())} onConfirm={confirmClearLocalData} />}
   </div>;
 }
 
@@ -187,6 +180,10 @@ function NavItem({ active, icon, label, count, onClick }: { active: boolean; ico
 function ReviewReasons({ reasons, onCriterion }: { reasons: ReturnType<typeof score>['reviewReasons']; onCriterion?: (criterionId: string) => void }) {
   if (!reasons.length) return null;
   return <details className="review-reasons"><summary>{reasons.length} 项需人工复核</summary><div className="review-reason-list">{reasons.map(reason => <p key={reason.code}>{reviewReasonText(reason)}{reason.criterionIds?.length ? <>（相关项目：{reason.criterionIds.map((id, index) => <React.Fragment key={id}>{index > 0 && '、'}{onCriterion ? <button className="criterion-link review-criterion-link" onClick={() => onCriterion(id)}>{id}</button> : id}</React.Fragment>)}</> : ''}</p>)}</div></details>;
+}
+
+function ClearLocalDataModal({ onClose, onExport, onConfirm }: { onClose: () => void; onExport: () => void; onConfirm: () => void }) {
+  return <div className="modal-backdrop" role="presentation" onMouseDown={onClose}><div className="modal clear-local-data-modal" role="dialog" aria-modal="true" aria-labelledby="clear-local-data-title" onMouseDown={event => event.stopPropagation()}><div className="modal-head"><div><div className="eyebrow">LOCAL DATA</div><h2 id="clear-local-data-title">清空本地数据</h2></div><button className="icon-btn" onClick={onClose} aria-label="关闭"><X size={18} /></button></div><p className="modal-note">将清除本浏览器中保存的所有审核数据，建议先导出 JSON。</p><div className="modal-actions"><button className="text-btn" onClick={onExport}>先导出JSON</button><div><button className="outline-btn" onClick={onClose}>取消</button><button className="danger-link" onClick={onConfirm}>清除</button></div></div></div></div>;
 }
 
 function Dashboard({ profile, score: snapshot, answers, onModule, onCriterion, onStart }: { profile: Profile; score: ReturnType<typeof score>; forward: ReturnType<typeof score>; answers: Answers; onModule: (module: string) => void; onCriterion: (criterionId: string) => void; onStart: () => void; forwardOnlyCount: number }) {
