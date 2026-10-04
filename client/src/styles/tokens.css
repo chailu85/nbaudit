@@ -37,6 +37,8 @@
   --control-height: 48px;
   --sidebar-width: 240px;
   --content-width: 880px;
+  --dashboard-score-width: 280px;
+  --report-content-width: 720px;
   --assessment-module-width: 280px;
   --assessment-criterion-width: 640px;
   --assessment-choice-height: 56px;
