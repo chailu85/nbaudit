@@ -18,6 +18,7 @@ const pages = [
 ] as const;
 const viewports = [
   { key: '390x844', width: 390, height: 844, dir: mobileDir },
+  { key: '1280x900', width: 1280, height: 900, dir: desktopDir },
   { key: '1920x1080', width: 1920, height: 1080, dir: desktopDir },
   { key: '2560x1440', width: 2560, height: 1440, dir: desktopDir },
 ] as const;
@@ -142,7 +143,7 @@ async function main() {
       await context.close();
     }
     console.log('手机像素对比通过：390×844 五个页面差异为 0。');
-    console.log('桌面基线已保存：1920×1080 与 2560×1440 五个页面。');
+    console.log('桌面基线已保存：1280×900、1920×1080 与 2560×1440 五个页面。');
   } finally {
     await browser?.close();
     await rm(tempRoot, { recursive: true, force: true });

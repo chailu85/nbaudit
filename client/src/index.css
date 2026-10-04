@@ -616,3 +616,88 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .remediation-row-toggle .remediation-row-details { grid-column: 1 / -1; grid-row: 3; display: flex; flex-wrap: wrap; gap: var(--space-1); }
   .remediation-row-toggle .remediation-owner, .remediation-row-toggle .remediation-due, .remediation-row-toggle .remediation-status { grid-column: auto; }
 }
+
+
+/* Desktop redesign round 2: responsive framework only. Mobile rules above remain unchanged. */
+@media (min-width: 1024px) {
+  html { font-size: 15px; }
+  :root {
+    --font-size-12: 0.8125rem;
+    --font-size-14: 0.9375rem;
+    --font-size-16: 1rem;
+    --font-size-24: 1.5rem;
+    --font-size-40: 2.5rem;
+    --font-size-72: 4.5rem;
+    --space-1: 0.5rem;
+    --space-2: 1rem;
+    --space-3: 1.5rem;
+    --space-4: 2rem;
+    --space-5: 2.5rem;
+    --space-6: 3rem;
+    --space-7: 3.5rem;
+    --space-8: 4rem;
+    --space-10: 5rem;
+    --line-width: 0.0625rem;
+    --line-width-active: 0.125rem;
+    --control-height: 3rem;
+    --sidebar-width: 15rem;
+    --content-width: 69.3333rem;
+    --dashboard-score-width: 17.5rem;
+    --report-content-width: 45rem;
+    --source-sidebar-width: 15rem;
+    --source-list-width: 40rem;
+    --assessment-module-width: 17.5rem;
+    --assessment-criterion-width: 40rem;
+    --assessment-choice-height: 3.5rem;
+    --assessment-footer-height: 4rem;
+    --header-height: 4rem;
+    --bottom-nav-height: 4rem;
+    --modal-width: 45rem;
+    --side-nav-top: 9.5rem;
+    --side-data-space: 13rem;
+    --desktop-content-padding: 3rem;
+    --desktop-grid-gap: 1.5rem;
+  }
+
+  body { font-size: 0.9375rem; }
+  .main-content { padding: var(--desktop-content-padding); }
+  .disclaimer { align-items: center; }
+  .disclaimer > span { flex: 1; }
+  .disclaimer button { margin-left: var(--desktop-grid-gap); }
+  .page-head .eyebrow + h1,
+  .report-header .report-kicker + h1,
+  .modal-head .eyebrow + h2 { margin-top: 0.5rem; }
+  textarea { resize: none; }
+  button svg { display: none; }
+
+  .criterion-id, .criterion-link, .remediation-id, .clause-meta .criterion-id,
+  .source-workspace .clause-meta > b, .source-workspace .clause-meta .criterion-link {
+    text-decoration: none;
+  }
+  .criterion-link:hover, .criterion-link:focus-visible,
+  .source-workspace .clause-meta .criterion-link:hover,
+  .source-workspace .clause-meta .criterion-link:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+  }
+
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--desktop-grid-gap);
+  }
+  .col-3 { grid-column: span 3; }
+  .col-4 { grid-column: span 4; }
+  .col-8 { grid-column: span 8; }
+  .col-9 { grid-column: span 9; }
+}
+
+@media (min-width: 1600px) {
+  html { font-size: 16px; }
+  :root { --content-width: 80rem; }
+}
+
+@media (min-width: 2200px) {
+  html { font-size: 18px; }
+  :root { --content-width: 88.8889rem; }
+}
