@@ -620,7 +620,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 
 /* Desktop redesign round 2: responsive framework only. Mobile rules above remain unchanged. */
 @media (min-width: 1024px) {
-  html { font-size: 15px; }
+  html { font-size: 0.9375rem; }
   :root {
     --font-size-12: 0.8125rem;
     --font-size-14: 0.9375rem;
@@ -693,12 +693,12 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 }
 
 @media (min-width: 1600px) {
-  html { font-size: 16px; }
+  html { font-size: 1rem; }
   :root { --content-width: 80rem; }
 }
 
 @media (min-width: 2200px) {
-  html { font-size: 18px; }
+  html { font-size: 1.125rem; }
   :root { --content-width: 88.8889rem; }
 }
 
@@ -1192,5 +1192,37 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .source-workspace .clause-list {
     width: 100%;
     min-width: var(--space-0);
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .assessment-page .criteria-toolbar > div:first-child h2 {
+    overflow: visible;
+    text-overflow: clip;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .report-page-head,
+  .report-page-head > div,
+  .report-page-head > .report-actions {
+    min-width: var(--space-0);
+  }
+  .report-row > span:nth-child(2),
+  .report-row-rich > span:nth-child(2) {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .report-row > span:nth-child(5),
+  .report-row-rich > span:nth-child(5) {
+    overflow-wrap: anywhere;
+    white-space: normal;
+    word-break: normal;
   }
 }
