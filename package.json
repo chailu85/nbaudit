@@ -12,6 +12,7 @@
     "test": "vitest run",
     "check:desktop": "pnpm build:static && tsx scripts/desktop-check.ts",
     "check:mobile": "pnpm build:static && tsx scripts/mobile-pixel-check.ts",
+    "check:touch": "pnpm build:static && tsx scripts/touch-check.ts",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "db:migrate": "drizzle-kit migrate",
     "dev:static": "vite --host 0.0.0.0 --port ${PORT:-3000} --strictPort",

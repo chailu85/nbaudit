@@ -1403,3 +1403,28 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .remediation-row-toggle > * { align-self: center; }
   .remediation-row-toggle .remediation-priority { display: flex; align-items: center; min-height: var(--control-height); }
 }
+
+@media (max-width: 1023px) {
+  .data-menu summary { position: relative; }
+  .data-menu summary::before {
+    position: absolute;
+    top: var(--space-0);
+    bottom: var(--space-0);
+    left: calc(var(--space-2) * -1);
+    width: calc(100% + var(--space-2));
+    content: '';
+  }
+  .search input,
+  .remediation-search input,
+  .source-search input { min-height: calc(var(--control-height) - var(--line-width)); }
+  .source-workspace .clause-meta .criterion-link { min-width: var(--control-height); }
+  .review-criterion-link { position: relative; }
+  .review-criterion-link::before {
+    top: calc(var(--space-2) * -1);
+    left: calc(100% - var(--control-height));
+    width: var(--control-height);
+    height: var(--control-height);
+    content: '';
+    transform: none;
+  }
+}
