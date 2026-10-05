@@ -1377,14 +1377,10 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   }
   .report-counted-label {
     display: block;
-    overflow: hidden;
-    height: var(--line-height-normal);
-    font-size: var(--space-0);
-    white-space: nowrap;
-  }
-  .report-counted-label::after {
-    content: '现行基线计分项目';
+    height: auto;
+    overflow: visible;
     font-size: var(--font-size-12);
+    white-space: normal;
   }
   .report-na-cell {
     overflow: hidden;
@@ -1501,4 +1497,21 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 
 @media (max-width: 1023px) {
   .remediation-table-head { display: none; }
+}
+
+@media (min-width: 1024px) {
+  .report-sheet > h2 { margin-bottom: var(--space-1); }
+
+  .remediation-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 6fr) minmax(0, 2fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: minmax(var(--control-height), auto);
+    align-items: start;
+  }
+  .remediation-row-toggle { display: contents; }
+  .remediation-row > .remediation-id { grid-column: 1; grid-row: 1; align-self: start; min-height: var(--space-0); display: flex; align-items: flex-start; }
+  .remediation-row-toggle h3 { grid-column: 2; grid-row: 1; align-self: start; }
+  .remediation-row-toggle .remediation-owner { grid-column: 3; grid-row: 1; align-self: start; }
+  .remediation-row-toggle .remediation-due { grid-column: 4; grid-row: 1; align-self: start; }
+  .remediation-row-toggle .remediation-priority { grid-column: 5; grid-row: 1; align-self: start; min-height: var(--space-0); display: block; }
+  .remediation-row-toggle .remediation-status { grid-column: 6; grid-row: 1; align-self: start; }
 }

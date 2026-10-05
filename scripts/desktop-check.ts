@@ -77,6 +77,60 @@ async function assertNarrowDesktopText(page: import('playwright-core').Page) {
   if (broken.length) throw new Error(`1024px 文本断行：${broken.map(item => `${item.selector}:${item.token}`).join('、')}`);
 }
 
+
+async function assertReportCountLabels(page: import('playwright-core').Page, expectedLabel: string) {
+  await page.locator('button.nav-item').filter({ hasText: '审核报告' }).click();
+  await page.locator('.report-stats').waitFor({ state: 'visible', timeout: 10_000 });
+  const result = await page.evaluate(`(() => {
+    const expected = ${JSON.stringify(expectedLabel)};
+    const root = document.querySelector('.report-stats');
+    if (!root) throw new Error('缺少报告计数块');
+    const labels = Array.from(root.querySelectorAll('.report-counted-label'));
+    const visible = labels.filter(element => {
+      const style = getComputedStyle(element);
+      return style.display !== 'none' && style.visibility !== 'hidden';
+    });
+    const contentOf = (element, pseudo) => {
+      const content = getComputedStyle(element, pseudo).content;
+      return content === 'none' || content === 'normal' ? '' : content.replace(/^['"]|['"]$/g, '');
+    };
+    return {
+      visibleCount: visible.length,
+      occurrences: visible.reduce((count, element) => count + ((element.textContent || '') + contentOf(element, '::before') + contentOf(element, '::after')).split(expected).length - 1, 0),
+      overflows: visible.map(element => element.scrollWidth > element.clientWidth),
+      texts: visible.map(element => element.textContent || ''),
+    };
+  })()`) as { visibleCount: number; occurrences: number; overflows: boolean[]; texts: string[] };
+  if (result.visibleCount !== 1 || result.occurrences !== 1 || result.overflows.some(Boolean)) {
+    throw new Error(`报告计数标签异常（期望一次且不溢出）：${JSON.stringify(result)}`);
+  }
+}
+
+async function assertRemediationRowsAligned(page: import('playwright-core').Page) {
+  await page.locator('button.nav-item').filter({ hasText: '整改清单' }).click();
+  await page.locator('.remediation-row').first().waitFor({ state: 'visible', timeout: 10_000 });
+  const rows = await page.evaluate(`(() => Array.from(document.querySelectorAll('.remediation-row')).map(row => {
+    const getTop = selector => {
+      const element = row.querySelector(selector);
+      return element ? element.getBoundingClientRect().top : null;
+    };
+    return {
+      id: getTop('.remediation-id'),
+      name: getTop('.remediation-row-toggle h3'),
+      owner: getTop('.remediation-row-toggle .remediation-owner'),
+      due: getTop('.remediation-row-toggle .remediation-due'),
+      priority: getTop('.remediation-row-toggle .remediation-priority'),
+      status: getTop('.remediation-row-toggle .remediation-status'),
+    };
+  }))()`) as Array<Record<string, number | null>>;
+  const failures = rows.map((row, index) => {
+    const values = Object.values(row).filter((value): value is number => value !== null);
+    const spread = values.length ? Math.max(...values) - Math.min(...values) : 0;
+    return spread > 2 ? { index, spread, row } : null;
+  }).filter(Boolean);
+  if (failures.length) throw new Error(`整改清单六列未对齐：${JSON.stringify(failures)}`);
+}
+
 async function assertCustomSelectKeyboard(page: import('playwright-core').Page) {
   await page.locator('button.nav-item').filter({ hasText: '整改清单' }).click();
   await page.getByRole('button', { name: '状态：全部 ▾', exact: true }).click();
@@ -171,6 +225,8 @@ async function main() {
       ].filter(Boolean);
       console.log(`${item.width}×${item.height}: 根字号 ${metrics.rootFont}px；内容区 ${metrics.contentWidth}px；侧栏 ${metrics.sidebarWidth}px；横向滚动 ${metrics.horizontalOverflow ? '是' : '否'}`);
       if (failures.length) throw new Error(`${item.width}px 桌面断言失败：${failures.join('；')}`);
+      await assertReportCountLabels(page, '现行基线计分项目');
+      await assertRemediationRowsAligned(page);
       if (item.width === 1024) {
         await assertNarrowDesktopText(page);
         await assertCustomSelectKeyboard(page);
@@ -179,7 +235,12 @@ async function main() {
       }
       await context.close();
     }
-    console.log('桌面三档尺寸检查通过。');
+    const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, timezoneId: 'Asia/Shanghai' });
+    const mobilePage = await mobileContext.newPage();
+    await importSample(mobilePage);
+    await assertReportCountLabels(mobilePage, '国内适用项目');
+    await mobileContext.close();
+    console.log('桌面四档尺寸、计数标签、整改六列对齐及移动端标签检查通过。');
   } finally {
     await browser?.close();
     if (!preview.killed) preview.kill('SIGTERM');
