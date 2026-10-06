@@ -12,6 +12,7 @@ const cases = [
   { width: 1920, height: 1080, rootFont: 16, contentWidth: 1280 },
   { width: 2560, height: 1440, rootFont: 18, contentWidth: 1600 },
 ] as const;
+const sidebarCases = [1024, 1280, 1920, 2560].flatMap(width => [720, 1080].map(height => ({ width, height })));
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -193,6 +194,53 @@ async function assertA04SelectKeyboardAndEdge(page: import('playwright-core').Pa
   await edgeTrigger.press('Escape');
 }
 
+async function assertSidebarFixed(page: import('playwright-core').Page) {
+  const pageLabels = ['审核总览', '依据与差异', '审核报告'];
+  for (const pageLabel of pageLabels) {
+    if (pageLabel !== '审核总览') {
+      await page.locator('button.nav-item').filter({ hasText: pageLabel }).click();
+      await page.waitForTimeout(120);
+    }
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(60);
+    const result = await page.evaluate(`(() => {
+      const selectors = ['.brand-title', '.nav-item:nth-child(1)', '.nav-item:nth-child(2)', '.nav-item:nth-child(3)', '.nav-item:nth-child(4)', '.nav-item:nth-child(5)', '.data-menu summary'];
+      const read = () => selectors.map(selector => {
+        const element = document.querySelector(selector);
+        if (!element) return { selector, top: null, bottom: null, clickable: false };
+        const rect = element.getBoundingClientRect();
+        const point = document.elementFromPoint(rect.left + Math.min(rect.width / 2, 8), rect.top + rect.height / 2);
+        return { selector, top: rect.top, bottom: rect.bottom, clickable: selector !== '.data-menu summary' || point === element || element.contains(point) };
+      });
+      return { before: read(), scrollHeight: document.documentElement.scrollHeight, viewportHeight: window.innerHeight };
+    })()`) as { before: Array<{ selector: string; top: number | null; bottom: number | null; clickable: boolean }>; scrollHeight: number; viewportHeight: number };
+    const before = result.before as Array<{ selector: string; top: number | null; bottom: number | null; clickable: boolean }>;
+    const scrollPositions = [Math.max(0, Math.floor((result.scrollHeight - result.viewportHeight) / 2)), result.scrollHeight];
+    for (const position of scrollPositions) {
+      await page.evaluate((y) => window.scrollTo(0, y), position);
+      await page.waitForTimeout(60);
+      const after = await page.evaluate(`(() => {
+        const selectors = ['.brand-title', '.nav-item:nth-child(1)', '.nav-item:nth-child(2)', '.nav-item:nth-child(3)', '.nav-item:nth-child(4)', '.nav-item:nth-child(5)', '.data-menu summary'];
+        return selectors.map(selector => {
+          const element = document.querySelector(selector);
+          if (!element) return { selector, top: null, bottom: null, clickable: false };
+          const rect = element.getBoundingClientRect();
+          const point = document.elementFromPoint(rect.left + Math.min(rect.width / 2, 8), rect.top + rect.height / 2);
+          return { selector, top: rect.top, bottom: rect.bottom, clickable: selector !== '.data-menu summary' || point === element || element.contains(point) };
+        });
+      })()`) as Array<{ selector: string; top: number | null; bottom: number | null; clickable: boolean }>;
+      const failures = after.map((item, index) => {
+        const initial = before[index];
+        const delta = initial.top === null || item.top === null ? Number.POSITIVE_INFINITY : Math.abs(item.top - initial.top);
+        const outOfView = item.selector === '.data-menu summary' && (item.top === null || item.bottom === null || item.top < 0 || item.bottom > result.viewportHeight);
+        const notClickable = item.selector === '.data-menu summary' && !item.clickable;
+        return delta > 1 || outOfView || notClickable ? { selector: item.selector, initialTop: initial.top, afterTop: item.top, delta, bottom: item.bottom, clickable: item.clickable } : null;
+      }).filter(Boolean);
+      if (failures.length) throw new Error(`侧栏固定性失败：${pageLabel}，滚动${position === result.scrollHeight ? '底部' : '中部'}，${JSON.stringify(failures)}`);
+    }
+  }
+}
+
 async function main() {
   if (!existsSync(samplePath)) throw new Error(`缺少样例数据：${samplePath}`);
   const preview = startPreview();
@@ -227,12 +275,21 @@ async function main() {
       if (failures.length) throw new Error(`${item.width}px 桌面断言失败：${failures.join('；')}`);
       await assertReportCountLabels(page, '现行基线计分项目');
       await assertRemediationRowsAligned(page);
+      await assertSidebarFixed(page);
       if (item.width === 1024) {
         await assertNarrowDesktopText(page);
         await assertCustomSelectKeyboard(page);
         await assertA04SelectKeyboardAndEdge(page);
         console.log('1024px 断行、自定义下拉键盘、A04方向键隔离与贴边检查通过。');
       }
+      await context.close();
+    }
+    for (const item of sidebarCases) {
+      const context = await browser.newContext({ viewport: item, timezoneId: 'Asia/Shanghai' });
+      const page = await context.newPage();
+      await importSample(page);
+      await assertSidebarFixed(page);
+      console.log(`${item.width}×${item.height}: 侧栏标题、五个导航项和数据按钮滚动坐标稳定，数据按钮可见可点击。`);
       await context.close();
     }
     const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, timezoneId: 'Asia/Shanghai' });
