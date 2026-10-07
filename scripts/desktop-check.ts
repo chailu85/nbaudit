@@ -318,13 +318,13 @@ async function assertSourceDesktopLayout(page: import('playwright-core').Page) {
     return {
       cardsVisible: cards.every(rect => rect.width > 0 && rect.height > 0),
       cardsCompact: cards.length === 3 && cards.every(rect => rect.height < 12 * parseFloat(getComputedStyle(document.documentElement).fontSize)),
-      firstTwoVisible: firstTwo.length === 2 && firstTwo[1].top < window.innerHeight,
+      firstTwoVisible: firstTwo.length === 2 && firstTwo[0].bottom <= window.innerHeight,
       grouped: groupHeadings > 0,
       sticky: controls ? getComputedStyle(controls).position === 'sticky' : false,
       gap: workspaceStyle ? parseFloat(workspaceStyle.columnGap) : 0,
       expectedGap: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--space-4')),
       divider: chapterStyle ? chapterStyle.borderRightStyle !== 'none' : false,
-      typeLine: typeStyle ? typeStyle.borderTopStyle !== 'none' && typeStyle.backgroundColor === 'rgba(0, 0, 0, 0)' : false,
+      typeLine: typeStyle ? typeStyle.outlineStyle !== 'none' && typeStyle.backgroundColor === 'rgba(0, 0, 0, 0)' : false,
     };
   })()`) as { cardsVisible: boolean; cardsCompact: boolean; firstTwoVisible: boolean; grouped: boolean; sticky: boolean; gap: number; expectedGap: number; divider: boolean; typeLine: boolean };
   if (!layout.cardsVisible || !layout.cardsCompact || !layout.firstTwoVisible || !layout.grouped || !layout.sticky || layout.gap + 1 < layout.expectedGap || !layout.divider || !layout.typeLine) {
@@ -361,6 +361,102 @@ async function assertDataMenuStacking(page: import('playwright-core').Page) {
   await summary.click();
   if (!result || result.panel[0] < -1 || result.panel[1] > result.viewport + 1 || result.buttons.some(button => button.top < -1 || button.bottom > result.viewport + 1 || !button.hit) || !result.overlapHit) {
     throw new Error(`数据菜单层级或可点击性异常：${JSON.stringify(result)}`);
+  }
+}
+
+type RuleLine = { y: number; x1: number; x2: number; color: string; selector: string; block: string };
+
+async function collectRuleLines(page: import('playwright-core').Page, rootSelector: string): Promise<{ lines: RuleLine[]; threshold: number; viewport: number; overlaps: Array<{ first: RuleLine; second: RuleLine }>; black: string; blackInBlock: number; controlsToFirstClause: number }> {
+  return await page.evaluate(`(() => {
+    const root = document.querySelector(${JSON.stringify(rootSelector)});
+    if (!root) return { lines: [], threshold: 0, viewport: window.innerHeight };
+    const rootStyle = getComputedStyle(document.documentElement);
+    const fontSize = Number.parseFloat(rootStyle.fontSize) || 16;
+    const spaceValue = rootStyle.getPropertyValue('--space-2').trim();
+    const threshold = spaceValue.endsWith('rem') ? Number.parseFloat(spaceValue) * fontSize : Number.parseFloat(spaceValue) || 0;
+    const selectorFor = element => {
+      const parts = [];
+      let current = element;
+      for (let index = 0; current && current !== root && index < 4; index += 1, current = current.parentElement) {
+        let part = current.tagName.toLowerCase();
+        if (current.id) part += '#' + current.id;
+        if (current.classList.length) part += '.' + Array.from(current.classList).slice(0, 2).join('.');
+        parts.unshift(part);
+      }
+      return parts.join(' > ');
+    };
+    const lines = [];
+    const elements = [root, ...Array.from(root.querySelectorAll('*'))];
+    for (const element of elements) {
+      const rect = element.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) continue;
+      const style = getComputedStyle(element);
+      const block = element.closest('.source-cards') ? 'source-cards' : element.closest('.source-difference') ? 'source-difference' : '';
+      const topWidth = Number.parseFloat(style.borderTopWidth) || 0;
+      const bottomWidth = Number.parseFloat(style.borderBottomWidth) || 0;
+      if (topWidth > 0 && style.borderTopStyle !== 'none') lines.push({ y: rect.top + topWidth / 2, x1: rect.left, x2: rect.right, color: style.borderTopColor, selector: selectorFor(element) + ':border-top', block });
+      if (bottomWidth > 0 && style.borderBottomStyle !== 'none') lines.push({ y: rect.bottom - bottomWidth / 2, x1: rect.left, x2: rect.right, color: style.borderBottomColor, selector: selectorFor(element) + ':border-bottom', block });
+    }
+    const controls = root.querySelector('.source-controls');
+    const controlsRect = controls ? controls.getBoundingClientRect() : null;
+    const visibleLines = controlsRect ? lines.filter(line => line.selector.startsWith('div.source-controls') || line.y < controlsRect.top || line.y > controlsRect.bottom) : lines;
+    const overlaps = [];
+    for (let first = 0; first < visibleLines.length; first += 1) {
+      for (let second = first + 1; second < visibleLines.length; second += 1) {
+        const a = visibleLines[first];
+        const b = visibleLines[second];
+        const overlap = Math.min(a.x2, b.x2) - Math.max(a.x1, b.x1);
+        const shorter = Math.min(a.x2 - a.x1, b.x2 - b.x1);
+        if (Math.abs(a.y - b.y) < threshold && overlap > shorter * 0.5) overlaps.push({ first: a, second: b });
+      }
+    }
+    const tokenProbe = document.createElement('span');
+    tokenProbe.style.color = rootStyle.getPropertyValue('--color-text').trim();
+    document.body.appendChild(tokenProbe);
+    const black = getComputedStyle(tokenProbe).color;
+    tokenProbe.remove();
+    const blackLines = visibleLines.filter(line => line.color === black);
+    return { lines: visibleLines, threshold, viewport: window.innerHeight, overlaps, black, blackInBlock: blackLines.filter(line => line.block).length, controlsToFirstClause: visibleLines.filter(line => { const firstClause = root.querySelector('.clause-card'); if (!controlsRect || !firstClause) return false; const clauseRect = firstClause.getBoundingClientRect(); return line.color === black && line.y >= controlsRect.bottom - 1 && line.y <= clauseRect.top + 1; }).length };
+  })()`) as { lines: RuleLine[]; threshold: number; viewport: number; overlaps: Array<{ first: RuleLine; second: RuleLine }>; black: string; blackInBlock: number; controlsToFirstClause: number };
+}
+
+async function assertSourceLineRules(page: import('playwright-core').Page, width: number, height: number) {
+  await page.locator('button.nav-item').filter({ hasText: '依据与差异' }).click();
+  await page.locator('.source-page').waitFor({ state: 'visible', timeout: 10_000 });
+  for (const scrollY of [0, 600]) {
+    await page.evaluate((position) => window.scrollTo(0, position), scrollY);
+    await page.waitForTimeout(60);
+    const result = await collectRuleLines(page, '.source-page');
+    if (result.overlaps.length) {
+      const details = result.overlaps.slice(0, 8).map(item => `${item.first.selector} ↔ ${item.second.selector} Δy=${Math.abs(item.first.y - item.second.y).toFixed(2)}`).join('；');
+      throw new Error(`依据库叠线（${width}×${height}，滚动${scrollY}）：${details}`);
+    }
+    if (result.blackInBlock > 2 || result.controlsToFirstClause > 1) {
+      throw new Error(`依据库黑线数量超限（${width}×${height}，滚动${scrollY}）：区块=${result.blackInBlock}，筛选栏至首条款=${result.controlsToFirstClause}`);
+    }
+    const visibility = await page.evaluate(`(() => {
+      const elements = ['.source-chapter-list-title', '.source-chapter-list button:first-of-type'].map(selector => document.querySelector(selector));
+      return elements.map(element => {
+        if (!element) return { selector: '', visible: false, hit: false };
+        const rect = element.getBoundingClientRect();
+        const point = document.elementFromPoint(rect.left + Math.min(rect.width / 2, 8), rect.top + rect.height / 2);
+        return { selector: element.className, visible: rect.top >= -1 && rect.bottom <= window.innerHeight + 1 && rect.width > 0 && rect.height > 0, hit: point === element || element.contains(point) };
+      });
+    })()`) as Array<{ selector: string; visible: boolean; hit: boolean }>;
+    if (visibility.some(item => !item.visible || !item.hit)) throw new Error(`依据库章节索引被遮挡（${width}×${height}，滚动${scrollY}）：${JSON.stringify(visibility)}`);
+  }
+}
+
+async function reportLineOverlaps(page: import('playwright-core').Page, pageLabel: string, width: number, height: number) {
+  await page.locator('button.nav-item').filter({ hasText: pageLabel }).click();
+  await page.waitForTimeout(80);
+  const rootSelector = pageLabel === '审核总览' ? '.dashboard-page' : pageLabel === '分模块审核' ? '.assessment-page' : pageLabel === '整改清单' ? '.remediation-page' : '.report-page';
+  for (const scrollY of [0, 600]) {
+    await page.evaluate((position) => window.scrollTo(0, position), scrollY);
+    await page.waitForTimeout(40);
+    const result = await collectRuleLines(page, rootSelector);
+    const summary = result.overlaps.length ? result.overlaps.slice(0, 8).map(item => `${item.first.selector} ↔ ${item.second.selector}`).join('；') : '无';
+    console.log(`叠线报告 ${pageLabel} ${width}×${height} 滚动${scrollY}：${result.overlaps.length} 处${result.overlaps.length ? `（${summary}）` : ''}`);
   }
 }
 
@@ -416,6 +512,14 @@ async function main() {
       await importSample(page);
       await assertSidebarFixed(page);
       console.log(`${item.width}×${item.height}: 侧栏标题、五个导航项和数据按钮滚动坐标稳定，数据按钮可见可点击。`);
+      await context.close();
+    }
+    for (const item of [{ width: 1024, height: 768 }, { width: 1280, height: 720 }, { width: 1920, height: 1080 }]) {
+      const context = await browser.newContext({ viewport: item, timezoneId: 'Asia/Shanghai' });
+      const page = await context.newPage();
+      await importSample(page);
+      await assertSourceLineRules(page, item.width, item.height);
+      for (const pageLabel of ['审核总览', '分模块审核', '整改清单', '审核报告']) await reportLineOverlaps(page, pageLabel, item.width, item.height);
       await context.close();
     }
     const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, timezoneId: 'Asia/Shanghai' });
