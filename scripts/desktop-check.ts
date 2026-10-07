@@ -241,6 +241,53 @@ async function assertSidebarFixed(page: import('playwright-core').Page) {
   }
 }
 
+async function assertAssessmentDesktopLayout(page: import('playwright-core').Page) {
+  const navItems = page.locator('button.nav-item');
+  const navResult = await page.evaluate(`(() => Array.from(document.querySelectorAll('.nav-item')).map(element => {
+    const rect = element.getBoundingClientRect();
+    const point = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    return { visible: rect.width > 0 && rect.height > 0, hit: point === element || element.contains(point) };
+  }))()` ) as Array<{ visible: boolean; hit: boolean }>;
+  if (navResult.length !== 5 || navResult.some(item => !item.visible || !item.hit)) {
+    throw new Error(`桌面导航项不可见或被遮挡：${JSON.stringify(navResult)}`);
+  }
+  await navItems.filter({ hasText: '分模块审核' }).click();
+  await page.locator('.assessment-page').waitFor({ state: 'visible', timeout: 10_000 });
+  const layout = await page.evaluate(`(() => {
+    const root = document.documentElement;
+    const moduleList = document.querySelector('.assessment-page .module-list');
+    const criteriaPane = document.querySelector('.assessment-page .criteria-pane');
+    const next = document.querySelector('.assessment-item-pagination .assessment-next-btn');
+    if (!moduleList || !criteriaPane || !next) return null;
+    const moduleRect = moduleList.getBoundingClientRect();
+    const criteriaRect = criteriaPane.getBoundingClientRect();
+    const nextRect = next.getBoundingClientRect();
+    const moduleStyle = getComputedStyle(moduleList);
+    const nextStyle = getComputedStyle(next);
+    const previousStyle = getComputedStyle(document.querySelector('.assessment-previous-btn'));
+    const rootStyle = getComputedStyle(root);
+    return {
+      distance: criteriaRect.left - moduleRect.right,
+      expectedGap: Number.parseFloat(rootStyle.getPropertyValue('--space-4')),
+      borderRight: moduleStyle.borderRightStyle !== 'none' && Number.parseFloat(moduleStyle.borderRightWidth) > 0,
+      nextBackground: nextStyle.backgroundColor,
+      nextColor: nextStyle.color,
+      previousBackground: previousStyle.backgroundColor,
+      previousColor: previousStyle.color,
+      transparent: rootStyle.getPropertyValue('--color-transparent').trim(),
+      nextBottom: nextRect.bottom,
+      viewportHeight: window.innerHeight,
+    };
+  })()`) as { distance: number; expectedGap: number; borderRight: boolean; nextBackground: string; nextColor: string; previousBackground: string; previousColor: string; transparent: string; nextBottom: number; viewportHeight: number } | null;
+  if (!layout) throw new Error('分模块审核桌面布局缺少必要元素');
+  if (layout.distance + 1 < layout.expectedGap || !layout.borderRight) {
+    throw new Error(`分栏间距或右侧分隔线不符合要求：${JSON.stringify(layout)}`);
+  }
+  if (layout.nextBackground === layout.transparent || layout.nextBackground === layout.previousBackground || layout.nextColor === layout.previousColor || layout.nextBackground === layout.nextColor || layout.nextBottom > layout.viewportHeight + 1) {
+    throw new Error(`桌面下一项按钮样式或位置不符合要求：${JSON.stringify(layout)}`);
+  }
+}
+
 async function main() {
   if (!existsSync(samplePath)) throw new Error(`缺少样例数据：${samplePath}`);
   const preview = startPreview();
@@ -276,6 +323,7 @@ async function main() {
       await assertReportCountLabels(page, '现行基线计分项目');
       await assertRemediationRowsAligned(page);
       await assertSidebarFixed(page);
+      await assertAssessmentDesktopLayout(page);
       if (item.width === 1024) {
         await assertNarrowDesktopText(page);
         await assertCustomSelectKeyboard(page);
