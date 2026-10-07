@@ -286,6 +286,82 @@ async function assertAssessmentDesktopLayout(page: import('playwright-core').Pag
   if (layout.nextBackground === layout.transparent || layout.nextBackground === layout.previousBackground || layout.nextColor === layout.previousColor || layout.nextBackground === layout.nextColor || layout.nextBottom > layout.viewportHeight + 1) {
     throw new Error(`桌面下一项按钮样式或位置不符合要求：${JSON.stringify(layout)}`);
   }
+  const pagination = await page.evaluate(`(() => {
+    const pane = document.querySelector('.assessment-page .criteria-pane');
+    const pagination = document.querySelector('.assessment-item-pagination');
+    if (!pane || !pagination) return null;
+    const paneRect = pane.getBoundingClientRect();
+    const paginationRect = pagination.getBoundingClientRect();
+    const previous = pagination.querySelector('.assessment-previous-btn')?.getBoundingClientRect();
+    const next = pagination.querySelector('.assessment-next-btn')?.getBoundingClientRect();
+    return { pane: [paneRect.left, paneRect.right], pagination: [paginationRect.left, paginationRect.right], previous: previous ? [previous.left, previous.right] : null, next: next ? [next.left, next.right] : null };
+  })()`) as { pane: [number, number]; pagination: [number, number]; previous: [number, number] | null; next: [number, number] | null } | null;
+  if (!pagination || !pagination.previous || !pagination.next || pagination.pagination[0] < pagination.pane[0] - 1 || pagination.pagination[1] > pagination.pane[1] + 1 || pagination.previous[0] < pagination.pagination[0] - 1 || pagination.next[1] > pagination.pagination[1] + 1) {
+    throw new Error(`审核分页未与条款区边缘对齐：${JSON.stringify(pagination)}`);
+  }
+}
+
+async function assertSourceDesktopLayout(page: import('playwright-core').Page) {
+  await page.locator('button.nav-item').filter({ hasText: '依据与差异' }).click();
+  await page.locator('.source-page').waitFor({ state: 'visible', timeout: 10_000 });
+  const layout = await page.evaluate(`(() => {
+    const workspace = document.querySelector('.source-workspace');
+    const chapterList = document.querySelector('.source-chapter-list');
+    const controls = document.querySelector('.source-controls');
+    const cards = Array.from(document.querySelectorAll('.source-card')).map(element => element.getBoundingClientRect());
+    const groupHeadings = document.querySelectorAll('.clause-group-heading').length;
+    const firstTwo = Array.from(document.querySelectorAll('.clause-card')).slice(0, 2).map(element => element.getBoundingClientRect());
+    const type = document.querySelector('.clause-type');
+    const typeStyle = type ? getComputedStyle(type) : null;
+    const chapterStyle = chapterList ? getComputedStyle(chapterList) : null;
+    const workspaceStyle = workspace ? getComputedStyle(workspace) : null;
+    return {
+      cardsVisible: cards.every(rect => rect.width > 0 && rect.height > 0),
+      cardsCompact: cards.length === 3 && cards.every(rect => rect.height < 12 * parseFloat(getComputedStyle(document.documentElement).fontSize)),
+      firstTwoVisible: firstTwo.length === 2 && firstTwo[1].top < window.innerHeight,
+      grouped: groupHeadings > 0,
+      sticky: controls ? getComputedStyle(controls).position === 'sticky' : false,
+      gap: workspaceStyle ? parseFloat(workspaceStyle.columnGap) : 0,
+      expectedGap: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--space-4')),
+      divider: chapterStyle ? chapterStyle.borderRightStyle !== 'none' : false,
+      typeLine: typeStyle ? typeStyle.borderTopStyle !== 'none' && typeStyle.backgroundColor === 'rgba(0, 0, 0, 0)' : false,
+    };
+  })()`) as { cardsVisible: boolean; cardsCompact: boolean; firstTwoVisible: boolean; grouped: boolean; sticky: boolean; gap: number; expectedGap: number; divider: boolean; typeLine: boolean };
+  if (!layout.cardsVisible || !layout.cardsCompact || !layout.firstTwoVisible || !layout.grouped || !layout.sticky || layout.gap + 1 < layout.expectedGap || !layout.divider || !layout.typeLine) {
+    throw new Error(`依据库桌面布局不符合要求：${JSON.stringify(layout)}`);
+  }
+  const search = page.locator('.source-search input');
+  await search.fill('不存在的依据关键词');
+  await page.locator('.source-reset').click();
+  if ((await search.inputValue()) !== '') throw new Error('依据库重置筛选未清空关键词');
+}
+
+async function assertDataMenuStacking(page: import('playwright-core').Page) {
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const summary = page.locator('.data-menu summary');
+  await summary.click();
+  const result = await page.evaluate(`(() => {
+    const panel = document.querySelector('.data-menu-panel');
+    const sidebar = document.querySelector('.sidebar');
+    if (!panel || !sidebar) return null;
+    const panelRect = panel.getBoundingClientRect();
+    const sidebarRect = sidebar.getBoundingClientRect();
+    const buttons = Array.from(panel.querySelectorAll('button')).map(element => {
+      const rect = element.getBoundingClientRect();
+      const point = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      return { top: rect.top, bottom: rect.bottom, hit: point === element || element.contains(point) };
+    });
+    const left = Math.max(panelRect.left, sidebarRect.left);
+    const right = Math.min(panelRect.right, sidebarRect.right);
+    const top = Math.max(panelRect.top, sidebarRect.top);
+    const bottom = Math.min(panelRect.bottom, sidebarRect.bottom);
+    const overlapPoint = left < right && top < bottom ? document.elementFromPoint((left + right) / 2, (top + bottom) / 2) : null;
+    return { panel: [panelRect.top, panelRect.bottom], viewport: window.innerHeight, buttons, overlapHit: overlapPoint ? panel.contains(overlapPoint) : true };
+  })()`) as { panel: [number, number]; viewport: number; buttons: Array<{ top: number; bottom: number; hit: boolean }>; overlapHit: boolean } | null;
+  await summary.click();
+  if (!result || result.panel[0] < -1 || result.panel[1] > result.viewport + 1 || result.buttons.some(button => button.top < -1 || button.bottom > result.viewport + 1 || !button.hit) || !result.overlapHit) {
+    throw new Error(`数据菜单层级或可点击性异常：${JSON.stringify(result)}`);
+  }
 }
 
 async function main() {
@@ -322,6 +398,8 @@ async function main() {
       if (failures.length) throw new Error(`${item.width}px 桌面断言失败：${failures.join('；')}`);
       await assertReportCountLabels(page, '现行基线计分项目');
       await assertRemediationRowsAligned(page);
+      await assertSourceDesktopLayout(page);
+      await assertDataMenuStacking(page);
       await assertSidebarFixed(page);
       await assertAssessmentDesktopLayout(page);
       if (item.width === 1024) {

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { BookOpen } from 'lucide-react';
 import { Criterion, StandardClause } from '@/data/criteria';
 import { ResponsiveSelect } from '@/components/ResponsiveSelect';
@@ -35,6 +35,10 @@ export function SourceLibrary({ items, clauses, activeCriterionIds, onCriterion 
   const linkedCriterion = (clause: StandardClause) => exactMappedCriterion(clause, items, activeCriterionIds);
   const selectChapter = (chapterName: string) => { setChapter(chapterName); setIsChapterPickerOpen(false); };
   const selectedChapter = chapter === 'all' ? '全部章节' : chapter;
+  const showChapterGroups = chapter === 'all' && !normalized;
+  const filteredChapterCounts = useMemo(() => filtered.reduce((counts, clause) => counts.set(clause.chapter, (counts.get(clause.chapter) ?? 0) + 1), new Map<string, number>()), [filtered]);
+  const hasActiveFilters = Boolean(normalized || type !== 'all' || chapter !== 'all');
+  const resetFilters = () => { setQuery(''); setType('all'); setChapter('all'); };
 
   return <div className="source-page">
     <div className="page-head compact">
@@ -58,12 +62,13 @@ export function SourceLibrary({ items, clauses, activeCriterionIds, onCriterion 
       <button className="chapter-selector" onClick={() => setIsChapterPickerOpen(true)}>{selectedChapter} <span>▾</span></button>
       <div className="source-search"><input value={query} onChange={event => setQuery(event.target.value)} placeholder="搜索关键词或条款编号" /></div>
       <ResponsiveSelect aria-label="全部类型" value={type} onChange={value => setType(value as typeof type)} options={[{ value: 'all', label: '全部类型' }, { value: '规范性', label: '规范性条款' }, { value: '资料性', label: '资料性附录' }, { value: '定义', label: '术语定义' }, { value: '引用', label: '规范性引用' }]} />
+      {hasActiveFilters && <button className="text-btn source-reset" onClick={resetFilters}>重置筛选</button>}
       <span className="muted">显示 {filtered.length} / {clauses.length} 条</span>
     </div>
     {isChapterPickerOpen && <div className="chapter-picker-overlay" role="dialog" aria-modal="true" aria-label="选择章节"><div className="chapter-picker-head"><span>选择章节</span><button className="text-btn" onClick={() => setIsChapterPickerOpen(false)}>关闭</button></div><div className="chapter-picker-list"><button className={`chapter-picker-item ${chapter === 'all' ? 'active' : ''}`} onClick={() => selectChapter('all')}><strong>全部章节</strong><span>{clauses.length}</span></button>{chapters.map(chapterName => <button className={`chapter-picker-item ${chapter === chapterName ? 'active' : ''}`} onClick={() => selectChapter(chapterName)} key={chapterName}><strong>{chapterName}</strong><span>{countFor(chapterName)}</span></button>)}</div></div>}
-    <div className="source-workspace">
+    <div className={`source-workspace ${showChapterGroups ? 'has-chapter-groups' : ''}`}>
       <aside className="source-chapter-list"><button className={chapter === 'all' ? 'active' : ''} onClick={() => selectChapter('all')}><strong>全部章节</strong><span>{clauses.length}</span></button>{chapters.map(chapterName => <button className={chapter === chapterName ? 'active' : ''} onClick={() => selectChapter(chapterName)} key={chapterName}><strong>{chapterName}</strong><span>{countFor(chapterName)}</span></button>)}</aside>
-      <section className="clause-list">{filtered.length === 0 ? <div className="empty"><BookOpen size={32} /><h3>没有匹配条款</h3><p>尝试搜索“视频”“附录F”“180d”或具体条款号。</p></div> : filtered.map(clause => { const target = linkedCriterion(clause); const canJump = Boolean(target && onCriterion && activeCriterionIds.includes(target.id)); return <article className="clause-card" key={clause.id}><div className="clause-meta">{canJump && target && onCriterion ? <button className="criterion-link" onClick={() => onCriterion(target.id)}>{clause.id}</button> : <span className="criterion-id">{clause.id}</span>}</div><div className="clause-body"><div className="clause-chapter">{clause.chapter} <span>· {clause.type}</span></div><h3>{clause.title}</h3><p>{clause.requirement}</p><small>来源：{clause.source}</small></div></article>; })}</section>
+      <section className="clause-list">{filtered.length === 0 ? <div className="empty"><BookOpen size={32} /><h3>没有匹配条款</h3><p>尝试搜索“视频”“附录F”“180d”或具体条款号。</p></div> : filtered.map((clause, index) => { const target = linkedCriterion(clause); const canJump = Boolean(target && onCriterion && activeCriterionIds.includes(target.id)); const firstInGroup = showChapterGroups && (index === 0 || filtered[index - 1]?.chapter !== clause.chapter); return <Fragment key={clause.id}>{firstInGroup && <div className="clause-group-heading">{clause.chapter} · {filteredChapterCounts.get(clause.chapter)} 条</div>}<article className="clause-card"><div className="clause-meta">{canJump && target && onCriterion ? <button className="criterion-link" onClick={() => onCriterion(target.id)}>{clause.id}</button> : <span className="criterion-id">{clause.id}</span>}</div><div className="clause-body"><div className="clause-chapter"><span className="clause-chapter-name">{clause.chapter}</span> <span className="clause-type">· {clause.type}</span></div><h3>{clause.title}</h3><p>{clause.requirement}</p><small>来源：{clause.source}</small></div></article></Fragment>; })}</section>
     </div>
   </div>;
 }
