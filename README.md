@@ -21,10 +21,11 @@ A local-first React/Vite workbench for internal public-security compliance self-
 
 | 页面 | 桌面截图（1920 宽） |
 |---|---|
-| 审核总览 | ![审核总览](docs/screenshots/dashboard-1920x1080.png) |
-| 分模块审核 | ![分模块审核](docs/screenshots/assessment-1920x1080.png) |
-| 整改清单 | ![整改清单](docs/screenshots/remediation-1920x1080.png) |
-| 审核报告 | ![审核报告](docs/screenshots/report-1920x1080.png) |
+| 审核总览 | ![审核总览](after/desktop/1920x1080/dashboard.png) |
+| 分模块审核 | ![分模块审核](after/desktop/1920x1080/assessment.png) |
+| 整改清单 | ![整改清单](after/desktop/1920x1080/remediation.png) |
+| 依据与差异 | ![依据与差异](after/desktop/1920x1080/sources-scroll-0.png) |
+| 审核报告 | ![审核报告](after/desktop/1920x1080/report.png) |
 
 手机端样例（390 宽）：
 
