@@ -15,6 +15,8 @@ button, input, select, textarea, summary { -webkit-tap-highlight-color: var(--co
 .brand-mark { display: none; }
 .brand-title { color: var(--color-text); font-size: var(--font-size-24); font-weight: var(--font-weight-bold); line-height: var(--line-height-tight); letter-spacing: 0; }
 .brand-sub { margin-top: var(--space-1); color: var(--color-muted); font-size: var(--font-size-12); font-weight: var(--font-weight-regular); line-height: var(--line-height-normal); }
+.author-credit { display: flex; align-items: center; gap: var(--space-1); color: var(--color-muted); font-size: var(--font-size-12); line-height: var(--line-height-normal); }
+.author-credit img { display: block; width: var(--space-4); height: var(--space-4); object-fit: cover; border-radius: var(--radius-none); }
 .data-menu { position: relative; margin-top: auto; border-top: var(--line-width) solid var(--color-line); }
 .data-menu summary { display: flex; align-items: center; min-height: var(--control-height); color: var(--color-text); font-size: var(--font-size-14); font-weight: var(--font-weight-bold); list-style: none; cursor: pointer; }
 .data-menu summary::-webkit-details-marker { display: none; }
@@ -246,6 +248,7 @@ textarea { resize: vertical; }
   .brand { min-width: 0; }
   .brand-title { font-size: var(--font-size-16); white-space: nowrap; }
   .brand-sub { display: none; }
+  .author-credit { margin-left: auto; margin-right: var(--space-1); white-space: nowrap; }
   .data-menu { margin: var(--space-0); margin-left: auto; border: var(--space-0); }
   .data-menu summary { min-height: var(--control-height); font-size: var(--font-size-14); }
   .data-menu summary::after { display: none; }
@@ -769,7 +772,8 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
     border: var(--line-width) solid var(--color-text);
     z-index: calc(var(--z-popover) + 2);
   }
-  .topbar .data-menu { pointer-events: auto; }
+  .topbar .author-credit { margin-top: auto; padding: var(--space-2) var(--space-0); border-top: var(--line-width) solid var(--color-line); }
+  .topbar .data-menu { margin-top: var(--space-0); pointer-events: auto; }
 
   .toast {
     position: absolute;

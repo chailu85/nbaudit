@@ -134,6 +134,7 @@ function App() {
         <div className="brand-mark"><ShieldCheck size={22} /></div>
         <div><div className="brand-title">内保合规审核台</div><div className="brand-sub">单位内部治安保卫 · 全标准版</div></div>
       </div>
+      <div className="author-credit" aria-label="作者 Ec"><img src="/ec-avatar.jpg" alt="Ec" /><span>Ec</span></div>
       <details className="data-menu">
         <summary>数据</summary>
         <div className="data-menu-panel">
